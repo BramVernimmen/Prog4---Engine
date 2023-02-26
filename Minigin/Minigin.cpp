@@ -9,6 +9,8 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "Time.h"
+#include <chrono>
 
 SDL_Window* g_window{};
 
@@ -83,10 +85,13 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 
+	auto& time = Time::GetInstance();
+
 	// todo: this update loop could use some work.
 	bool doContinue = true;
 	while (doContinue)
 	{
+		time.Update(); // update to get DeltaTime
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
 		renderer.Render();

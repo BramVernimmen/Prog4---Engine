@@ -19,6 +19,7 @@ namespace dae
 		virtual void Render() const override;
 
 		void AddTextureToRender(std::shared_ptr<Texture2D> pTextureToAdd, Transform transform);
+		void RemoveTextureFromRenderer(std::shared_ptr<Texture2D> pTextureToRemove, Transform transform);
 
 	protected:
 

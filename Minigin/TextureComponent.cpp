@@ -1,4 +1,3 @@
-#include <string>
 #include "TextureComponent.h"
 #include "ResourceManager.h"
 #include "GameObject.h"

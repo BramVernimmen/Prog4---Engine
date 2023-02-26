@@ -1,6 +1,8 @@
 #pragma once
 #include "UpdateComponent.h"
 #include "Transform.h"
+#include <string>
+
 namespace dae
 {
 	class Texture2D;
