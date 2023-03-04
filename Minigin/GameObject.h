@@ -7,7 +7,7 @@ namespace dae
 {
 	class BaseComponent;
 
-	class GameObject final
+	class GameObject final : std::enable_shared_from_this<GameObject>
 	{
 	public:
 
@@ -21,7 +21,7 @@ namespace dae
 		virtual void Update();
 		virtual void Render() const;
 
-		template <typename T> std::shared_ptr<T> AddComponent(std::shared_ptr<GameObject> go);
+		template <typename T> std::shared_ptr<T> AddComponent();
 		template <typename T> std::shared_ptr<T> GetComponent() const;
 		template <typename T> void RemoveComponent();
 
@@ -33,11 +33,13 @@ namespace dae
 
 
 	template<typename T>
-	inline std::shared_ptr<T> GameObject::AddComponent(std::shared_ptr<GameObject> go)
+	inline std::shared_ptr<T> GameObject::AddComponent()
 	{
-		m_Components.push_back(std::make_shared<T>(go));
+		m_Components.push_back(std::make_shared<T>(weak_from_this()));
 		return std::dynamic_pointer_cast<T>(m_Components.back()); // return the last element, this is the one we just added
 	}
+
+
 	template<typename T>
 	inline std::shared_ptr<T> GameObject::GetComponent() const
 	{

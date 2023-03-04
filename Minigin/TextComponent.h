@@ -14,7 +14,7 @@ namespace dae
 	{
 		
 	public:
-		TextComponent(std::shared_ptr<GameObject>& pParent);
+		TextComponent(std::weak_ptr<GameObject> pParent);
 		virtual ~TextComponent() = default;
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;

@@ -6,7 +6,7 @@ namespace dae
 	class FPSComponent : public UpdateComponent
 	{
 	public:
-		FPSComponent(std::shared_ptr<GameObject>& pParent);
+		FPSComponent(std::weak_ptr<GameObject> pParent);
 		virtual ~FPSComponent() = default;
 		FPSComponent(const FPSComponent& other) = delete;
 		FPSComponent(FPSComponent&& other) = delete;

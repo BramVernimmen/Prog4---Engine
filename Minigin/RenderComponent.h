@@ -8,7 +8,7 @@ namespace dae
 	class RenderComponent : public BaseComponent
 	{
 	public:
-		RenderComponent(std::shared_ptr<GameObject>& pParent);
+		RenderComponent(std::weak_ptr<GameObject> pParent);
 		virtual ~RenderComponent() = default;
 		RenderComponent(const RenderComponent& other) = delete;
 		RenderComponent(RenderComponent&& other) = delete;

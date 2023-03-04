@@ -11,6 +11,7 @@
 #include "ResourceManager.h"
 #include "Time.h"
 #include <chrono>
+#include <thread>
 
 SDL_Window* g_window{};
 
@@ -87,13 +88,22 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 	auto& time = Time::GetInstance();
 
-	// todo: this update loop could use some work.
 	bool doContinue = true;
+	//constexpr float fixedTimeStepSec{ 0.02f }; // use this for a fixedUpdate
+	constexpr float desiredFPS{ 60.0f };
+	constexpr int frameTimeMS{ static_cast<int>(1000 / desiredFPS) };
+
 	while (doContinue)
 	{
+		const auto& currentTime = time.GetTimeCurrent();
 		time.Update(); // update to get DeltaTime
+
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
 		renderer.Render();
+
+		// sleeping to get desired fps
+		const auto sleepTime = currentTime + std::chrono::milliseconds{ frameTimeMS } - std::chrono::high_resolution_clock::now();
+		std::this_thread::sleep_for(sleepTime);
 	}
 }

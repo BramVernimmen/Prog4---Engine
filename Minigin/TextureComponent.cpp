@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "RenderComponent.h"
 
-dae::TextureComponent::TextureComponent(std::shared_ptr<GameObject>& pParent)
+dae::TextureComponent::TextureComponent(std::weak_ptr<GameObject> pParent)
 	: UpdateComponent(pParent)
 {
 }

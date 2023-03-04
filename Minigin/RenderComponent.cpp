@@ -2,7 +2,7 @@
 #include "Transform.h"
 #include "Renderer.h"
 
-dae::RenderComponent::RenderComponent(std::shared_ptr<GameObject>& pParent)
+dae::RenderComponent::RenderComponent(std::weak_ptr<GameObject> pParent)
 	: BaseComponent(pParent)
 {
 }

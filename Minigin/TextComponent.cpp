@@ -7,7 +7,7 @@
 //#include <SDL_pixels.h>
 #include "Renderer.h"
 
-dae::TextComponent::TextComponent(std::shared_ptr<GameObject>& pParent)
+dae::TextComponent::TextComponent(std::weak_ptr<GameObject> pParent)
 	:UpdateComponent(pParent)
 {
 }
