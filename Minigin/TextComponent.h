@@ -1,6 +1,5 @@
 #pragma once
 #include "UpdateComponent.h"
-#include "Transform.h"
 #include <string>
 #include <SDL_pixels.h>
 
@@ -10,12 +9,13 @@ namespace dae
 	class Font;
 	class Texture2D;
 	class RenderComponent;
-	class TextComponent : public UpdateComponent
+	class TransformComponent;
+	class TextComponent final : public UpdateComponent
 	{
 		
 	public:
-		TextComponent(std::weak_ptr<GameObject> pParent);
-		virtual ~TextComponent() = default;
+		TextComponent(std::weak_ptr<GameObject> pOwner);
+		~TextComponent() = default;
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;
 		TextComponent& operator=(const TextComponent& other) = delete;
@@ -33,7 +33,7 @@ namespace dae
 
 	private:
 		std::weak_ptr<RenderComponent> m_pRenderComponent{};
-		Transform m_Transform{};
+		std::weak_ptr<TransformComponent> m_TransformComponent{};
 		std::shared_ptr<Texture2D> m_pTexture{};
 
 		bool m_NeedsUpdate{true};

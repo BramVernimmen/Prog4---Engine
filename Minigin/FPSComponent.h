@@ -1,13 +1,15 @@
 #pragma once
 #include "UpdateComponent.h"
+#include <vector>
+
 namespace dae
 {
 	class TextComponent;
-	class FPSComponent : public UpdateComponent
+	class FPSComponent final : public UpdateComponent
 	{
 	public:
-		FPSComponent(std::weak_ptr<GameObject> pParent);
-		virtual ~FPSComponent() = default;
+		FPSComponent(std::weak_ptr<GameObject> pOwner);
+		~FPSComponent() = default;
 		FPSComponent(const FPSComponent& other) = delete;
 		FPSComponent(FPSComponent&& other) = delete;
 		FPSComponent& operator=(const FPSComponent& other) = delete;
@@ -16,12 +18,14 @@ namespace dae
 
 		virtual void Update() override;
 
-		std::shared_ptr<TextComponent> GetTextComponent() const { return m_pPersonalTextComponent; }
+		//std::shared_ptr<TextComponent> GetTextComponent() const { return m_pPersonalTextComponent; }
 
 
 	private:
-		std::shared_ptr<TextComponent> m_pPersonalTextComponent{};
+		std::weak_ptr<TextComponent> m_pPersonalTextComponent{};
 		float m_TimeRunning{ 0.99f };
+		const float m_TimeLimit{ 1.0f };
+		std::vector<float> m_PastDeltatimes{};
 	};
 
 }

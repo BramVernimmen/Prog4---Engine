@@ -3,13 +3,13 @@
 #include <unordered_map>
 namespace dae
 {
-	class Transform;
+	class TransformComponent;
 	class Texture2D;
-	class RenderComponent : public BaseComponent
+	class RenderComponent final: public BaseComponent
 	{
 	public:
-		RenderComponent(std::weak_ptr<GameObject> pParent);
-		virtual ~RenderComponent() = default;
+		RenderComponent(std::weak_ptr<GameObject> pOwner);
+		~RenderComponent() = default;
 		RenderComponent(const RenderComponent& other) = delete;
 		RenderComponent(RenderComponent&& other) = delete;
 		RenderComponent& operator=(const RenderComponent& other) = delete;
@@ -18,13 +18,14 @@ namespace dae
 		virtual void Update() override {}
 		virtual void Render() const override;
 
-		void AddTextureToRender(std::shared_ptr<Texture2D> pTextureToAdd, Transform transform);
-		void RemoveTextureFromRenderer(std::shared_ptr<Texture2D> pTextureToRemove, Transform transform);
+		void AddTextureToRender(std::shared_ptr<Texture2D> pTextureToAdd, std::shared_ptr<TransformComponent> pTransform);
+		void RemoveTextureFromRenderer(std::shared_ptr<Texture2D> pTextureToRemove, std::shared_ptr<TransformComponent> pTransform);
 
 	protected:
 
 	private:
-		std::unordered_multimap<std::shared_ptr<Texture2D>, Transform> m_TexturesToRenderMap{};
+		// this map shouldn't have full ownership, yet weird things happen if I try to make this weak_ptrs instead
+		std::unordered_multimap<std::shared_ptr<Texture2D>, std::shared_ptr<TransformComponent>> m_TexturesToRenderMap{};
 	};
 }
 
