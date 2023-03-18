@@ -20,6 +20,12 @@ void dae::GameObject::Render() const
 	m_RenderComponent->Render();
 }
 
+void dae::GameObject::DisplayGui()
+{
+
+	m_RenderComponent->DisplayGui();
+}
+
 void dae::GameObject::SetParent(std::shared_ptr<GameObject> newParent)
 {
 	if (shared_from_this() == newParent)

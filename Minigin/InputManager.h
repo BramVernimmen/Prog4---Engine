@@ -1,5 +1,7 @@
 #pragma once
 #include "Singleton.h"
+//#include <Xinput.h>
+
 
 namespace dae
 {
@@ -7,6 +9,8 @@ namespace dae
 	{
 	public:
 		bool ProcessInput();
+	private:
+		//XINPUT_STATE m_CurrentState{};
 	};
 
 }

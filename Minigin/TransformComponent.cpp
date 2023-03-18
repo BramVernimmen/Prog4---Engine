@@ -27,6 +27,7 @@ void dae::TransformComponent::Update()
 	}
 }
 
+
 const glm::vec3& dae::TransformComponent::GetWorldPosition() const
 {
 	return m_WorldPosition;

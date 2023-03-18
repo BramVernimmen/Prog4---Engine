@@ -40,3 +40,12 @@ void Scene::Render() const
 	}
 }
 
+void dae::Scene::DisplayGui()
+{
+
+	for (const auto& object : m_objects)
+	{
+		object->DisplayGui();
+	}
+}
+

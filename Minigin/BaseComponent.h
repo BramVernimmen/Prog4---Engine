@@ -17,6 +17,7 @@ namespace dae
 
 		virtual void Update() = 0;
 		virtual void Render() const = 0;
+		virtual void DisplayGui() = 0;
 
 	protected:
 		std::weak_ptr<GameObject> GetOwner() const { return m_pOwner; }
