@@ -205,6 +205,8 @@
     <ClInclude Include="TextureComponent.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="TrashTheCache_GameObjComponent.h" />
+    <ClInclude Include="TrashTheCache_IntegerComponent.h" />
     <ClInclude Include="UpdateComponent.h" />
   </ItemGroup>
   <ItemGroup>
@@ -243,6 +245,8 @@
     <ClCompile Include="TextureComponent.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
+    <ClCompile Include="TrashTheCache_GameObjComponent.cpp" />
+    <ClCompile Include="TrashTheCache_IntegerComponent.cpp" />
     <ClCompile Include="UpdateComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
