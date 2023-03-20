@@ -22,13 +22,13 @@ namespace dae
 	protected:
 
 	private:
-		int m_AmountOfSamples{ 15 };
+		int m_AmountOfSamples{ 10 };
 
 		std::vector<float> m_PlotYValues{ };
 
 		ImGui::PlotConfig m_PlotConfig{ }; // keep this, no need to remake it every frame
 
-		void ExecuteFunction();
+		void StartTrashing();
 		float TrashIntegers(int* arr, int arrLength, int stepsize, int sampleSize);
 	};
 

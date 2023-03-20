@@ -16,15 +16,15 @@ void dae::TrashTheCache_IntegerComponent::DisplayGui()
 
 	if (ImGui::Button("Trash the cache") && m_AmountOfSamples >= 4) // we need to subtract 2, so this leaves us with at least 2 more values
 	{
-		ExecuteFunction();
+		StartTrashing();
 	}
 
-	ImGui::Plot("plot", m_PlotConfig);
+	ImGui::Plot("integerTrashCachePlot", m_PlotConfig);
 
 	ImGui::End();
 }
 
-void dae::TrashTheCache_IntegerComponent::ExecuteFunction()
+void dae::TrashTheCache_IntegerComponent::StartTrashing()
 {
 	 //all steps are: 1.0f, 2.0f, 4.0f, 8.0f, 16.0f, 32.0f, 64.0f, 128.0f, 256.0f, 512.0f, 1024.0f -> will be a size of 11
 
@@ -94,7 +94,7 @@ float dae::TrashTheCache_IntegerComponent::TrashIntegers(int* arr, int arrLength
 	elapsedTimes.erase(std::min_element(elapsedTimes.begin(), elapsedTimes.end()));
 	elapsedTimes.erase(std::max_element(elapsedTimes.begin(), elapsedTimes.end()));
 	// take avg and print
-	float avgTime{ std::accumulate(elapsedTimes.begin(), elapsedTimes.end(), 0.0f) / elapsedTimes.size() / 1000.0f}; // in milliseconds
+	const float avgTime{ std::accumulate(elapsedTimes.begin(), elapsedTimes.end(), 0.0f) / elapsedTimes.size() / 1000.0f}; // in milliseconds
 
 	return avgTime;
 }
