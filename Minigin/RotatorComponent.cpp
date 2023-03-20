@@ -20,24 +20,18 @@ void dae::RotatorComponent::Update()
 	m_RotationResults.y = sinf(m_Rotation) * m_Radius;
 
 
-	// we seperate the ones that will be tracking
-	// if we are trackign a certain position, we will overwrite the worldposition
-	// if we don't, we aren't circling around the position if we have a parent, we will be offset
-	// if we want an offset, we can always set our offset for the rotator
 	if (m_TrackingTransformComponent.expired() == false) // if we have something to track
 	{
 		//cache the locked
 		const auto& lockedTracker{ m_TrackingTransformComponent.lock() };
-		const auto& worldPosOfTracker{ lockedTracker->GetWorldPosition() };
-		// add that world position to our rotation results
-		m_RotationResults.x += worldPosOfTracker.x;
-		m_RotationResults.y += worldPosOfTracker.y;
-		m_TransformComponent.lock()->SetWorldPosition({ m_RotationResults.x + m_Offset.x, m_RotationResults.y + m_Offset.y , 0.0f});
+		const auto& localPosOfTracker{ lockedTracker->GetLocalPosition() };
+		// add that local position to our rotation results
+		m_RotationResults.x += localPosOfTracker.x;
+		m_RotationResults.y += localPosOfTracker.y;
 	}
-	else
-	{
-		m_TransformComponent.lock()->SetLocalPosition(m_RotationResults.x + m_Offset.x, m_RotationResults.y + m_Offset.y);
-	}
+
+	// rotate
+	m_TransformComponent.lock()->SetLocalPosition(m_RotationResults.x + m_Offset.x, m_RotationResults.y + m_Offset.y);
 
 }
 

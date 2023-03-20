@@ -15,23 +15,23 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{4d000ea1-138e-4c53-9b86-1a34abe20bd1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game Files\Helper Files">
+    <Filter Include="Helper Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Game Files\Helper Files\Singletons">
+    <Filter Include="Helper Files\Singletons">
       <UniqueIdentifier>{40f683c5-0e99-4839-9f1b-146e9710af36}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture2D.h">
-      <Filter>Game Files\Helper Files</Filter>
+      <Filter>Helper Files</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Game Files\Helper Files</Filter>
+      <Filter>Helper Files</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
-      <Filter>Game Files\Helper Files</Filter>
+      <Filter>Helper Files</Filter>
     </ClInclude>
     <ClInclude Include="BaseComponent.h">
       <Filter>Components</Filter>
@@ -55,22 +55,22 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Game Files\Helper Files\Singletons</Filter>
+      <Filter>Helper Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>Game Files\Helper Files\Singletons</Filter>
+      <Filter>Helper Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>Game Files\Helper Files\Singletons</Filter>
+      <Filter>Helper Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Game Files\Helper Files\Singletons</Filter>
+      <Filter>Helper Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
-      <Filter>Game Files\Helper Files\Singletons</Filter>
+      <Filter>Helper Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
-      <Filter>Game Files\Helper Files\Singletons</Filter>
+      <Filter>Helper Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="FPSComponent.h">
       <Filter>Components</Filter>
@@ -123,13 +123,13 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
-      <Filter>Game Files\Helper Files</Filter>
+      <Filter>Helper Files</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Game Files\Helper Files</Filter>
+      <Filter>Helper Files</Filter>
     </ClCompile>
     <ClCompile Include="Texture2D.cpp">
-      <Filter>Game Files\Helper Files</Filter>
+      <Filter>Helper Files</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Game Files</Filter>
@@ -150,19 +150,19 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Game Files\Helper Files\Singletons</Filter>
+      <Filter>Helper Files\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <Filter>Game Files\Helper Files\Singletons</Filter>
+      <Filter>Helper Files\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>Game Files\Helper Files\Singletons</Filter>
+      <Filter>Helper Files\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Game Files\Helper Files\Singletons</Filter>
+      <Filter>Helper Files\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
-      <Filter>Game Files\Helper Files\Singletons</Filter>
+      <Filter>Helper Files\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="FPSComponent.cpp">
       <Filter>Components</Filter>

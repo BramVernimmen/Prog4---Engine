@@ -22,6 +22,8 @@ namespace dae
 		void SetLocalPosition(float x, float y);
 		void SetWorldPosition(glm::vec3 newWorldPos);
 
+		void SetDirty();
+
 	private:
 
 		glm::vec3 m_LocalPosition{};

@@ -13,17 +13,31 @@ void dae::GameObject::Update()
 	{
 		currComponent->Update();
 	}
+
+	for (auto& currChild : m_Children)
+	{
+		currChild->Update();
+	}
 }
 
 void dae::GameObject::Render() const
 {
 	m_RenderComponent->Render();
+
+	for (const auto& currChild : m_Children)
+	{
+		currChild->Render();
+	}
 }
 
 void dae::GameObject::DisplayGui()
 {
-
 	m_RenderComponent->DisplayGui();
+
+	for (auto& currChild : m_Children)
+	{
+		currChild->DisplayGui();
+	}
 }
 
 void dae::GameObject::SetParent(std::shared_ptr<GameObject> newParent)
@@ -40,7 +54,9 @@ void dae::GameObject::SetParent(std::shared_ptr<GameObject> newParent)
 	}
 
 	m_pParent = newParent;
-	newParent->AddChild(shared_from_this());
+	if (newParent.get()) // nullptr check
+		newParent->AddChild(shared_from_this());
+	
 
 	//update positions
 	if (newParent) // if newParent is not null (is not the scene root)
@@ -57,6 +73,8 @@ void dae::GameObject::SetParent(std::shared_ptr<GameObject> newParent)
 		transComp->SetLocalPosition(worldPos.x, worldPos.y);
 	}
 }
+
+
 
 void dae::GameObject::AddChild(std::shared_ptr<GameObject> newChild)
 {

@@ -20,7 +20,7 @@ void dae::TransformComponent::Update()
 		}
 		else
 		{
-			// give empty, the root is always 0,0
+			// given when empty, the root is always 0,0
 			// giving an empty will just add the changed local, and change all children
 			SetWorldPosition(glm::vec3{});
 		}
@@ -53,7 +53,20 @@ void dae::TransformComponent::SetWorldPosition(glm::vec3 newWorldPos)
 
 	for (const auto& currChild : GetOwner().lock()->GetChildren())
 	{
-		// check if our owner has other children, their position will need to be changed too
-		currChild->GetComponent<TransformComponent>()->SetWorldPosition(m_WorldPosition);
+		// check if our owner has other children
+		// their position will need to be changed too
+		// set them as dirt, next update they will correct their own position
+		currChild->GetComponent<TransformComponent>()->SetDirty();
+	}
+}
+
+void dae::TransformComponent::SetDirty()
+{
+	m_NeedsUpdate = true;
+
+	// we continue this chain until there are no more children left
+	for (const auto& currChild : GetOwner().lock()->GetChildren())
+	{
+		currChild->GetComponent<TransformComponent>()->SetDirty();
 	}
 }

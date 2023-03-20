@@ -8,7 +8,6 @@ namespace dae
 {
 	class BaseComponent;
 	class RenderComponent;
-
 	// has to be public: https://stackoverflow.com/questions/56415222/why-weak-from-this-always-returns-empty-weak-pointer
 	class GameObject final : public std::enable_shared_from_this<GameObject>
 	{
