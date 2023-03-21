@@ -32,7 +32,8 @@ void dae::TrashTheCache_IntegerComponent::StartTrashing()
 	m_PlotYValues.clear();
 
 	// allocate the integers
-	const int arrLength{ static_cast<int>(std::powf(2, 26)) };
+	//const int arrLength{ static_cast<int>(std::powf(2, 26)) };
+	const int arrLength{ 15'000'000 };
 	int* arr = new int[arrLength];
 
 	m_PlotYValues.push_back(TrashIntegers(arr, arrLength, 1, m_AmountOfSamples));
