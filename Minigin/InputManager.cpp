@@ -142,7 +142,14 @@ void dae::InputManager::BindCommand(const std::vector<unsigned int>& buttons, In
 
 bool dae::InputManager::ReadSDL_Events()
 {
-	// handle SDL -> later
+	// handle SDL 
+	// clear the old sets first, new frame so what was down/up last frame doesn't count anymore
+	m_KeysDown.clear();
+	m_KeysUp.clear();
+	// we don't clear the m_KeysPressed
+	// they get removed when their key is up
+	// that way they are still contained if the button is held down
+
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT) {
