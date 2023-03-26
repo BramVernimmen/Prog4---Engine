@@ -22,6 +22,9 @@
     <Filter Include="Helper Files\Singletons">
       <UniqueIdentifier>{40f683c5-0e99-4839-9f1b-146e9710af36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{cb8125d1-18c3-4024-bdff-2aecd754fc7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture2D.h">
@@ -114,6 +117,15 @@
     <ClInclude Include="TrashTheCache_IntegerComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Helper Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseComponent.cpp">
@@ -202,6 +214,15 @@
     </ClCompile>
     <ClCompile Include="TrashTheCache_IntegerComponent.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Helper Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
