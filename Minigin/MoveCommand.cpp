@@ -4,12 +4,12 @@
 #include "InputManager.h"
 #include "Time.h"
 
-dae::MoveCommand::MoveCommand(std::weak_ptr<GameObject> pGameObject, float speed)
-	: m_pGameObject{pGameObject}
+dae::MoveCommand::MoveCommand(GameObject* pGameObject, float speed)
+	: Command(pGameObject)
 	, m_MovementSpeed{speed}
 {
 	// cache the transform from the gameobject
-	m_pTransform = m_pGameObject.lock()->GetComponent<TransformComponent>();
+	m_pTransform = GetGameObject()->GetComponent<TransformComponent>().get();
 }
 
 void dae::MoveCommand::Execute()
@@ -18,8 +18,7 @@ void dae::MoveCommand::Execute()
 	auto axisValue = dae::InputManager::GetInstance().Get2DAxisValue();
 
 	axisValue *= m_MovementSpeed * dae::Time::GetInstance().GetDeltaTime();
-	auto lockedTransform{ m_pTransform.lock() };
-	const auto localPos{ lockedTransform->GetLocalPosition() };
+	const auto& localPos{ m_pTransform->GetLocalPosition() };
 	// move the local pos
-	lockedTransform->SetLocalPosition(axisValue.x + localPos.x, localPos.y - axisValue.y );
+	m_pTransform->SetLocalPosition(axisValue.x + localPos.x, localPos.y - axisValue.y );
 }

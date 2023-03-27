@@ -8,7 +8,7 @@ namespace dae
 	class MoveCommand final : public Command
 	{
 	public:
-		MoveCommand(std::weak_ptr<GameObject> pGameObject, float speed);
+		MoveCommand(GameObject* pGameObject, float speed);
 		~MoveCommand() = default;
 		
 		MoveCommand(const MoveCommand& other) = delete;
@@ -19,8 +19,7 @@ namespace dae
 
 		virtual void Execute() override;
 	private:
-		std::weak_ptr<GameObject> m_pGameObject{};
-		std::weak_ptr<TransformComponent> m_pTransform{};
+		TransformComponent* m_pTransform{};
 		float m_MovementSpeed{};
 	};
 
