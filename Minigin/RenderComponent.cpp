@@ -45,6 +45,8 @@ void dae::RenderComponent::RemoveTextureFromRenderer(std::shared_ptr<Texture2D> 
 	}
 }
 
+
+
 void dae::RenderComponent::AddToDisplayGui(std::weak_ptr<UpdateComponent> pComponentToAdd)
 {
 	//auto findResult{ std::find(m_DisplayGuiComponents.begin(), m_DisplayGuiComponents.end(), pComponentToAdd) };

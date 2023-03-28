@@ -96,14 +96,12 @@ private:
 
 
 Controller::Controller(int controllerIndex)
-{
-	pImpl = new ControllerImpl(controllerIndex);
-}
+	: pImpl{ std::make_unique<ControllerImpl>(controllerIndex) }
+{}
 
-Controller::~Controller()
-{
-	delete pImpl;
-}
+dae::Controller::~Controller() = default;
+
+
 
 void Controller::Update()
 {

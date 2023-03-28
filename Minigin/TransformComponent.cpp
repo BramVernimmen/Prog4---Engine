@@ -8,29 +8,34 @@ dae::TransformComponent::TransformComponent(std::weak_ptr<GameObject> pOwner)
 
 void dae::TransformComponent::Update()
 {
-	if (m_NeedsUpdate)
-	{
-		// when our local has changed
-		
-		// cache the parent of our owner
-		const auto grandParent{ GetOwner().lock()->GetParent().lock() };
-		if (grandParent) // if this exists
-		{
-			SetWorldPosition(grandParent->GetComponent<TransformComponent>()->GetWorldPosition());
-		}
-		else
-		{
-			// given when empty, the root is always 0,0
-			// giving an empty will just add the changed local, and change all children
-			SetWorldPosition(glm::vec3{});
-		}
-	}
+	
 }
 
 
-const glm::vec3& dae::TransformComponent::GetWorldPosition() const
+const glm::vec3& dae::TransformComponent::GetWorldPosition()
 {
+	if (m_IsDirty)
+		UpdateWorldPosition();
+
 	return m_WorldPosition;
+}
+
+void dae::TransformComponent::UpdateWorldPosition()
+{
+	// when our local has changed
+
+	// cache the parent of our owner
+	const auto grandParent{ GetOwner().lock()->GetParent().lock() };
+	if (grandParent) // if this exists
+	{
+		SetWorldPosition(grandParent->GetComponent<TransformComponent>()->GetWorldPosition());
+	}
+	else
+	{
+		// given when empty, the root is always 0,0
+		// giving an empty will just add the changed local, and change all children
+		SetWorldPosition(glm::vec3{});
+	}
 }
 
 
@@ -44,7 +49,7 @@ void dae::TransformComponent::SetLocalPosition(float x, float y)
 
 	m_LocalPosition.x = x;
 	m_LocalPosition.y = y;
-	m_NeedsUpdate = true;
+	m_IsDirty = true;
 }
 
 void dae::TransformComponent::SetWorldPosition(glm::vec3 newWorldPos)
@@ -62,7 +67,7 @@ void dae::TransformComponent::SetWorldPosition(glm::vec3 newWorldPos)
 
 void dae::TransformComponent::SetDirty()
 {
-	m_NeedsUpdate = true;
+	m_IsDirty = true;
 
 	// we continue this chain until there are no more children left
 	for (const auto& currChild : GetOwner().lock()->GetChildren())

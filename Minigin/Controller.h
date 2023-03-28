@@ -1,11 +1,14 @@
 #pragma once
 #include "glm/glm.hpp"
+#include <memory>
+
 namespace dae 
 {
 	class Controller final
 	{
 		class ControllerImpl;
-		ControllerImpl* pImpl;
+		//ControllerImpl* pImpl;
+		std::unique_ptr<ControllerImpl> pImpl;
 	public :
 		// using enum instead of enum class makes us capable of initializing them with unsigned int and no need for a cast
 		enum ControllerButton
