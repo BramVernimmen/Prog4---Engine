@@ -3,7 +3,8 @@
 #include <vector>
 #include <memory>
 #include "Controller.h"
-#include "Command.h"
+#include "Axis2DCommand.h"
+#include "AxisCommand.h"
 #include <map>
 #include <unordered_set>
 #include <glm/glm.hpp>
@@ -43,17 +44,13 @@ namespace dae
 
 		void BindCommand(const std::vector<unsigned int>& buttons, InputType inputType, std::unique_ptr<Command> pCommand, int id = -1); // default to keyboard
 
-		const glm::vec2& Get2DAxisValue() const { return m_2DAxisValue; }
-		float GetAnalogAxisValue() const { return m_AnalogAxisValue; }
+		
 
 	private:
 		std::vector<std::unique_ptr<dae::Controller>> m_pControllers{};
 
 		std::multimap<InputInfo, std::unique_ptr<Command>> m_Commands{};
 
-
-		glm::vec2 m_2DAxisValue{};
-		float m_AnalogAxisValue{};
 
 
 		std::unordered_set<unsigned int> m_KeysDown{};
@@ -62,7 +59,6 @@ namespace dae
 
 		bool ReadSDL_Events();
 		void ControllerIndexCheck(int id);
-		void ResetValues();
 	};
 
 }

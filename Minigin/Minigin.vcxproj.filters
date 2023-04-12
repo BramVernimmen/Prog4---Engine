@@ -25,6 +25,12 @@
     <Filter Include="Commands">
       <UniqueIdentifier>{cb8125d1-18c3-4024-bdff-2aecd754fc7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\BaseComponents">
+      <UniqueIdentifier>{d9961336-51de-4ac9-a7e0-d536c4356db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands\BaseCommands">
+      <UniqueIdentifier>{bae8fa76-5606-45bf-8d45-0cb757f924cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture2D.h">
@@ -36,9 +42,6 @@
     <ClInclude Include="Font.h">
       <Filter>Helper Files</Filter>
     </ClInclude>
-    <ClInclude Include="BaseComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="TextureComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -47,12 +50,6 @@
     </ClInclude>
     <ClInclude Include="Minigin.h">
       <Filter>Game Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UpdateComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="TextComponent.h">
       <Filter>Components</Filter>
@@ -120,17 +117,29 @@
     <ClInclude Include="Controller.h">
       <Filter>Helper Files</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
     <ClInclude Include="MoveCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
+    <ClInclude Include="BaseComponent.h">
+      <Filter>Components\BaseComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Components\BaseComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateComponent.h">
+      <Filter>Components\BaseComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Commands\BaseCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Axis2DCommand.h">
+      <Filter>Commands\BaseCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="AxisCommand.h">
+      <Filter>Helper Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="TextureComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -151,9 +160,6 @@
     </ClCompile>
     <ClCompile Include="Minigin.cpp">
       <Filter>Game Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UpdateComponent.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
       <Filter>Components</Filter>
@@ -218,11 +224,23 @@
     <ClCompile Include="Controller.cpp">
       <Filter>Helper Files</Filter>
     </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
     <ClCompile Include="MoveCommand.cpp">
       <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComponent.cpp">
+      <Filter>Components\BaseComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateComponent.cpp">
+      <Filter>Components\BaseComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Commands\BaseCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="Axis2DCommand.cpp">
+      <Filter>Commands\BaseCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="AxisCommand.cpp">
+      <Filter>Game Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

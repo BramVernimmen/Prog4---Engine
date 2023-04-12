@@ -1,11 +1,11 @@
 #pragma once
-#include "Command.h"
+#include "Axis2DCommand.h"
 #include <memory>
 namespace dae
 {
 	class GameObject;
 	class TransformComponent;
-	class MoveCommand final : public Command
+	class MoveCommand final : public Axis2DCommand
 	{
 	public:
 		MoveCommand(GameObject* pGameObject, float speed);
@@ -19,6 +19,7 @@ namespace dae
 
 		virtual void Execute() override;
 	private:
+		GameObject* m_pGameObject{};
 		TransformComponent* m_pTransform{};
 		float m_MovementSpeed{};
 	};

@@ -17,7 +17,6 @@ bool dae::InputManager::ProcessInput()
 
 	for (const auto& currCommand : m_Commands)
 	{
-		ResetValues();
 		bool executeCommand{ false }; // we check if we can execute the command first
 		if (currCommand.first.id >= 0) // we are using a controller
 		{
@@ -33,16 +32,33 @@ bool dae::InputManager::ProcessInput()
 				executeCommand = m_pControllers[currCommand.first.id]->IsPressed(currCommand.first.buttons[0]);
 				break;
 			case InputType::AnalogAxis:
+			{
 				// get the analog axis value from the controller
-				m_AnalogAxisValue = m_pControllers[currCommand.first.id]->GetAxis(currCommand.first.buttons[0]);
-				if (m_AnalogAxisValue > 0.0f)
+				float axisValue{0.0f};
+				axisValue = m_pControllers[currCommand.first.id]->GetAxis(currCommand.first.buttons[0]);
+				if (axisValue > 0.0f)
+				{
+					// SET INPUT
+					AxisCommand* tempCast = static_cast<AxisCommand*>(currCommand.second.get());
+					tempCast->SetInput(axisValue);
+
+
 					executeCommand = true;
+				}
+			}
 				break;
 			case InputType::Analog2DAxis:
 				// get the 2D analog axis value from the controller
-				m_2DAxisValue = m_pControllers[currCommand.first.id]->Get2DAxis(currCommand.first.buttons[0]);
-				if (m_2DAxisValue.x != 0.0f || m_2DAxisValue.y != 0.0f)
+				glm::vec2 Axis2DValue{};
+				Axis2DValue = m_pControllers[currCommand.first.id]->Get2DAxis(currCommand.first.buttons[0]);
+				if (Axis2DValue.x != 0.0f || Axis2DValue.y != 0.0f)
+				{
+					// SET INPUT
+					Axis2DCommand* tempCast = static_cast<Axis2DCommand*>(currCommand.second.get());
+					tempCast->SetInput(Axis2DValue);
+
 					executeCommand = true;
+				}
 				break;
 			case InputType::Digital2DAxis:
 				// get the 2D digital axis value from the controller
@@ -59,7 +75,10 @@ bool dae::InputManager::ProcessInput()
 
 				if (readOutput.x != 0 || readOutput.y != 0) // only if we actually moved
 				{
-					m_2DAxisValue = { readOutput.x, readOutput.y };
+					// SET INPUT
+					Axis2DCommand* tempCast = static_cast<Axis2DCommand*>(currCommand.second.get());
+					tempCast->SetInput(readOutput);
+
 					executeCommand = true;
 				}
 				
@@ -96,7 +115,10 @@ bool dae::InputManager::ProcessInput()
 
 				if (readOutput.x != 0 || readOutput.y != 0) // only if we actually moved
 				{
-					m_2DAxisValue = { readOutput.x, readOutput.y };
+					// SET INPUT
+					Axis2DCommand* tempCast = static_cast<Axis2DCommand*>(currCommand.second.get());
+					tempCast->SetInput(readOutput);
+
 					executeCommand = true;
 				}
 				break;
@@ -184,10 +206,4 @@ void dae::InputManager::ControllerIndexCheck(int id)
 			m_pControllers.push_back(std::make_unique<Controller>(static_cast<int>(m_pControllers.size())));
 		}
 	}
-}
-
-void dae::InputManager::ResetValues()
-{
-	m_2DAxisValue = {};
-	m_AnalogAxisValue = 0.0f;
 }

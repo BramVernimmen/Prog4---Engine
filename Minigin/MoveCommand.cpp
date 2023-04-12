@@ -5,17 +5,18 @@
 #include "Time.h"
 
 dae::MoveCommand::MoveCommand(GameObject* pGameObject, float speed)
-	: Command(pGameObject)
+	: m_pGameObject{pGameObject}
 	, m_MovementSpeed{speed}
 {
 	// cache the transform from the gameobject
-	m_pTransform = GetGameObject()->GetComponent<TransformComponent>().get();
+	m_pTransform = m_pGameObject->GetComponent<TransformComponent>().get();
 }
 
 void dae::MoveCommand::Execute()
 {
 	// get the direction linked to this command
-	auto axisValue = dae::InputManager::GetInstance().Get2DAxisValue();
+	auto axisValue = m_InputValue;
+
 
 	axisValue *= m_MovementSpeed * dae::Time::GetInstance().GetDeltaTime();
 	const auto& localPos{ m_pTransform->GetLocalPosition() };
