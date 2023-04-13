@@ -20,7 +20,7 @@ namespace dae
 		virtual void DisplayGui() = 0;
 
 	protected:
-		std::weak_ptr<GameObject> GetOwner() const { return m_pOwner; }
+		GameObject* GetOwner() const { return m_pOwner.lock().get(); }
 
 	private:
 		std::weak_ptr<GameObject> m_pOwner;

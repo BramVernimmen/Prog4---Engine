@@ -31,6 +31,27 @@
     <Filter Include="Commands\BaseCommands">
       <UniqueIdentifier>{bae8fa76-5606-45bf-8d45-0cb757f924cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{2f1be6c2-337e-483a-8bd8-9d460c8d67c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Observer">
+      <UniqueIdentifier>{cd5606ab-501f-4ce9-a2cb-ba256a78ed6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Observer\Base">
+      <UniqueIdentifier>{26b5756b-dc57-47c4-a137-a388c610273d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events\Base">
+      <UniqueIdentifier>{5f060b47-90ad-41bc-9122-1e3692f5b1a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\DeprecatedComponents">
+      <UniqueIdentifier>{0604ed41-4e25-4676-afc5-5d4bc83b7c01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\PlayerBasedComponents">
+      <UniqueIdentifier>{1c1a2290-9aeb-4625-a6d5-ec156a25a081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\UtilityComponents">
+      <UniqueIdentifier>{0c61f922-764c-4a6d-8ecc-e43db735a92d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture2D.h">
@@ -42,17 +63,11 @@
     <ClInclude Include="Font.h">
       <Filter>Helper Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextureComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Game Files</Filter>
     </ClInclude>
     <ClInclude Include="Minigin.h">
       <Filter>Game Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Helper Files\Singletons</Filter>
@@ -71,15 +86,6 @@
     </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Helper Files\Singletons</Filter>
-    </ClInclude>
-    <ClInclude Include="FPSComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TransformComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="RotatorComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdParty\imgui\imconfig.h">
       <Filter>imgui</Filter>
@@ -108,12 +114,6 @@
     <ClInclude Include="..\3rdParty\imgui\imgui_plot.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="TrashTheCache_GameObjComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TrashTheCache_IntegerComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Controller.h">
       <Filter>Helper Files</Filter>
     </ClInclude>
@@ -136,13 +136,46 @@
       <Filter>Commands\BaseCommands</Filter>
     </ClInclude>
     <ClInclude Include="AxisCommand.h">
-      <Filter>Helper Files</Filter>
+      <Filter>Commands\BaseCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Events\Observer\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Events\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineEvents.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Events\Observer\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="TrashTheCache_IntegerComponent.h">
+      <Filter>Components\DeprecatedComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="TrashTheCache_GameObjComponent.h">
+      <Filter>Components\DeprecatedComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="RotatorComponent.h">
+      <Filter>Components\DeprecatedComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSComponent.h">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="TextComponent.h">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureComponent.h">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthComponent.h">
+      <Filter>Components\PlayerBasedComponents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TextureComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Font.cpp">
       <Filter>Helper Files</Filter>
     </ClCompile>
@@ -161,12 +194,6 @@
     <ClCompile Include="Minigin.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TextComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Helper Files\Singletons</Filter>
     </ClCompile>
@@ -181,15 +208,6 @@
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>Helper Files\Singletons</Filter>
-    </ClCompile>
-    <ClCompile Include="FPSComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TransformComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="RotatorComponent.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui\imgui.cpp">
       <Filter>imgui</Filter>
@@ -215,12 +233,6 @@
     <ClCompile Include="..\3rdParty\imgui\imgui_plot.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="TrashTheCache_GameObjComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TrashTheCache_IntegerComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Controller.cpp">
       <Filter>Helper Files</Filter>
     </ClCompile>
@@ -240,7 +252,43 @@
       <Filter>Commands\BaseCommands</Filter>
     </ClCompile>
     <ClCompile Include="AxisCommand.cpp">
-      <Filter>Game Files</Filter>
+      <Filter>Commands\BaseCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Events\Observer\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Events\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Events\Observer\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Components\BaseComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashTheCache_IntegerComponent.cpp">
+      <Filter>Components\DeprecatedComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashTheCache_GameObjComponent.cpp">
+      <Filter>Components\DeprecatedComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="RotatorComponent.cpp">
+      <Filter>Components\DeprecatedComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSComponent.cpp">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="TextComponent.cpp">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureComponent.cpp">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthComponent.cpp">
+      <Filter>Components\PlayerBasedComponents</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

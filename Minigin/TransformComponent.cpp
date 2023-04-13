@@ -25,7 +25,7 @@ void dae::TransformComponent::UpdateWorldPosition()
 	// when our local has changed
 
 	// cache the parent of our owner
-	const auto grandParent{ GetOwner().lock()->GetParent().lock() };
+	const auto grandParent{ GetOwner()->GetParent().lock() };
 	if (grandParent) // if this exists
 	{
 		SetWorldPosition(grandParent->GetComponent<TransformComponent>()->GetWorldPosition());
@@ -56,7 +56,7 @@ void dae::TransformComponent::SetWorldPosition(glm::vec3 newWorldPos)
 {
 	m_WorldPosition = newWorldPos + m_LocalPosition;
 
-	for (const auto& currChild : GetOwner().lock()->GetChildren())
+	for (const auto& currChild : GetOwner()->GetChildren())
 	{
 		// check if our owner has other children
 		// their position will need to be changed too
@@ -70,7 +70,7 @@ void dae::TransformComponent::SetDirty()
 	m_IsDirty = true;
 
 	// we continue this chain until there are no more children left
-	for (const auto& currChild : GetOwner().lock()->GetChildren())
+	for (const auto& currChild : GetOwner()->GetChildren())
 	{
 		currChild->GetComponent<TransformComponent>()->SetDirty();
 	}

@@ -8,7 +8,7 @@
 dae::FPSComponent::FPSComponent(std::weak_ptr<GameObject> pOwner)
 	: UpdateComponent(pOwner)
 {
-	m_pPersonalTextComponent = GetOwner().lock()->GetComponent<dae::TextComponent>();
+	m_pPersonalTextComponent = GetOwner()->GetComponent<dae::TextComponent>();
 }
 
 void dae::FPSComponent::Update()
