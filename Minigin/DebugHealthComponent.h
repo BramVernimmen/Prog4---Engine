@@ -6,7 +6,7 @@
 namespace dae
 {
 	class TextComponent;
-	class DebugHealthComponent : public UpdateComponent, public Observer
+	class DebugHealthComponent final : public UpdateComponent, public Observer
 	{
 	public:
 		DebugHealthComponent(std::weak_ptr<GameObject> pOwner);

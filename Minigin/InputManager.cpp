@@ -2,12 +2,15 @@
 #include "InputManager.h"
 #include <backends/imgui_impl_sdl2.h>
 
-
 bool dae::InputManager::ProcessInput()
 {
 	// first read SDL events
 	if (ReadSDL_Events() == false) // quit has been hit
 		return false;
+
+	if (!m_IsGameFocused)
+		return true;
+
 
 	// update all controllers
 	for (const auto& currController : m_pControllers)
@@ -187,6 +190,13 @@ bool dae::InputManager::ReadSDL_Events()
 		}
 		if (e.type == SDL_MOUSEBUTTONDOWN) {
 
+		}
+		if (e.type == SDL_WINDOWEVENT && e.window.event == SDL_WINDOWEVENT_FOCUS_LOST) {
+			m_KeysPressed.clear(); // safety clear, sdl seems to trigger all key ups for some reason
+			m_IsGameFocused = false;
+		}
+		if (e.type == SDL_WINDOWEVENT && e.window.event == SDL_WINDOWEVENT_FOCUS_GAINED) {
+			m_IsGameFocused = true;
 		}
 		// etc...
 		//process event for IMGUI

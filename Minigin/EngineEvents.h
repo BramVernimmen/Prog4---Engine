@@ -3,7 +3,7 @@
 
 namespace dae
 {
-	class PlayerDamaged : public Event {};
-	class PlayerDied : public Event {};
-	class GainedScore : public Event {};
+	class PlayerDamaged final : public Event {};
+	class PlayerDied final : public Event {};
+	class GainedScore final : public Event {};
 }

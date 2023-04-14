@@ -7,7 +7,7 @@
 namespace dae
 {
 
-	class ScoreComponent : public UpdateComponent, public Subject, public Observer
+	class ScoreComponent final : public UpdateComponent, public Subject, public Observer
 	{
 	public:
 		ScoreComponent(std::weak_ptr<GameObject> pOwner);

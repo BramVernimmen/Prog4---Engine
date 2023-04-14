@@ -4,7 +4,7 @@
 namespace dae
 {
 
-	class HowToPlayComponent : public UpdateComponent
+	class HowToPlayComponent final : public UpdateComponent
 	{
 	public:
 		HowToPlayComponent(std::weak_ptr<GameObject> pOwner);

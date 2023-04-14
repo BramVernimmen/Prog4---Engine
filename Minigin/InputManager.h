@@ -59,6 +59,8 @@ namespace dae
 
 		bool ReadSDL_Events();
 		void ControllerIndexCheck(int id);
+
+		bool m_IsGameFocused{ true };
 	};
 
 }
