@@ -192,6 +192,9 @@
     <ClInclude Include="GiveScoreCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
+    <ClInclude Include="HowToPlayComponent.h">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">
@@ -322,6 +325,9 @@
     </ClCompile>
     <ClCompile Include="GiveScoreCommand.cpp">
       <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="HowToPlayComponent.cpp">
+      <Filter>Components\UtilityComponents</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
