@@ -8,7 +8,7 @@ namespace dae
 	{
 	public:
 		virtual ~Observer() = default;
-		virtual void Notify(Event event, std::any source = nullptr) = 0;
+		virtual void Notify(const Event& currEvent, std::any payload = nullptr) = 0;
 	};
 }
 

@@ -16,7 +16,7 @@ namespace dae
 		HealthComponent& operator=(HealthComponent&& other) = delete;
 
 
-		virtual void Update() override;
+		virtual void Update() override {};
 
 		void SetMaxHealth(int newMax) { m_MaxHealth = newMax; }
 		void ResetHealth();

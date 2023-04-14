@@ -15,7 +15,7 @@ namespace dae
 		void RemoveObserver(Observer* observerToRemove);
 
 	protected:
-		void NotifyObservers(Event event, std::any source = nullptr);
+		void NotifyObservers(Event&& currEvent, std::any payload = nullptr);
 
 	private:
 		std::vector<Observer*> m_pObservers{};

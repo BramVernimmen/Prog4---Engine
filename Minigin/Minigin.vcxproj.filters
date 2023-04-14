@@ -52,6 +52,9 @@
     <Filter Include="Components\UtilityComponents">
       <UniqueIdentifier>{0c61f922-764c-4a6d-8ecc-e43db735a92d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\PlayerBasedComponents\Debug">
+      <UniqueIdentifier>{f6ea7180-47bc-4eb7-952f-1f90fc11c320}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture2D.h">
@@ -174,6 +177,21 @@
     <ClInclude Include="HealthComponent.h">
       <Filter>Components\PlayerBasedComponents</Filter>
     </ClInclude>
+    <ClInclude Include="DebugHealthComponent.h">
+      <Filter>Components\PlayerBasedComponents\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
+      <Filter>Components\PlayerBasedComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugScoreComponent.h">
+      <Filter>Components\PlayerBasedComponents\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="GiveScoreCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">
@@ -289,6 +307,21 @@
     </ClCompile>
     <ClCompile Include="HealthComponent.cpp">
       <Filter>Components\PlayerBasedComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugHealthComponent.cpp">
+      <Filter>Components\PlayerBasedComponents\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>Components\PlayerBasedComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugScoreComponent.cpp">
+      <Filter>Components\PlayerBasedComponents\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GiveScoreCommand.cpp">
+      <Filter>Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
