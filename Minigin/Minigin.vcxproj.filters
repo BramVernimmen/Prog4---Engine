@@ -195,6 +195,9 @@
     <ClInclude Include="HowToPlayComponent.h">
       <Filter>Components\UtilityComponents</Filter>
     </ClInclude>
+    <ClInclude Include="AchievementObserver.h">
+      <Filter>Events\Observer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">
@@ -328,6 +331,9 @@
     </ClCompile>
     <ClCompile Include="HowToPlayComponent.cpp">
       <Filter>Components\UtilityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="AchievementObserver.cpp">
+      <Filter>Events\Observer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
