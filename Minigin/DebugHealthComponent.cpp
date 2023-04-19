@@ -14,6 +14,7 @@ void dae::DebugHealthComponent::Update()
 	if (m_ShouldUpdateText)
 	{
 		m_pPersonalTextComponent.lock()->SetText("Lives: " + std::to_string(m_LastHealth) );
+		m_ShouldUpdateText = false;
 	}
 }
 

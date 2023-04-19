@@ -27,6 +27,12 @@ void dae::AchievementObserver::ClearAchievements()
 
 void dae::AchievementObserver::UnlockAchievement(const char* ID)
 {
+	bool isAchieved{ false };
+	SteamUserStats()->GetAchievement(ID, &isAchieved);
+
+	if (isAchieved)
+		return;
+
 	SteamUserStats()->SetAchievement(ID);
 	SteamUserStats()->StoreStats();
 }

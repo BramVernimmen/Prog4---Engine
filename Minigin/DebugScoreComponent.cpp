@@ -14,6 +14,7 @@ void dae::DebugScoreComponent::Update()
 	if (m_ShouldUpdateText)
 	{
 		m_pPersonalTextComponent.lock()->SetText("Score: " + std::to_string(m_CurrentScoreToPrint));
+		m_ShouldUpdateText = false;
 	}
 }
 
