@@ -12,8 +12,6 @@
 #include "Time.h"
 #include <chrono>
 #include <thread>
-#include <steam_api_common.h>
-#include "AchievementObserver.h"
 
 SDL_Window* g_window{};
 
@@ -82,8 +80,6 @@ dae::Minigin::~Minigin()
 
 void dae::Minigin::Run(const std::function<void()>& load)
 {
-	auto& achievements = AchievementObserver::GetInstance();
-	achievements.ClearAchievements(); // clear all achievements and stats, this is just for testing purposses now.
 	load();
 
 	auto& renderer = Renderer::GetInstance();
@@ -101,8 +97,6 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	{
 		const auto& currentTime = time.GetTimeCurrent();
 		time.Update(); // update to get DeltaTime
-
-		SteamAPI_RunCallbacks();
 
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
