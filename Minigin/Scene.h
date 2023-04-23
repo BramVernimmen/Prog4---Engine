@@ -4,18 +4,16 @@
 
 namespace dae
 {
-	//class GameObject;
 	class Scene final
 	{
 		friend Scene& SceneManager::CreateScene(const std::string& name);
 	public:
-		void Add(std::unique_ptr<GameObject> object);
-		void Remove(GameObject* object);
-		void RemoveAll();
 
 		void Update();
 		void Render() const;
 		void DisplayGui();
+
+		GameObject* GetRoot() { return m_pRoot.get(); }
 
 		~Scene();
 		Scene(const Scene& other) = delete;
@@ -28,6 +26,7 @@ namespace dae
 
 		std::string m_name;
 		std::vector < std::unique_ptr<GameObject>> m_objects{};
+		std::unique_ptr<GameObject> m_pRoot;
 
 		static unsigned int m_idCounter; 
 	};

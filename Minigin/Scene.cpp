@@ -1,35 +1,17 @@
 #include "Scene.h"
-#include "GameObject.h"
 
 using namespace dae;
 
 unsigned int Scene::m_idCounter = 0;
 
-Scene::Scene(const std::string& name) : m_name(name) {}
+Scene::Scene(const std::string& name) 
+	: m_name(name) 
+{
+	m_pRoot = std::make_unique<GameObject>();
+}
 
 Scene::~Scene() = default;
 
-void Scene::Add(std::unique_ptr<GameObject> object)
-{
-	m_objects.emplace_back(std::move(object));
-}
-
-void Scene::Remove(GameObject* object)
-{
-	for (auto it{ m_objects.begin() }; it != m_objects.end(); ++it)
-	{
-		if (object == (*it).get())
-		{
-			m_objects.erase(it);
-			return;
-		}
-	}
-}
-
-void Scene::RemoveAll()
-{
-	m_objects.clear();
-}
 
 void Scene::Update()
 {
@@ -37,6 +19,8 @@ void Scene::Update()
 	{
 		object->Update();
 	}
+
+	m_pRoot->Update();
 }
 
 void Scene::Render() const
@@ -45,6 +29,8 @@ void Scene::Render() const
 	{
 		object->Render();
 	}
+
+	m_pRoot->Render();
 }
 
 void dae::Scene::DisplayGui()
@@ -54,5 +40,7 @@ void dae::Scene::DisplayGui()
 	{
 		object->DisplayGui();
 	}
+
+	m_pRoot->DisplayGui();
 }
 

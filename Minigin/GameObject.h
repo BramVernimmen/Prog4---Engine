@@ -4,16 +4,16 @@
 #include <algorithm>
 #include <iostream>
 #include "BaseComponent.h"
+#include "RenderComponent.h"
 
 namespace dae
 {
-	class RenderComponent;
+	//class RenderComponent;
 	// has to be public: https://stackoverflow.com/questions/56415222/why-weak-from-this-always-returns-empty-weak-pointer
-	class GameObject final : public std::enable_shared_from_this<GameObject>
+	class GameObject final
 	{
 	public:
-
-		GameObject() = default;
+		GameObject();
 		~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
@@ -29,20 +29,21 @@ namespace dae
 		template <typename T> T* GetComponent() const;
 		template <typename T> void RemoveComponent();
 
-		void SetParent(std::shared_ptr<GameObject> newParent);
-		std::vector<std::shared_ptr<GameObject>> GetChildren() const { return m_Children; }
+		void SetParent(GameObject* newParent, bool keepWorldPosition = false);
+		std::vector<GameObject*> GetChildren() const { return m_ReturnChildren; }
 		GameObject* GetParent() const { return m_pParent; }
 
 	protected:
-		void AddChild(std::shared_ptr<GameObject> newChild);
-		void RemoveChild(std::shared_ptr<GameObject> childToRemove);
-		bool CheckIfChild(std::shared_ptr<GameObject> parentToCheck);
+		void AddChild(std::unique_ptr<GameObject> newChild);
+		std::unique_ptr<GameObject> RemoveChild(GameObject* childToRemove);
+		bool CheckIfChild(GameObject* parentToCheck);
 
 	private:
 		std::vector<std::unique_ptr<BaseComponent>> m_Components{};
 		std::unique_ptr<BaseComponent> m_RenderComponent{};
 
-		std::vector<std::shared_ptr<GameObject>> m_Children{};
+		std::vector<std::unique_ptr<GameObject>> m_Children{};
+		std::vector<GameObject*> m_ReturnChildren{};
 		GameObject* m_pParent{};
 	};
 
