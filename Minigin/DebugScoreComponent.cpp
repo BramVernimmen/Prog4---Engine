@@ -6,7 +6,7 @@
 dae::DebugScoreComponent::DebugScoreComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
-	m_pPersonalTextComponent = GetOwner()->GetComponent<dae::TextComponent>().get();
+	m_pPersonalTextComponent = GetOwner()->GetComponent<dae::TextComponent>();
 }
 
 void dae::DebugScoreComponent::Update()

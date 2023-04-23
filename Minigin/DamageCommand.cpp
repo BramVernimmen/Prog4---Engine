@@ -6,7 +6,7 @@ dae::DamageCommand::DamageCommand(GameObject* pGameObject, int damage)
 	: m_pGameObject{pGameObject}
 	, m_Damage{damage}
 {
-	m_pHealth = pGameObject->GetComponent<HealthComponent>().get();
+	m_pHealth = pGameObject->GetComponent<HealthComponent>();
 }
 
 void dae::DamageCommand::Execute()

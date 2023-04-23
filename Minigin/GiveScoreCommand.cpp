@@ -6,7 +6,7 @@ dae::GiveScoreCommand::GiveScoreCommand(GameObject* pGameObject, int score)
 	: m_pGameObject{pGameObject}
 	, m_ScoreValue{score}
 {
-	m_pScore = pGameObject->GetComponent<ScoreComponent>().get();
+	m_pScore = pGameObject->GetComponent<ScoreComponent>();
 }
 
 void dae::GiveScoreCommand::Execute()

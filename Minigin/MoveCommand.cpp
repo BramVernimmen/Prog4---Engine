@@ -9,7 +9,7 @@ dae::MoveCommand::MoveCommand(GameObject* pGameObject, float speed)
 	, m_MovementSpeed{speed}
 {
 	// cache the transform from the gameobject
-	m_pTransform = m_pGameObject->GetComponent<TransformComponent>().get();
+	m_pTransform = m_pGameObject->GetComponent<TransformComponent>();
 }
 
 void dae::MoveCommand::Execute()

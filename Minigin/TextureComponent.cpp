@@ -7,7 +7,7 @@
 dae::TextureComponent::TextureComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
-	m_TransformComponent = GetOwner()->GetComponent<TransformComponent>().get();
+	m_TransformComponent = GetOwner()->GetComponent<TransformComponent>();
 }
 
 void dae::TextureComponent::Update()

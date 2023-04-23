@@ -6,7 +6,7 @@
 dae::RotatorComponent::RotatorComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
-	m_TransformComponent = GetOwner()->GetComponent<TransformComponent>().get();
+	m_TransformComponent = GetOwner()->GetComponent<TransformComponent>();
 }
 
 void dae::RotatorComponent::Update()

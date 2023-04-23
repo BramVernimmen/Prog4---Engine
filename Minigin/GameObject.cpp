@@ -48,12 +48,12 @@ void dae::GameObject::SetParent(std::shared_ptr<GameObject> newParent)
 	if (CheckIfChild(newParent))
 		return;
 
-	if (m_pParent.lock())// we already have a parent, remove ourselves first
+	if (m_pParent)// we already have a parent, remove ourselves first
 	{
-		m_pParent.lock()->RemoveChild(shared_from_this());
+		m_pParent->RemoveChild(shared_from_this());
 	}
 
-	m_pParent = newParent;
+	m_pParent = newParent.get();
 	if (newParent.get()) // nullptr check
 		newParent->AddChild(shared_from_this());
 	

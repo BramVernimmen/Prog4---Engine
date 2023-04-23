@@ -25,7 +25,7 @@ void dae::TransformComponent::UpdateWorldPosition()
 	// when our local has changed
 
 	// cache the parent of our owner
-	const auto grandParent{ GetOwner()->GetParent().lock() };
+	const auto grandParent{ GetOwner()->GetParent() };
 	if (grandParent) // if this exists
 	{
 		SetWorldPosition(grandParent->GetComponent<TransformComponent>()->GetWorldPosition());
