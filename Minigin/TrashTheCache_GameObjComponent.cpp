@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <numeric>
 
-dae::TrashTheCache_GameObjComponent::TrashTheCache_GameObjComponent(std::weak_ptr<GameObject> pOwner)
+dae::TrashTheCache_GameObjComponent::TrashTheCache_GameObjComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
 }

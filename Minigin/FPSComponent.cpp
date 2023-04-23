@@ -5,10 +5,10 @@
 #include <algorithm>
 #include <numeric>
 
-dae::FPSComponent::FPSComponent(std::weak_ptr<GameObject> pOwner)
+dae::FPSComponent::FPSComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
-	m_pPersonalTextComponent = GetOwner()->GetComponent<dae::TextComponent>();
+	m_pPersonalTextComponent = GetOwner()->GetComponent<dae::TextComponent>().get();
 }
 
 void dae::FPSComponent::Update()
@@ -26,7 +26,7 @@ void dae::FPSComponent::Update()
 		// first calculate average deltaTime
 		const float avgDT{ std::accumulate(m_PastDeltatimes.begin(), m_PastDeltatimes.end(), 0.0f) / m_PastDeltatimes.size() };
 		m_PastDeltatimes.clear();
-		m_pPersonalTextComponent.lock()->SetText(std::to_string(static_cast<int>(1.f / avgDT)) + " FPS");
+		m_pPersonalTextComponent->SetText(std::to_string(static_cast<int>(1.f / avgDT)) + " FPS");
 
 		// the TextComponent is not a direct child of the GameObject, so it will not update automatically
 		m_TimeRunning -= m_TimeLimit;

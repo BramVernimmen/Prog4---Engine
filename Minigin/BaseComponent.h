@@ -7,7 +7,7 @@ namespace dae
 	class BaseComponent
 	{
 	public:
-		BaseComponent(std::weak_ptr<GameObject> pOwner);
+		BaseComponent(GameObject* pOwner);
 		virtual ~BaseComponent() = default;
 		BaseComponent(const BaseComponent& other) = delete;
 		BaseComponent(BaseComponent&& other) = delete;
@@ -20,10 +20,10 @@ namespace dae
 		virtual void DisplayGui() = 0;
 
 	protected:
-		GameObject* GetOwner() const { return m_pOwner.lock().get(); }
+		GameObject* GetOwner() const { return m_pOwner; }
 
 	private:
-		std::weak_ptr<GameObject> m_pOwner;
+		GameObject* m_pOwner;
 	};
 }
 

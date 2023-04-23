@@ -4,10 +4,10 @@
 #include "RenderComponent.h"
 #include "TransformComponent.h"
 
-dae::TextureComponent::TextureComponent(std::weak_ptr<GameObject> pOwner)
+dae::TextureComponent::TextureComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
-	m_TransformComponent = pOwner.lock()->GetComponent<TransformComponent>();
+	m_TransformComponent = GetOwner()->GetComponent<TransformComponent>().get();
 }
 
 void dae::TextureComponent::Update()
@@ -21,8 +21,8 @@ void dae::TextureComponent::SetTexture(const std::string& filename)
 }
 
 
-void dae::TextureComponent::AddToRenderer(std::shared_ptr<RenderComponent>& pRenderer)
+void dae::TextureComponent::AddToRenderer(RenderComponent* pRenderer)
 {
-	pRenderer->AddTextureToRender(m_pTexture, m_TransformComponent.lock());
+	pRenderer->AddTextureToRender(m_pTexture.get(), m_TransformComponent);
 }
 

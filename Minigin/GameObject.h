@@ -56,7 +56,7 @@ namespace dae
 			// check if it already exists, if so return that one
 			if (m_RenderComponent)
 				return std::dynamic_pointer_cast<T>(m_RenderComponent);
-			m_RenderComponent = std::make_shared<T>(weak_from_this());
+			m_RenderComponent = std::make_shared<T>(this);
 
 			return std::dynamic_pointer_cast<T>(m_RenderComponent);
 		}
@@ -70,7 +70,7 @@ namespace dae
 		}
 
 		// if we get here, the component doesn't exist yet, create it
-		m_Components.push_back(std::make_shared<T>(weak_from_this()));
+		m_Components.push_back(std::make_shared<T>(this));
 		return std::dynamic_pointer_cast<T>(m_Components.back()); // return the last element, this is the one we just added
 	}
 

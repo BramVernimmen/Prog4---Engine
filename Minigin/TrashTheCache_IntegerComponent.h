@@ -9,7 +9,7 @@ namespace dae
 	class TrashTheCache_IntegerComponent : public UpdateComponent
 	{
 	public:
-		TrashTheCache_IntegerComponent(std::weak_ptr<GameObject> pOwner);
+		TrashTheCache_IntegerComponent(GameObject* pOwner);
 		virtual ~TrashTheCache_IntegerComponent() = default;
 		TrashTheCache_IntegerComponent(const TrashTheCache_IntegerComponent& other) = delete;
 		TrashTheCache_IntegerComponent(TrashTheCache_IntegerComponent&& other) = delete;

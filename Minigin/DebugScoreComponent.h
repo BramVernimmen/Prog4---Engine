@@ -9,7 +9,7 @@ namespace dae
 	class DebugScoreComponent final : public UpdateComponent, public Observer
 	{
 	public:
-		DebugScoreComponent(std::weak_ptr<GameObject> pOwner);
+		DebugScoreComponent(GameObject* pOwner);
 		~DebugScoreComponent() = default;
 		DebugScoreComponent(const DebugScoreComponent& other) = delete;
 		DebugScoreComponent(DebugScoreComponent&& other) = delete;
@@ -23,7 +23,7 @@ namespace dae
 
 
 	private:
-		std::weak_ptr<TextComponent> m_pPersonalTextComponent{};
+		TextComponent* m_pPersonalTextComponent{};
 		int m_CurrentScoreToPrint{ 0 };
 		bool m_ShouldUpdateText{ true };
 

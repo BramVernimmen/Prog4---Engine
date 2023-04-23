@@ -5,7 +5,7 @@ namespace dae
 	class UpdateComponent : public BaseComponent
 	{
 	public:
-		UpdateComponent(std::weak_ptr<GameObject> pOwner);
+		UpdateComponent(GameObject* pOwner);
 		virtual ~UpdateComponent() = default;
 		UpdateComponent(const UpdateComponent& other) = delete;
 		UpdateComponent(UpdateComponent&& other) = delete;

@@ -8,21 +8,18 @@
 #include "TransformComponent.h"
 #include "GameObject.h"
 
-dae::TextComponent::TextComponent(std::weak_ptr<GameObject> pOwner)
+dae::TextComponent::TextComponent(GameObject* pOwner)
 	:UpdateComponent(pOwner)
 {
-	m_TransformComponent = pOwner.lock()->GetComponent<TransformComponent>();
+	m_TransformComponent = GetOwner()->GetComponent<TransformComponent>().get();
 }
 
 void dae::TextComponent::Update()
 {
 	if (m_NeedsUpdate)
 	{
-		// cache the lock, we use it multiple times
-		auto lockedRenderComponent{ m_pRenderComponent.lock() };
-		auto lockedTransformComponent{ m_TransformComponent.lock() };
 		// first remove the old one, so it won't be stored
-		lockedRenderComponent->RemoveTextureFromRenderer(m_pTexture, lockedTransformComponent);
+		m_pRenderComponent->RemoveTextureFromRenderer(m_pTexture.get(), m_TransformComponent);
 
 		const SDL_Color color = { 255,255,255 }; // only white text is supported now
 		const auto surf = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), m_Color);
@@ -40,7 +37,7 @@ void dae::TextComponent::Update()
 		m_NeedsUpdate = false;
 
 		// then add the new one
-		lockedRenderComponent->AddTextureToRender(m_pTexture, lockedTransformComponent);
+		m_pRenderComponent->AddTextureToRender(m_pTexture.get(), m_TransformComponent);
 	}
 }
 
@@ -62,8 +59,8 @@ void dae::TextComponent::SetColor(const SDL_Color& newColor)
 	m_NeedsUpdate = true;
 }
 
-void dae::TextComponent::AddToRenderer(std::shared_ptr<RenderComponent>& pRenderer)
+void dae::TextComponent::AddToRenderer(RenderComponent* pRenderer)
 {
-	pRenderer->AddTextureToRender(m_pTexture, m_TransformComponent.lock());
+	pRenderer->AddTextureToRender(m_pTexture.get(), m_TransformComponent);
 	m_pRenderComponent = pRenderer;
 }

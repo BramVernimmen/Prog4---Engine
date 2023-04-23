@@ -1,7 +1,7 @@
 #include "HowToPlayComponent.h"
 #include "imgui.h"
 
-dae::HowToPlayComponent::HowToPlayComponent(std::weak_ptr<GameObject> pOwner)
+dae::HowToPlayComponent::HowToPlayComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
 }

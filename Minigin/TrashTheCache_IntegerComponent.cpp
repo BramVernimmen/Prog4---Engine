@@ -4,7 +4,7 @@
 #include <chrono>
 #include <numeric>
 
-dae::TrashTheCache_IntegerComponent::TrashTheCache_IntegerComponent(std::weak_ptr<GameObject> pOwner)
+dae::TrashTheCache_IntegerComponent::TrashTheCache_IntegerComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
 }

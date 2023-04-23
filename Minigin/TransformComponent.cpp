@@ -1,7 +1,7 @@
 #include "TransformComponent.h"
 #include "GameObject.h"
 
-dae::TransformComponent::TransformComponent(std::weak_ptr<GameObject> pOwner)
+dae::TransformComponent::TransformComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
 }

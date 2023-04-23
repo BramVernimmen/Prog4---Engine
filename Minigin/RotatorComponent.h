@@ -8,7 +8,7 @@ namespace dae
 	class RotatorComponent final : public UpdateComponent
 	{
 	public:
-		RotatorComponent(std::weak_ptr<GameObject> pOwner);
+		RotatorComponent(GameObject* pOwner);
 		virtual ~RotatorComponent() = default;
 		RotatorComponent(const RotatorComponent& other) = delete;
 		RotatorComponent(RotatorComponent&& other) = delete;
@@ -22,13 +22,13 @@ namespace dae
 		void SetOffset(glm::vec3 offset) { m_Offset = offset; }
 
 		// setting the transform to rotate around
-		void SetTracking(std::weak_ptr<TransformComponent> transToTrack);
+		void SetTracking(TransformComponent* transToTrack);
 
 	protected:
 
 	private:
-		std::weak_ptr<TransformComponent> m_TransformComponent{}; // this is the transform of our current Owner
-		std::weak_ptr<TransformComponent> m_TrackingTransformComponent{}; // this is the transform of the Object we want to rotate around
+		TransformComponent* m_TransformComponent{}; // this is the transform of our current Owner
+		TransformComponent* m_TrackingTransformComponent{}; // this is the transform of the Object we want to rotate around
 
 		const float m_TwoPi{ 6.28318530718f };
 		float m_Speed {5.0f};

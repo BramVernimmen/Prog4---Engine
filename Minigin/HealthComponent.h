@@ -8,7 +8,7 @@ namespace dae
 	class HealthComponent final : public UpdateComponent, public Subject
 	{
 	public:
-		HealthComponent(std::weak_ptr<GameObject> pOwner);
+		HealthComponent(GameObject* pOwner);
 		~HealthComponent() = default;
 		HealthComponent(const HealthComponent& other) = delete;
 		HealthComponent(HealthComponent&& other) = delete;

@@ -10,7 +10,7 @@ namespace dae
     class TextureComponent final : public UpdateComponent
     {
     public:
-		TextureComponent(std::weak_ptr<GameObject> pOwner);
+		TextureComponent(GameObject* pOwner);
 		~TextureComponent() = default;
 		TextureComponent(const TextureComponent& other) = delete;
 		TextureComponent(TextureComponent&& other) = delete;
@@ -22,11 +22,11 @@ namespace dae
 
 		void SetTexture(const std::string& filename);
 
-		void AddToRenderer(std::shared_ptr<RenderComponent>& pRenderer);
+		void AddToRenderer(RenderComponent* pRenderer);
 
     private:
 		std::shared_ptr<Texture2D> m_pTexture{};
-		std::weak_ptr<TransformComponent> m_TransformComponent{};
+		TransformComponent* m_TransformComponent{};
     };
 
 }

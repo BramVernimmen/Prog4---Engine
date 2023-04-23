@@ -7,7 +7,7 @@ namespace dae
 	class TransformComponent final : public UpdateComponent
 	{
 	public:
-		TransformComponent(std::weak_ptr<GameObject> pOwner);
+		TransformComponent(GameObject* pOwner);
 		~TransformComponent() = default;
 		TransformComponent(const TransformComponent& other) = delete;
 		TransformComponent(TransformComponent&& other) = delete;

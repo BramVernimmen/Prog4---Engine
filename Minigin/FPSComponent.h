@@ -8,7 +8,7 @@ namespace dae
 	class FPSComponent final : public UpdateComponent
 	{
 	public:
-		FPSComponent(std::weak_ptr<GameObject> pOwner);
+		FPSComponent(GameObject* pOwner);
 		~FPSComponent() = default;
 		FPSComponent(const FPSComponent& other) = delete;
 		FPSComponent(FPSComponent&& other) = delete;
@@ -22,7 +22,7 @@ namespace dae
 
 
 	private:
-		std::weak_ptr<TextComponent> m_pPersonalTextComponent{};
+		TextComponent* m_pPersonalTextComponent{};
 		float m_TimeRunning{ 0.99f };
 		const float m_TimeLimit{ 1.0f };
 		std::vector<float> m_PastDeltatimes{};

@@ -7,7 +7,7 @@ namespace dae
 	class HowToPlayComponent final : public UpdateComponent
 	{
 	public:
-		HowToPlayComponent(std::weak_ptr<GameObject> pOwner);
+		HowToPlayComponent(GameObject* pOwner);
 		virtual ~HowToPlayComponent() = default;
 		HowToPlayComponent(const HowToPlayComponent& other) = delete;
 		HowToPlayComponent(HowToPlayComponent&& other) = delete;

@@ -1,7 +1,7 @@
 #include "HealthComponent.h"
 #include "EngineEvents.h"
 
-dae::HealthComponent::HealthComponent(std::weak_ptr<GameObject> pOwner)
+dae::HealthComponent::HealthComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
 	ResetHealth();

@@ -3,17 +3,17 @@
 #include "GameObject.h"
 #include "HealthComponent.h"
 
-dae::DebugHealthComponent::DebugHealthComponent(std::weak_ptr<GameObject> pOwner)
+dae::DebugHealthComponent::DebugHealthComponent(GameObject* pOwner)
 	: UpdateComponent{pOwner}
 {
-	m_pPersonalTextComponent = GetOwner()->GetComponent<dae::TextComponent>();
+	m_pPersonalTextComponent = GetOwner()->GetComponent<dae::TextComponent>().get();
 }
 
 void dae::DebugHealthComponent::Update()
 {
 	if (m_ShouldUpdateText)
 	{
-		m_pPersonalTextComponent.lock()->SetText("Lives: " + std::to_string(m_LastHealth) );
+		m_pPersonalTextComponent->SetText("Lives: " + std::to_string(m_LastHealth) );
 		m_ShouldUpdateText = false;
 	}
 }

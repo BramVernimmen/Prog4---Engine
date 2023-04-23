@@ -3,10 +3,10 @@
 #include "TransformComponent.h"
 #include "GameObject.h"
 
-dae::RotatorComponent::RotatorComponent(std::weak_ptr<GameObject> pOwner)
+dae::RotatorComponent::RotatorComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
-	m_TransformComponent = pOwner.lock()->GetComponent<TransformComponent>();
+	m_TransformComponent = GetOwner()->GetComponent<TransformComponent>().get();
 }
 
 void dae::RotatorComponent::Update()
@@ -20,22 +20,21 @@ void dae::RotatorComponent::Update()
 	m_RotationResults.y = sinf(m_Rotation) * m_Radius;
 
 
-	if (m_TrackingTransformComponent.expired() == false) // if we have something to track
+	if (m_TrackingTransformComponent) // if we have something to track
 	{
 		//cache the locked
-		const auto& lockedTracker{ m_TrackingTransformComponent.lock() };
-		const auto& localPosOfTracker{ lockedTracker->GetLocalPosition() };
+		const auto& localPosOfTracker{ m_TrackingTransformComponent->GetLocalPosition() };
 		// add that local position to our rotation results
 		m_RotationResults.x += localPosOfTracker.x;
 		m_RotationResults.y += localPosOfTracker.y;
 	}
 
 	// rotate
-	m_TransformComponent.lock()->SetLocalPosition(m_RotationResults.x + m_Offset.x, m_RotationResults.y + m_Offset.y);
+	m_TransformComponent->SetLocalPosition(m_RotationResults.x + m_Offset.x, m_RotationResults.y + m_Offset.y);
 
 }
 
-void dae::RotatorComponent::SetTracking(std::weak_ptr<TransformComponent> transToTrack)
+void dae::RotatorComponent::SetTracking(TransformComponent* transToTrack)
 {
 	m_TrackingTransformComponent = transToTrack;
 }

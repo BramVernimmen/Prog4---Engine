@@ -9,7 +9,7 @@ namespace dae
 	class DebugHealthComponent final : public UpdateComponent, public Observer
 	{
 	public:
-		DebugHealthComponent(std::weak_ptr<GameObject> pOwner);
+		DebugHealthComponent(GameObject* pOwner);
 		~DebugHealthComponent() = default;
 		DebugHealthComponent(const DebugHealthComponent& other) = delete;
 		DebugHealthComponent(DebugHealthComponent&& other) = delete;
@@ -24,7 +24,7 @@ namespace dae
 		void SetLastHealth(int lastHealth);
 
 	private:
-		std::weak_ptr<TextComponent> m_pPersonalTextComponent{};
+		TextComponent* m_pPersonalTextComponent{};
 
 		int m_LastHealth{};
 		bool m_ShouldUpdateText{ false };

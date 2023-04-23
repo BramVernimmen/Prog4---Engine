@@ -30,7 +30,7 @@ namespace dae
 	class TrashTheCache_GameObjComponent : public UpdateComponent
 	{
 	public:
-		TrashTheCache_GameObjComponent(std::weak_ptr<GameObject> pOwner);
+		TrashTheCache_GameObjComponent(GameObject* pOwner);
 		virtual ~TrashTheCache_GameObjComponent();
 		TrashTheCache_GameObjComponent(const TrashTheCache_GameObjComponent& other) = delete;
 		TrashTheCache_GameObjComponent(TrashTheCache_GameObjComponent&& other) = delete;

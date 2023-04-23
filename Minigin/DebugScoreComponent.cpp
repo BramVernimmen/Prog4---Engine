@@ -3,17 +3,17 @@
 #include "GameObject.h"
 #include "ScoreComponent.h"
 
-dae::DebugScoreComponent::DebugScoreComponent(std::weak_ptr<GameObject> pOwner)
+dae::DebugScoreComponent::DebugScoreComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
-	m_pPersonalTextComponent = GetOwner()->GetComponent<dae::TextComponent>();
+	m_pPersonalTextComponent = GetOwner()->GetComponent<dae::TextComponent>().get();
 }
 
 void dae::DebugScoreComponent::Update()
 {
 	if (m_ShouldUpdateText)
 	{
-		m_pPersonalTextComponent.lock()->SetText("Score: " + std::to_string(m_CurrentScoreToPrint));
+		m_pPersonalTextComponent->SetText("Score: " + std::to_string(m_CurrentScoreToPrint));
 		m_ShouldUpdateText = false;
 	}
 }

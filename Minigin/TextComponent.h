@@ -14,7 +14,7 @@ namespace dae
 	{
 		
 	public:
-		TextComponent(std::weak_ptr<GameObject> pOwner);
+		TextComponent(GameObject* pOwner);
 		~TextComponent() = default;
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;
@@ -26,14 +26,14 @@ namespace dae
 
 		void SetFont(std::shared_ptr<Font>& newFont);
 		void SetText(const std::string& newText);
-		void SetPosition(float x, float y);
+		//void SetPosition(float x, float y);
 		void SetColor(const SDL_Color& newColor);
 
-		void AddToRenderer(std::shared_ptr<RenderComponent>& pRenderer);
+		void AddToRenderer(RenderComponent* pRenderer);
 
 	private:
-		std::weak_ptr<RenderComponent> m_pRenderComponent{};
-		std::weak_ptr<TransformComponent> m_TransformComponent{};
+		RenderComponent* m_pRenderComponent{};
+		TransformComponent* m_TransformComponent{};
 		std::shared_ptr<Texture2D> m_pTexture{};
 
 		bool m_NeedsUpdate{true};

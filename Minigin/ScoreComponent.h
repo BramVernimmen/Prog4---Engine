@@ -10,7 +10,7 @@ namespace dae
 	class ScoreComponent final : public UpdateComponent, public Subject, public Observer
 	{
 	public:
-		ScoreComponent(std::weak_ptr<GameObject> pOwner);
+		ScoreComponent(GameObject* pOwner);
 		~ScoreComponent() = default;
 		ScoreComponent(const ScoreComponent& other) = delete;
 		ScoreComponent(ScoreComponent&& other) = delete;

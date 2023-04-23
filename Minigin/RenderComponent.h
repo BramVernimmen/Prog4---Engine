@@ -9,7 +9,7 @@ namespace dae
 	class RenderComponent final: public BaseComponent
 	{
 	public:
-		RenderComponent(std::weak_ptr<GameObject> pOwner);
+		RenderComponent(GameObject* pOwner);
 		~RenderComponent() = default;
 		RenderComponent(const RenderComponent& other) = delete;
 		RenderComponent(RenderComponent&& other) = delete;
@@ -20,18 +20,18 @@ namespace dae
 		virtual void Render() const override;
 		virtual void DisplayGui() override;
 
-		void AddTextureToRender(std::shared_ptr<Texture2D> pTextureToAdd, std::shared_ptr<TransformComponent> pTransform);
-		void RemoveTextureFromRenderer(std::shared_ptr<Texture2D> pTextureToRemove, std::shared_ptr<TransformComponent> pTransform);
+		void AddTextureToRender(Texture2D* pTextureToAdd, TransformComponent* pTransform);
+		void RemoveTextureFromRenderer(Texture2D* pTextureToRemove, TransformComponent* pTransform);
 
-		void AddToDisplayGui(std::weak_ptr<UpdateComponent> pComponentToAdd);
-		void RemoveFromDisplayGui(std::weak_ptr<UpdateComponent> pComponentToAdd);
+		void AddToDisplayGui(UpdateComponent* pComponentToAdd);
+		void RemoveFromDisplayGui(UpdateComponent* pComponentToAdd);
 
 	protected:
 
 	private:
 		// this map shouldn't have full ownership, yet weird things happen if I try to make this weak_ptrs instead
-		std::unordered_multimap<std::shared_ptr<Texture2D>, std::shared_ptr<TransformComponent>> m_TexturesToRenderMap{};
-		std::vector<std::weak_ptr<UpdateComponent>> m_DisplayGuiComponents{};
+		std::unordered_multimap<Texture2D*, TransformComponent*> m_TexturesToRenderMap{};
+		std::vector<UpdateComponent*> m_DisplayGuiComponents{};
 	};
 }
 

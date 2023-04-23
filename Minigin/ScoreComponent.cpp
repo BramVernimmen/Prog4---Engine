@@ -1,6 +1,6 @@
 #include "ScoreComponent.h"
 
-dae::ScoreComponent::ScoreComponent(std::weak_ptr<GameObject> pOwner)
+dae::ScoreComponent::ScoreComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
 {
 
