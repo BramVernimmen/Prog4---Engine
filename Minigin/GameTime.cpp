@@ -1,6 +1,6 @@
-#include "Time.h"
+#include "GameTime.h"
 
-void dae::Time::Update()
+void dae::GameTime::Update()
 {
 	//const auto currentTime{ std::chrono::high_resolution_clock::now() };
 	m_CurrentTime = std::chrono::high_resolution_clock::now();

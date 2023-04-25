@@ -1,5 +1,5 @@
 #include "RotatorComponent.h"
-#include "Time.h"
+#include "GameTime.h"
 #include "TransformComponent.h"
 #include "GameObject.h"
 
@@ -11,7 +11,7 @@ dae::RotatorComponent::RotatorComponent(GameObject* pOwner)
 
 void dae::RotatorComponent::Update()
 {
-	m_Rotation += Time::GetInstance().GetDeltaTime() * m_Speed;
+	m_Rotation += GameTime::GetInstance().GetDeltaTime() * m_Speed;
 
 	if (m_Rotation >= m_TwoPi) // reset, this will avoid overflows (that will probably rarely happen)
 		m_Rotation -= m_TwoPi;

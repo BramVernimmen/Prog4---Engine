@@ -4,7 +4,7 @@
 
 namespace dae
 {	
-	class Time final : public Singleton<Time>
+	class GameTime final : public Singleton<GameTime>
 	{
 	public:
 		float GetDeltaTime() const { return m_DeltaTime; }

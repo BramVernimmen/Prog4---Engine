@@ -1,6 +1,6 @@
 #include "FPSComponent.h"
 #include "TextComponent.h"
-#include "Time.h"
+#include "GameTime.h"
 #include "GameObject.h"
 #include <algorithm>
 #include <numeric>
@@ -13,7 +13,7 @@ dae::FPSComponent::FPSComponent(GameObject* pOwner)
 
 void dae::FPSComponent::Update()
 {
-	const float dt{ Time::GetInstance().GetDeltaTime() };
+	const float dt{ GameTime::GetInstance().GetDeltaTime() };
 	m_TimeRunning += dt;
 
 	if (m_TimeRunning < m_TimeLimit) // branch prediction: more likely to land here

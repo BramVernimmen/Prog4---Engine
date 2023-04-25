@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 #include "InputManager.h"
-#include "Time.h"
+#include "GameTime.h"
 
 dae::MoveCommand::MoveCommand(GameObject* pGameObject, float speed)
 	: m_pGameObject{pGameObject}
@@ -18,7 +18,7 @@ void dae::MoveCommand::Execute()
 	auto axisValue = m_InputValue;
 
 
-	axisValue *= m_MovementSpeed * dae::Time::GetInstance().GetDeltaTime();
+	axisValue *= m_MovementSpeed * dae::GameTime::GetInstance().GetDeltaTime();
 	const auto& localPos{ m_pTransform->GetLocalPosition() };
 	// move the local pos
 	m_pTransform->SetLocalPosition(axisValue.x + localPos.x, localPos.y - axisValue.y );

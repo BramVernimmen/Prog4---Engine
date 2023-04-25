@@ -87,7 +87,7 @@
     <ClInclude Include="Singleton.h">
       <Filter>Helper Files\Singletons</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
+    <ClInclude Include="GameTime.h">
       <Filter>Helper Files\Singletons</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdParty\imgui\imconfig.h">
@@ -195,9 +195,6 @@
     <ClInclude Include="HowToPlayComponent.h">
       <Filter>Components\UtilityComponents</Filter>
     </ClInclude>
-    <ClInclude Include="AchievementObserver.h">
-      <Filter>Events\Observer</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">
@@ -210,9 +207,6 @@
       <Filter>Helper Files</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Game Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
     <ClCompile Include="Minigin.cpp">
@@ -230,7 +224,7 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Helper Files\Singletons</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
+    <ClCompile Include="GameTime.cpp">
       <Filter>Helper Files\Singletons</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui\imgui.cpp">
@@ -331,9 +325,6 @@
     </ClCompile>
     <ClCompile Include="HowToPlayComponent.cpp">
       <Filter>Components\UtilityComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="AchievementObserver.cpp">
-      <Filter>Events\Observer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
