@@ -91,8 +91,8 @@ void dae::GameObject::SetParent(GameObject* newParent, bool keepWorldPosition)
 
 void dae::GameObject::AddChild(std::unique_ptr<GameObject> newChild)
 {
-	m_ReturnChildren.push_back(newChild.get());
-	m_Children.push_back(std::move(newChild));
+	m_ReturnChildren.emplace_back(newChild.get());
+	m_Children.emplace_back(std::move(newChild));
 }
 
 std::unique_ptr<dae::GameObject> dae::GameObject::RemoveChild(GameObject* childToRemove)

@@ -36,6 +36,8 @@ void dae::TransformComponent::UpdateWorldPosition()
 		// giving an empty will just add the changed local, and change all children
 		SetWorldPosition(glm::vec3{});
 	}
+
+	m_IsDirty = false;
 }
 
 

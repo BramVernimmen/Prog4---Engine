@@ -76,6 +76,9 @@ namespace dae
 	template<typename T>
 	inline T* GameObject::GetComponent() const
 	{
+		if (T* castedComp = dynamic_cast<T*>(m_RenderComponent.get()))
+			return castedComp;
+
 		for (const auto& currComponent : m_Components)
 		{
 			T* castedComp = dynamic_cast<T*>(currComponent.get());

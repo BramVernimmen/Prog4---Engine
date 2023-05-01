@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include "InputManager.h"
 #include <backends/imgui_impl_sdl2.h>
+#include "Renderer.h"
 
 bool dae::InputManager::ProcessInput()
 {
@@ -197,6 +198,9 @@ bool dae::InputManager::ReadSDL_Events()
 		}
 		if (e.type == SDL_WINDOWEVENT && e.window.event == SDL_WINDOWEVENT_FOCUS_GAINED) {
 			m_IsGameFocused = true;
+		}
+		if (e.key.keysym.sym == SDLK_F2 && e.type == SDL_KEYDOWN) {
+			dae::Renderer::GetInstance().SwitchDrawMode();
 		}
 		// etc...
 		//process event for IMGUI

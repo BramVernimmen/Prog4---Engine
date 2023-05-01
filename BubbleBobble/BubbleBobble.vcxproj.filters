@@ -1,19 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="PlayerBasedComponents">
-      <UniqueIdentifier>{085f8240-7c68-4d62-8bf9-73b35c16809c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PlayerBasedComponents\Debug">
-      <UniqueIdentifier>{daa1d349-b4ae-4d5d-9504-fb6205205713}</UniqueIdentifier>
     </Filter>
     <Filter Include="Commands">
       <UniqueIdentifier>{34d50334-af86-4d25-bcbe-64b35f99617e}</UniqueIdentifier>
@@ -22,22 +12,31 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{69308ed8-f9bd-4794-a1bb-c827ddcacfff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\UitilityComponents">
+      <UniqueIdentifier>{76348911-b267-4bdb-8443-7113b62e0c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\PlayerBasedComponents">
+      <UniqueIdentifier>{085f8240-7c68-4d62-8bf9-73b35c16809c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\PlayerBasedComponents\Debug">
+      <UniqueIdentifier>{daa1d349-b4ae-4d5d-9504-fb6205205713}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
-    <ClCompile Include="HowToPlayComponent.cpp">
-      <Filter>Game Files</Filter>
-    </ClCompile>
     <ClCompile Include="DebugHealthComponent.cpp">
-      <Filter>PlayerBasedComponents\Debug</Filter>
+      <Filter>Components\PlayerBasedComponents\Debug</Filter>
     </ClCompile>
     <ClCompile Include="DebugScoreComponent.cpp">
-      <Filter>PlayerBasedComponents\Debug</Filter>
+      <Filter>Components\PlayerBasedComponents\Debug</Filter>
     </ClCompile>
     <ClCompile Include="HealthComponent.cpp">
-      <Filter>PlayerBasedComponents</Filter>
+      <Filter>Components\PlayerBasedComponents</Filter>
     </ClCompile>
     <ClCompile Include="DamageCommand.cpp">
       <Filter>Commands</Filter>
@@ -49,24 +48,27 @@
       <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="ScoreComponent.cpp">
-      <Filter>PlayerBasedComponents</Filter>
+      <Filter>Components\PlayerBasedComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="HowToPlayComponent.cpp">
+      <Filter>Components\UitilityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="GridComponent.cpp">
+      <Filter>Components\UitilityComponents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HowToPlayComponent.h">
-      <Filter>Game Files</Filter>
-    </ClInclude>
     <ClInclude Include="DebugHealthComponent.h">
-      <Filter>PlayerBasedComponents\Debug</Filter>
+      <Filter>Components\PlayerBasedComponents\Debug</Filter>
     </ClInclude>
     <ClInclude Include="DebugScoreComponent.h">
-      <Filter>PlayerBasedComponents\Debug</Filter>
+      <Filter>Components\PlayerBasedComponents\Debug</Filter>
     </ClInclude>
     <ClInclude Include="ScoreComponent.h">
-      <Filter>PlayerBasedComponents</Filter>
+      <Filter>Components\PlayerBasedComponents</Filter>
     </ClInclude>
     <ClInclude Include="HealthComponent.h">
-      <Filter>PlayerBasedComponents</Filter>
+      <Filter>Components\PlayerBasedComponents</Filter>
     </ClInclude>
     <ClInclude Include="GiveScoreCommand.h">
       <Filter>Commands</Filter>
@@ -76,6 +78,12 @@
     </ClInclude>
     <ClInclude Include="MoveCommand.h">
       <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="HowToPlayComponent.h">
+      <Filter>Components\UitilityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GridComponent.h">
+      <Filter>Components\UitilityComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

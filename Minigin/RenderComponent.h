@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseComponent.h"
 #include <unordered_map>
+
 namespace dae
 {
 	class TransformComponent;
@@ -26,12 +27,16 @@ namespace dae
 		void AddToDisplayGui(UpdateComponent* pComponentToAdd);
 		void RemoveFromDisplayGui(UpdateComponent* pComponentToAdd);
 
+		void AddToDebug(UpdateComponent* pComponentToAdd);
+		void RemoveFromDebug(UpdateComponent* pComponentToAdd);
+
 	protected:
 
 	private:
 		// this map shouldn't have full ownership, yet weird things happen if I try to make this weak_ptrs instead
 		std::unordered_multimap<Texture2D*, TransformComponent*> m_TexturesToRenderMap{};
 		std::vector<UpdateComponent*> m_DisplayGuiComponents{};
+		std::vector<UpdateComponent*> m_DebugComponents{};
 	};
 }
 

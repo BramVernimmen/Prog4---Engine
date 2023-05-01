@@ -165,6 +165,9 @@
     <ClInclude Include="TransformComponent.h">
       <Filter>Components\UtilityComponents</Filter>
     </ClInclude>
+    <ClInclude Include="Utils_SDL.h">
+      <Filter>Helper Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">

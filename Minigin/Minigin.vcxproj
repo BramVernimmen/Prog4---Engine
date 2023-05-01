@@ -244,6 +244,7 @@
     <ClInclude Include="TrashTheCache_GameObjComponent.h" />
     <ClInclude Include="TrashTheCache_IntegerComponent.h" />
     <ClInclude Include="UpdateComponent.h" />
+    <ClInclude Include="Utils_SDL.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\3rdParty\imgui\backends\imgui_impl_opengl2.cpp" />

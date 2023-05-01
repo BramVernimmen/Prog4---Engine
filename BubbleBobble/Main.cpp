@@ -17,9 +17,6 @@
 #include "TextComponent.h"
 #include "FPSComponent.h"
 #include "TransformComponent.h"
-//#include "RotatorComponent.h"
-//#include "TrashTheCache_GameObjComponent.h"
-//#include "TrashTheCache_IntegerComponent.h"
 #include "InputManager.h"
 #include "MoveCommand.h"
 #include "HealthComponent.h"
@@ -29,6 +26,7 @@
 #include "DebugScoreComponent.h"
 #include "GiveScoreCommand.h"
 #include "HowToPlayComponent.h"
+#include "GridComponent.h"
 
 void load()
 {
@@ -75,12 +73,24 @@ void load()
 
 
 
+	// grid 
+	dae::GameObject* grid = new dae::GameObject();
+	grid->SetParent(pRootDemo);
+	renderComp = grid->AddComponent<dae::RenderComponent>();
+	auto gridComp = grid->AddComponent<dae::GridComponent>();
+	renderComp->AddToDebug(gridComp);
+	auto transComp = grid->GetComponent<dae::TransformComponent>();
+	textureComp = grid->AddComponent<dae::TextureComponent>();
+	textureComp->SetTexture("001_Tile.png");
+	transComp->SetLocalPosition(50, 50);
+	gridComp->Resize(32, 25);
+
 	// fps
 	auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 	dae::GameObject* fps = new dae::GameObject();
 	fps->SetParent(pRootDemo);
 	renderComp = fps->AddComponent<dae::RenderComponent>();
-	auto transComp = fps->GetComponent<dae::TransformComponent>();
+	 transComp = fps->GetComponent<dae::TransformComponent>();
 	transComp->SetLocalPosition(0, 0);
 	auto textComponent = fps->AddComponent<dae::TextComponent>();
 	textComponent->SetFont(font);
