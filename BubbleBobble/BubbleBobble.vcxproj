@@ -76,9 +76,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -157,7 +159,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DamageCommand.cpp" />
+    <ClCompile Include="DebugHealthComponent.cpp" />
+    <ClCompile Include="DebugScoreComponent.cpp" />
+    <ClCompile Include="GiveScoreCommand.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="HowToPlayComponent.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MoveCommand.cpp" />
+    <ClCompile Include="ScoreComponent.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DamageCommand.h" />
+    <ClInclude Include="DebugHealthComponent.h" />
+    <ClInclude Include="DebugScoreComponent.h" />
+    <ClInclude Include="GiveScoreCommand.h" />
+    <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="HowToPlayComponent.h" />
+    <ClInclude Include="MoveCommand.h" />
+    <ClInclude Include="ScoreComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -46,14 +46,8 @@
     <Filter Include="Components\DeprecatedComponents">
       <UniqueIdentifier>{0604ed41-4e25-4676-afc5-5d4bc83b7c01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\PlayerBasedComponents">
-      <UniqueIdentifier>{1c1a2290-9aeb-4625-a6d5-ec156a25a081}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Components\UtilityComponents">
       <UniqueIdentifier>{0c61f922-764c-4a6d-8ecc-e43db735a92d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\PlayerBasedComponents\Debug">
-      <UniqueIdentifier>{f6ea7180-47bc-4eb7-952f-1f90fc11c320}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -120,9 +114,6 @@
     <ClInclude Include="Controller.h">
       <Filter>Helper Files</Filter>
     </ClInclude>
-    <ClInclude Include="MoveCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
     <ClInclude Include="BaseComponent.h">
       <Filter>Components\BaseComponents</Filter>
     </ClInclude>
@@ -172,27 +163,6 @@
       <Filter>Components\UtilityComponents</Filter>
     </ClInclude>
     <ClInclude Include="TransformComponent.h">
-      <Filter>Components\UtilityComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthComponent.h">
-      <Filter>Components\PlayerBasedComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugHealthComponent.h">
-      <Filter>Components\PlayerBasedComponents\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreComponent.h">
-      <Filter>Components\PlayerBasedComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugScoreComponent.h">
-      <Filter>Components\PlayerBasedComponents\Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="GiveScoreCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="HowToPlayComponent.h">
       <Filter>Components\UtilityComponents</Filter>
     </ClInclude>
   </ItemGroup>
@@ -254,9 +224,6 @@
     <ClCompile Include="Controller.cpp">
       <Filter>Helper Files</Filter>
     </ClCompile>
-    <ClCompile Include="MoveCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
     <ClCompile Include="BaseComponent.cpp">
       <Filter>Components\BaseComponents</Filter>
     </ClCompile>
@@ -303,27 +270,6 @@
       <Filter>Components\UtilityComponents</Filter>
     </ClCompile>
     <ClCompile Include="TransformComponent.cpp">
-      <Filter>Components\UtilityComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthComponent.cpp">
-      <Filter>Components\PlayerBasedComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugHealthComponent.cpp">
-      <Filter>Components\PlayerBasedComponents\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreComponent.cpp">
-      <Filter>Components\PlayerBasedComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugScoreComponent.cpp">
-      <Filter>Components\PlayerBasedComponents\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GiveScoreCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="HowToPlayComponent.cpp">
       <Filter>Components\UtilityComponents</Filter>
     </ClCompile>
   </ItemGroup>
