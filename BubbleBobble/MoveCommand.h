@@ -22,7 +22,6 @@ namespace dae
 	private:
 		GameObject* m_pGameObject{};
 		TransformComponent* m_pTransform{};
-		BoxCollision* m_pBoxCollision{};
 		float m_MovementSpeed{};
 	};
 

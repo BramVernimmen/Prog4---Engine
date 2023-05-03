@@ -11,8 +11,9 @@ namespace dae
 	public:
 		void AddBoxCollision(dae::BoxCollision* collisionToAdd);
 		void RemoveBoxCollision(dae::BoxCollision* collisionToRemove);
-		SDL_Rect CheckCollision(dae::BoxCollision* collisionToCheck);
+		std::vector<SDL_Rect> GetColliding(dae::BoxCollision* collisionToCheck);
 		
+		void Update();
 	protected:
 
 	private:

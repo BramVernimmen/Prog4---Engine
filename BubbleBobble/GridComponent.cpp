@@ -68,13 +68,11 @@ void dae::GridComponent::Resize(int newWidth, int newHeight)
 			transComp->SetLocalPosition(currentPos.x, currentPos.y);
 			renderComp->AddTextureToRender(pTileTexture.get(), transComp);
 
-			//if (currentIndex == 1)
-			{
-
+			// give every tile a BoxCollision
 			auto collision = tile->AddComponent<dae::BoxCollision>();
 			collision->SetSize(m_PixelSize, m_PixelSize);
+			collision->SetStatic();
 			renderComp->AddToDebug(collision);
-			}
 			
 			
 

@@ -88,7 +88,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& input = InputManager::GetInstance();
 
 	auto& time = GameTime::GetInstance();
-	auto& collisions = CollisionManager::GetInstance(); collisions;
+	auto& collisions = CollisionManager::GetInstance(); 
 
 	bool doContinue = true;
 	//constexpr float fixedTimeStepSec{ 0.02f }; // use this for a fixedUpdate
@@ -102,6 +102,8 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
+
+		collisions.Update();
 		renderer.Render();
 
 		// sleeping to get desired fps

@@ -1,6 +1,8 @@
 #include "CollisionManager.h"
 #include "BoxCollision.h"
 #include <iostream>
+#include "TransformComponent.h"
+#include "GameObject.h"
 
 void dae::CollisionManager::AddBoxCollision(dae::BoxCollision* collisionToAdd)
 {
@@ -20,10 +22,9 @@ void dae::CollisionManager::RemoveBoxCollision(dae::BoxCollision* collisionToRem
 		m_pBoxCollisions.erase(foundIt);
 }
 
-SDL_Rect dae::CollisionManager::CheckCollision(dae::BoxCollision* collisionToCheck)
+std::vector<SDL_Rect> dae::CollisionManager::GetColliding(dae::BoxCollision* collisionToCheck)
 {
-	SDL_Rect hitRect{};
-	hitRect.w = 0; // if we don't hit anything, return width as 0
+	std::vector<SDL_Rect> hitRects{};
 
 	const SDL_Rect& boxToCheck = collisionToCheck->GetRect();
 	for (const auto& box : m_pBoxCollisions)
@@ -35,11 +36,88 @@ SDL_Rect dae::CollisionManager::CheckCollision(dae::BoxCollision* collisionToChe
 		{
 			//hitRect = box->GetRect();
 			//std::cout << "HIT\n";
-			return box->GetRect();
+			hitRects.emplace_back(box->GetRect());
 		}
 	}
 
-	return hitRect;
+	return hitRects;
+
+}
+
+void dae::CollisionManager::Update()
+{
+	for (const auto& currBoxCollision : m_pBoxCollisions)
+	{
+		if (currBoxCollision->IsStatic())
+			continue;
+
+
+
+		const auto& hitRects = GetColliding(currBoxCollision);
+		if (hitRects.size() > 0) // we have a hit
+		{
+			const SDL_Rect& currBox = currBoxCollision->GetRect();
+			dae::TransformComponent* pTransform = currBoxCollision->GetOwner()->GetComponent<dae::TransformComponent>();
+			
+
+
+			int totalOffsetX{ 0 };
+			int totalOffsetY{ 0 };
+
+			for (const auto& hit : hitRects)
+			{
+
+
+				bool currIsLeft{ currBox.x <= hit.x };
+				bool currIsAbove{ currBox.y <= hit.y };
+
+				int offsetX{ 0 };
+				int offsetY{ 0 };
+
+				if (currIsLeft)
+				{
+					offsetX = hit.x - (currBox.x + currBox.w);
+				}
+				else
+				{
+					offsetX = (currBox.x - (hit.x + hit.w)) * -1;
+				}
+
+				if (currIsAbove)
+				{
+					offsetY = hit.y - (currBox.y + currBox.h);
+				}
+				else
+				{
+					offsetY = (currBox.y - (hit.y + hit.h)) * -1;
+				}
+
+
+
+				if (abs(offsetX) < abs(offsetY))
+				{
+					offsetY = 0;
+				}
+				else if (abs(offsetX) > abs(offsetY))
+				{
+					offsetX = 0;
+				}
+				totalOffsetX += offsetX;
+				totalOffsetY += offsetY;
+
+
+			}
+
+			totalOffsetX /= static_cast<int>(hitRects.size());
+			totalOffsetY /= static_cast<int>(hitRects.size());
+
+			glm::vec2 localPos = pTransform->GetLocalPosition();
+
+			pTransform->SetLocalPosition(localPos.x + totalOffsetX, localPos.y + totalOffsetY);
+
+		}
+		
+	}
 
 }
 
