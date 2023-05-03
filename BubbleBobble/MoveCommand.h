@@ -5,6 +5,7 @@ namespace dae
 {
 	class GameObject;
 	class TransformComponent;
+	class BoxCollision;
 	class MoveCommand final : public Axis2DCommand
 	{
 	public:
@@ -21,6 +22,7 @@ namespace dae
 	private:
 		GameObject* m_pGameObject{};
 		TransformComponent* m_pTransform{};
+		BoxCollision* m_pBoxCollision{};
 		float m_MovementSpeed{};
 	};
 

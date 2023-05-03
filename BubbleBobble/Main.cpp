@@ -27,6 +27,7 @@
 #include "GiveScoreCommand.h"
 #include "HowToPlayComponent.h"
 #include "GridComponent.h"
+#include "BoxCollision.h"
 
 void load()
 {
@@ -106,13 +107,21 @@ void load()
 	bubby->SetParent(pRootDemo);
 	renderComp = bubby->AddComponent<dae::RenderComponent>();
 	transComp = bubby->GetComponent<dae::TransformComponent>();
-	transComp->SetLocalPosition(220.0f, 240.0f);
+	transComp->SetLocalPosition(220.0f, 210.0f);
 	textureComp = bubby->AddComponent<dae::TextureComponent>();
 	textureComp->SetTexture("Bubby.png");
 	textureComp->AddToRenderer(renderComp);
 	auto healthComp = bubby->AddComponent<dae::HealthComponent>();
 	auto scoreComp = bubby->AddComponent<dae::ScoreComponent>();
 	healthComp->AddObserver(scoreComp); // our score needs to listen to our own health (for this test)
+	auto collision = bubby->AddComponent<dae::BoxCollision>();
+	collision->SetSize(48, 48);
+	renderComp->AddToDebug(collision);
+
+
+
+
+
 
 
 	// P1 health debug
@@ -149,52 +158,52 @@ void load()
 	scoreComp->AddObserver(debugScoreComp);
 
 
-	// bobby - has lives + score
-	dae::GameObject* bobby = new dae::GameObject();
-	bobby->SetParent(pRootDemo);
-	renderComp = bobby->AddComponent<dae::RenderComponent>();
-	auto newTransComp = bobby->GetComponent<dae::TransformComponent>();
-	newTransComp->SetLocalPosition(320.0f, 240.0f);
-	textureComp = bobby->AddComponent<dae::TextureComponent>();
-	textureComp->SetTexture("Bobby.png");
-	textureComp->AddToRenderer(renderComp);
-	healthComp = bobby->AddComponent<dae::HealthComponent>();
-	scoreComp = bobby->AddComponent<dae::ScoreComponent>();
-	healthComp->AddObserver(scoreComp); // our score needs to listen to our own health (for this test)
+	//// bobby - has lives + score
+	//dae::GameObject* bobby = new dae::GameObject();
+	//bobby->SetParent(pRootDemo);
+	//renderComp = bobby->AddComponent<dae::RenderComponent>();
+	//auto newTransComp = bobby->GetComponent<dae::TransformComponent>();
+	//newTransComp->SetLocalPosition(320.0f, 240.0f);
+	//textureComp = bobby->AddComponent<dae::TextureComponent>();
+	//textureComp->SetTexture("Bobby.png");
+	//textureComp->AddToRenderer(renderComp);
+	//healthComp = bobby->AddComponent<dae::HealthComponent>();
+	//scoreComp = bobby->AddComponent<dae::ScoreComponent>();
+	//healthComp->AddObserver(scoreComp); // our score needs to listen to our own health (for this test)
 
 
 	// P2 health debug
-	dae::GameObject* debugHealthP2 = new dae::GameObject();
-	debugHealthP2->SetParent(pRootDemo);
-	renderComp = debugHealthP2->AddComponent<dae::RenderComponent>();
-	transComp = debugHealthP2->GetComponent<dae::TransformComponent>();
-	transComp->SetLocalPosition(0.0f, 250.0f);
-	textComponent = debugHealthP2->AddComponent<dae::TextComponent>();
-	font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
-	textComponent->SetFont(font);
-	textComponent->SetText("Lives: ");
-	textComponent->SetColor({ 130, 210, 255 });
-	textComponent->AddToRenderer(renderComp);
-	debugHealthComp = debugHealthP2->AddComponent<dae::DebugHealthComponent>();
-	debugHealthComp->SetLastHealth(healthComp->GetCurrentHealth());
+	//dae::GameObject* debugHealthP2 = new dae::GameObject();
+	//debugHealthP2->SetParent(pRootDemo);
+	//renderComp = debugHealthP2->AddComponent<dae::RenderComponent>();
+	//transComp = debugHealthP2->GetComponent<dae::TransformComponent>();
+	//transComp->SetLocalPosition(0.0f, 250.0f);
+	//textComponent = debugHealthP2->AddComponent<dae::TextComponent>();
+	//font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
+	//textComponent->SetFont(font);
+	//textComponent->SetText("Lives: ");
+	//textComponent->SetColor({ 130, 210, 255 });
+	//textComponent->AddToRenderer(renderComp);
+	//debugHealthComp = debugHealthP2->AddComponent<dae::DebugHealthComponent>();
+	//debugHealthComp->SetLastHealth(healthComp->GetCurrentHealth());
 
 	// P2 score debug
-	dae::GameObject* debugScoreP2 = new dae::GameObject();
-	debugScoreP2->SetParent(pRootDemo);
-	renderComp = debugScoreP2->AddComponent<dae::RenderComponent>();
-	transComp = debugScoreP2->GetComponent<dae::TransformComponent>();
-	transComp->SetLocalPosition(0.0f, 270.f);
-	textComponent = debugScoreP2->AddComponent<dae::TextComponent>();
-	font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
-	textComponent->SetFont(font);
-	textComponent->SetText("Score: ");
-	textComponent->SetColor({ 130, 210, 255 });
-	textComponent->AddToRenderer(renderComp);
-	debugScoreComp = debugScoreP2->AddComponent<dae::DebugScoreComponent>();
+	//dae::GameObject* debugScoreP2 = new dae::GameObject();
+	//debugScoreP2->SetParent(pRootDemo);
+	//renderComp = debugScoreP2->AddComponent<dae::RenderComponent>();
+	//transComp = debugScoreP2->GetComponent<dae::TransformComponent>();
+	//transComp->SetLocalPosition(0.0f, 270.f);
+	//textComponent = debugScoreP2->AddComponent<dae::TextComponent>();
+	//font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
+	//textComponent->SetFont(font);
+	//textComponent->SetText("Score: ");
+	//textComponent->SetColor({ 130, 210, 255 });
+	//textComponent->AddToRenderer(renderComp);
+	//debugScoreComp = debugScoreP2->AddComponent<dae::DebugScoreComponent>();
 
 	// add	debug observer to bobby
-	healthComp->AddObserver(debugHealthComp);
-	scoreComp->AddObserver(debugScoreComp);
+	//healthComp->AddObserver(debugHealthComp);
+	//scoreComp->AddObserver(debugScoreComp);
 
 
 
@@ -235,17 +244,17 @@ void load()
 
 
 	// P2
-	std::vector<unsigned int> p2DamageButtonsInput{
-		SDLK_k
-	};
-	auto p2DamageCommand{ std::make_unique<dae::DamageCommand>(bobby, 1) };
-	dae::InputManager::GetInstance().BindCommand(p2DamageButtonsInput, dae::InputManager::InputType::OnButtonDown, std::move(p2DamageCommand));
+	//std::vector<unsigned int> p2DamageButtonsInput{
+	//	SDLK_k
+	//};
+	//auto p2DamageCommand{ std::make_unique<dae::DamageCommand>(bobby, 1) };
+	//dae::InputManager::GetInstance().BindCommand(p2DamageButtonsInput, dae::InputManager::InputType::OnButtonDown, std::move(p2DamageCommand));
 
-	std::vector<unsigned int> p2GiveScoreButtonsInput{
-		SDLK_i
-	};
-	auto p2ScoreCommand{ std::make_unique<dae::GiveScoreCommand>(bobby, 100) };
-	dae::InputManager::GetInstance().BindCommand(p2GiveScoreButtonsInput, dae::InputManager::InputType::OnButtonDown, std::move(p2ScoreCommand));
+	//std::vector<unsigned int> p2GiveScoreButtonsInput{
+	//	SDLK_i
+	//};
+	//auto p2ScoreCommand{ std::make_unique<dae::GiveScoreCommand>(bobby, 100) };
+	//dae::InputManager::GetInstance().BindCommand(p2GiveScoreButtonsInput, dae::InputManager::InputType::OnButtonDown, std::move(p2ScoreCommand));
 
 
 
@@ -261,15 +270,17 @@ void load()
 	auto character1MoveCommand{ std::make_unique<dae::MoveCommand>(bubby, baseSpeed) };
 	dae::InputManager::GetInstance().BindCommand(character1Input, dae::InputManager::InputType::Digital2DAxis, std::move(character1MoveCommand));
 
-	std::vector<unsigned int> character2Input{
-		dae::Controller::ControllerButton::DPadLeft,
-		dae::Controller::ControllerButton::DPadRight,
-		dae::Controller::ControllerButton::DPadUp,
-		dae::Controller::ControllerButton::DPadDown
-	};
+	//std::vector<unsigned int> character2Input{
+	//	dae::Controller::ControllerButton::DPadLeft,
+	//	dae::Controller::ControllerButton::DPadRight,
+	//	dae::Controller::ControllerButton::DPadUp,
+	//	dae::Controller::ControllerButton::DPadDown
+	//};
+	//
+	//auto character2MoveCommand{ std::make_unique<dae::MoveCommand>(bobby, baseSpeed * 2.0f) };
+	//dae::InputManager::GetInstance().BindCommand(character2Input, dae::InputManager::InputType::Digital2DAxis, std::move(character2MoveCommand), 0);
 
-	auto character2MoveCommand{ std::make_unique<dae::MoveCommand>(bobby, baseSpeed * 2.0f) };
-	dae::InputManager::GetInstance().BindCommand(character2Input, dae::InputManager::InputType::Digital2DAxis, std::move(character2MoveCommand), 0);
+
 
 
 	// EXTRA: 3rd character with left joystick input

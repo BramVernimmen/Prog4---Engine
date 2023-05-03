@@ -12,6 +12,7 @@
 #include "GameTime.h"
 #include <chrono>
 #include <thread>
+#include "CollisionManager.h"
 
 SDL_Window* g_window{};
 
@@ -87,10 +88,11 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& input = InputManager::GetInstance();
 
 	auto& time = GameTime::GetInstance();
+	auto& collisions = CollisionManager::GetInstance(); collisions;
 
 	bool doContinue = true;
 	//constexpr float fixedTimeStepSec{ 0.02f }; // use this for a fixedUpdate
-	constexpr float desiredFPS{ 60.0f };
+	constexpr float desiredFPS{ 500.0f };
 	constexpr int frameTimeMS{ static_cast<int>(1000 / desiredFPS) };
 
 	while (doContinue)

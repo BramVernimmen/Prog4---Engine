@@ -4,7 +4,7 @@
 namespace dae
 {
 	class TransformComponent;
-	class GridComponent : public UpdateComponent
+	class GridComponent final : public UpdateComponent
 	{
 	public:
 		GridComponent(GameObject* pOwner);

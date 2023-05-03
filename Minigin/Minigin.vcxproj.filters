@@ -168,6 +168,15 @@
     <ClInclude Include="Utils_SDL.h">
       <Filter>Helper Files</Filter>
     </ClInclude>
+    <ClInclude Include="BoxCollision.h">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Helper Files\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="Uitls.h">
+      <Filter>Helper Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">
@@ -274,6 +283,12 @@
     </ClCompile>
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Components\UtilityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollision.cpp">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Helper Files\Singletons</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

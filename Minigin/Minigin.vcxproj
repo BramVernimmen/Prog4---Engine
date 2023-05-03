@@ -218,6 +218,8 @@
     <ClInclude Include="Axis2DCommand.h" />
     <ClInclude Include="AxisCommand.h" />
     <ClInclude Include="BaseComponent.h" />
+    <ClInclude Include="BoxCollision.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="EngineEvents.h" />
@@ -243,6 +245,7 @@
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="TrashTheCache_GameObjComponent.h" />
     <ClInclude Include="TrashTheCache_IntegerComponent.h" />
+    <ClInclude Include="Uitls.h" />
     <ClInclude Include="UpdateComponent.h" />
     <ClInclude Include="Utils_SDL.h" />
   </ItemGroup>
@@ -267,6 +270,8 @@
     <ClCompile Include="Axis2DCommand.cpp" />
     <ClCompile Include="AxisCommand.cpp" />
     <ClCompile Include="BaseComponent.cpp" />
+    <ClCompile Include="BoxCollision.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Event.cpp" />

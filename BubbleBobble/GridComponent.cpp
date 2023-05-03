@@ -3,6 +3,7 @@
 #include "TransformComponent.h"
 #include "Utils_SDL.h"
 #include "TextureComponent.h"
+#include "BoxCollision.h"
 
 dae::GridComponent::GridComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
@@ -66,6 +67,16 @@ void dae::GridComponent::Resize(int newWidth, int newHeight)
 			auto transComp = tile->GetComponent<dae::TransformComponent>();
 			transComp->SetLocalPosition(currentPos.x, currentPos.y);
 			renderComp->AddTextureToRender(pTileTexture.get(), transComp);
+
+			//if (currentIndex == 1)
+			{
+
+			auto collision = tile->AddComponent<dae::BoxCollision>();
+			collision->SetSize(m_PixelSize, m_PixelSize);
+			renderComp->AddToDebug(collision);
+			}
+			
+			
 
 		}
 	}
