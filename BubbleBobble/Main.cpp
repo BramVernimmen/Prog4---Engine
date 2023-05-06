@@ -28,6 +28,7 @@
 #include "HowToPlayComponent.h"
 #include "GridComponent.h"
 #include "BoxCollision.h"
+#include "RigidBody.h"
 
 void load()
 {
@@ -117,8 +118,8 @@ void load()
 	auto collision = bubby->AddComponent<dae::BoxCollision>();
 	collision->SetSize(48, 48);
 	renderComp->AddToDebug(collision);
-
-
+	auto rigid = bubby->AddComponent<dae::RigidBody>();
+	renderComp->AddToDisplayGui(rigid);
 
 
 
@@ -260,14 +261,15 @@ void load()
 
 	// ========= Move Commands ===============
 
-	const float baseSpeed{ 200.0f };
+	const float baseSpeed{ 100.0f };
+	const float baseJumpStrength{ 250.0f };
 	std::vector<unsigned int> character1Input{
 		SDLK_a,
 		SDLK_d,
 		SDLK_w,
 		SDLK_s,
 	};
-	auto character1MoveCommand{ std::make_unique<dae::MoveCommand>(bubby, baseSpeed) };
+	auto character1MoveCommand{ std::make_unique<dae::MoveCommand>(bubby, baseSpeed, baseJumpStrength) };
 	dae::InputManager::GetInstance().BindCommand(character1Input, dae::InputManager::InputType::Digital2DAxis, std::move(character1MoveCommand));
 
 	//std::vector<unsigned int> character2Input{

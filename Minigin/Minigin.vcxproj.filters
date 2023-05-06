@@ -177,6 +177,12 @@
     <ClInclude Include="Uitls.h">
       <Filter>Helper Files</Filter>
     </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>Helper Files\Singletons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">
@@ -288,6 +294,12 @@
       <Filter>Components\UtilityComponents</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
+      <Filter>Helper Files\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Components\UtilityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
       <Filter>Helper Files\Singletons</Filter>
     </ClCompile>
   </ItemGroup>

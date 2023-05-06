@@ -3,6 +3,7 @@
 #include <iostream>
 #include "TransformComponent.h"
 #include "GameObject.h"
+#include "RigidBody.h"
 
 void dae::CollisionManager::AddBoxCollision(dae::BoxCollision* collisionToAdd)
 {
@@ -54,7 +55,9 @@ void dae::CollisionManager::Update()
 
 
 		const auto& hitRects = GetColliding(currBoxCollision);
-		if (hitRects.size() > 0) // we have a hit
+		const int amountOfHits{ static_cast<int>(hitRects.size()) };
+
+		if (amountOfHits > 0) // we have a hit
 		{
 			const SDL_Rect& currBox = currBoxCollision->GetRect();
 			dae::TransformComponent* pTransform = currBoxCollision->GetOwner()->GetComponent<dae::TransformComponent>();
@@ -63,6 +66,10 @@ void dae::CollisionManager::Update()
 
 			int totalOffsetX{ 0 };
 			int totalOffsetY{ 0 };
+
+			// we want to figure out how many collisions happen and where they actually are
+			int amountOfRights{ 0 };
+			int amountOfBelow{ 0 };
 
 			for (const auto& hit : hitRects)
 			{
@@ -77,6 +84,7 @@ void dae::CollisionManager::Update()
 				if (currIsLeft)
 				{
 					offsetX = hit.x - (currBox.x + currBox.w);
+					amountOfRights++;
 				}
 				else
 				{
@@ -86,6 +94,7 @@ void dae::CollisionManager::Update()
 				if (currIsAbove)
 				{
 					offsetY = hit.y - (currBox.y + currBox.h);
+					amountOfBelow++;
 				}
 				else
 				{
@@ -108,15 +117,86 @@ void dae::CollisionManager::Update()
 
 			}
 
-			totalOffsetX /= static_cast<int>(hitRects.size());
-			totalOffsetY /= static_cast<int>(hitRects.size());
+			totalOffsetX /= amountOfHits;
+			totalOffsetY /= amountOfHits;
 
 			glm::vec2 localPos = pTransform->GetLocalPosition();
+
+			dae::RigidBody* rigid = currBoxCollision->GetOwner()->GetComponent<dae::RigidBody>();
+			// only if we have a rigidbody
+
+			if (rigid != nullptr)
+			{
+				// get velocity
+				glm::vec2 currVelocity{ rigid->GetVelocity() };
+
+
+
+				if ((amountOfBelow == amountOfHits || (amountOfBelow >= amountOfRights && amountOfRights > 0)) && amountOfHits > 1 && amountOfHits < 6 && !rigid->IsGrounded())
+				{
+					currVelocity.y = 0.0f;
+					rigid->SetGrounded();
+				}
+				else if (amountOfHits == 6 && currVelocity.y < 0 && amountOfBelow > 3)
+				{
+					currVelocity.y = 0.0f;
+					rigid->SetGrounded();
+				}
+				else if (amountOfBelow == amountOfHits && amountOfHits == 1 && (currBox.y + currBox.w - 2 < hitRects.front().y))
+				{
+					// check if we are 2 pixels away from the edge or not
+					int difference{ 0 };
+					if (amountOfRights == 1)
+					{
+						// 1 block to the right
+						difference = hitRects.front().x - (currBox.x + currBox.w);
+					}
+					else
+					{
+						// 1 block to the left
+						difference = currBox.x - (hitRects.front().x + hitRects.front().w);
+					}
+
+					if (abs(difference) > 2)
+					{
+						currVelocity.y = 0.0f;
+						rigid->SetGrounded();
+					}
+				}
+				
+				if ((amountOfBelow == 0 || amountOfHits == 6) && currVelocity.y >= 0.0f && !rigid->IsGrounded())
+				{
+					currVelocity.y = 0.0f;
+				}
+
+
+				// make sure we stop moving when hitting the lowest side of a tile, while keep moving if we are higher up.
+				if (rigid->IsGrounded() || (amountOfHits == 1 && amountOfBelow == 0 && (currBox.y < hitRects.front().y + hitRects.front().w - 1)))
+				{
+					currVelocity.x = 0.0f;
+				}
+
+
+				// set velocity
+				rigid->SetVelocity(currVelocity);
+			}
+			
 
 			pTransform->SetLocalPosition(localPos.x + totalOffsetX, localPos.y + totalOffsetY);
 
 		}
-		
+		else
+		{
+			// check if it has a rigidbody
+			// if so set grounded to false
+			dae::RigidBody* rigid = currBoxCollision->GetOwner()->GetComponent<dae::RigidBody>();
+			if (rigid == nullptr)
+				break;
+
+			rigid->SetGrounded(false);
+
+		}
+
 	}
 
 }

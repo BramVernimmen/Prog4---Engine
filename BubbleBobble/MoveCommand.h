@@ -4,12 +4,12 @@
 namespace dae
 {
 	class GameObject;
-	class TransformComponent;
-	class BoxCollision;
+	//class TransformComponent;
+	class RigidBody;
 	class MoveCommand final : public Axis2DCommand
 	{
 	public:
-		MoveCommand(GameObject* pGameObject, float speed);
+		MoveCommand(GameObject* pGameObject, float speed, float jumpStrength);
 		~MoveCommand() = default;
 		
 		MoveCommand(const MoveCommand& other) = delete;
@@ -21,8 +21,10 @@ namespace dae
 		virtual void Execute() override;
 	private:
 		GameObject* m_pGameObject{};
-		TransformComponent* m_pTransform{};
+		//TransformComponent* m_pTransform{};
+		RigidBody* m_pRigidBody{};
 		float m_MovementSpeed{};
+		float m_JumpStrength{};
 	};
 
 }

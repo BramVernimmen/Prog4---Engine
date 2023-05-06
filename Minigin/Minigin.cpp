@@ -13,6 +13,7 @@
 #include <chrono>
 #include <thread>
 #include "CollisionManager.h"
+#include "PhysicsManager.h"
 
 SDL_Window* g_window{};
 
@@ -89,6 +90,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 	auto& time = GameTime::GetInstance();
 	auto& collisions = CollisionManager::GetInstance(); 
+	auto& physics = PhysicsManager::GetInstance();
 
 	bool doContinue = true;
 	//constexpr float fixedTimeStepSec{ 0.02f }; // use this for a fixedUpdate
@@ -103,6 +105,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
 
+		physics.Update();
 		collisions.Update();
 		renderer.Render();
 
