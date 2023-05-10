@@ -29,9 +29,11 @@
 #include "GridComponent.h"
 #include "BoxCollision.h"
 #include "RigidBody.h"
+#include <SDL_mixer.h>
 
 void load()
 {
+
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 	dae::GameObject* pRootDemo = scene.GetRoot();
 
