@@ -94,7 +94,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 
 	bool doContinue = true;
 	//constexpr float fixedTimeStepSec{ 0.02f }; // use this for a fixedUpdate
-	constexpr float desiredFPS{ 500.0f };
+	constexpr float desiredFPS{ 60.0f };
 	constexpr int frameTimeMS{ static_cast<int>(1000 / desiredFPS) };
 
 	while (doContinue)

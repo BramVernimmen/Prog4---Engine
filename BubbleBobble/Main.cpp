@@ -30,12 +30,24 @@
 #include "BoxCollision.h"
 #include "RigidBody.h"
 #include <SDL_mixer.h>
+#include "ServiceLocator.h"
+#include "LoggingSoundSystem.h"
+#include "SdlSoundSystem.h"
 
 void load()
 {
 
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 	dae::GameObject* pRootDemo = scene.GetRoot();
+
+	dae::ServiceLocator::SetSoundSystem(nullptr);
+	dae::ServiceLocator::SetSoundSystem(new dae::SdlSoundSystem());
+	dae::ServiceLocator::SetSoundSystem(new dae::LoggingSoundSystem(new dae::SdlSoundSystem));
+	auto& ss = dae::ServiceLocator::GetSoundSystem();
+
+	//ss.Load(0, "../Data/Sounds/Pickup.wav");
+	ss.Load(0, "Sounds/Pickup.wav");
+	ss.Play(0);
 
 	// background
 	dae::GameObject* bg = new dae::GameObject();
@@ -271,7 +283,7 @@ void load()
 		SDLK_w,
 		SDLK_s,
 	};
-	auto character1MoveCommand{ std::make_unique<dae::MoveCommand>(bubby, baseSpeed, baseJumpStrength) };
+	auto character1MoveCommand{ std::make_unique<dae::MoveCommand>(bubby, baseSpeed, baseJumpStrength, static_cast<unsigned short>(1), "Sounds/Jump.wav") };
 	dae::InputManager::GetInstance().BindCommand(character1Input, dae::InputManager::InputType::Digital2DAxis, std::move(character1MoveCommand));
 
 	//std::vector<unsigned int> character2Input{

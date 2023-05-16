@@ -1,6 +1,8 @@
 #pragma once
 #include "Axis2DCommand.h"
 #include <memory>
+#include <string>
+
 namespace dae
 {
 	class GameObject;
@@ -9,7 +11,7 @@ namespace dae
 	class MoveCommand final : public Axis2DCommand
 	{
 	public:
-		MoveCommand(GameObject* pGameObject, float speed, float jumpStrength);
+		MoveCommand(GameObject* pGameObject, float speed, float jumpStrength, unsigned short jumpSoundID, const std::string& jumpSoundPath);
 		~MoveCommand() = default;
 		
 		MoveCommand(const MoveCommand& other) = delete;
@@ -25,6 +27,7 @@ namespace dae
 		RigidBody* m_pRigidBody{};
 		float m_MovementSpeed{};
 		float m_JumpStrength{};
+		unsigned short m_JumpSoundID{};
 	};
 
 }

@@ -4,15 +4,19 @@
 #include "RigidBody.h"
 #include "InputManager.h"
 #include "GameTime.h"
+#include "ServiceLocator.h"
+#include "SoundSystem.h"
 
-dae::MoveCommand::MoveCommand(GameObject* pGameObject, float speed, float jumpStrength)
+dae::MoveCommand::MoveCommand(GameObject* pGameObject, float speed, float jumpStrength, unsigned short jumpSoundID, const std::string& jumpSoundPath)
 	: m_pGameObject{pGameObject}
 	, m_MovementSpeed{speed}
 	, m_JumpStrength{jumpStrength}
+	, m_JumpSoundID{jumpSoundID}
 {
 	// cache the transform from the gameobject
 	//m_pTransform = m_pGameObject->GetComponent<TransformComponent>();
 	m_pRigidBody = m_pGameObject->GetComponent<RigidBody>();
+	dae::ServiceLocator::GetSoundSystem().Load(m_JumpSoundID, jumpSoundPath);
 }
 
 void dae::MoveCommand::Execute()
@@ -38,8 +42,11 @@ void dae::MoveCommand::Execute()
 		return;
 
 	auto axisValue = m_InputValue; // we will only use left, right and up
-	if (axisValue.y < 0.0f)
+	if (axisValue.y <= 0.0f)
 		axisValue.y = 0.0f;
+	else
+		dae::ServiceLocator::GetSoundSystem().Play(m_JumpSoundID);
+
 	//const float dt = dae::GameTime::GetInstance().GetDeltaTime();
 
 	axisValue.x *= m_MovementSpeed;

@@ -49,6 +49,12 @@
     <Filter Include="Components\UtilityComponents">
       <UniqueIdentifier>{0c61f922-764c-4a6d-8ecc-e43db735a92d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helper Files\Sounds">
+      <UniqueIdentifier>{4c0128ff-1c2e-4340-8786-e7fda2882f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper Files\Sounds\Base">
+      <UniqueIdentifier>{fc925834-2dc6-4c75-9ffb-8ca21ef0ebec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture2D.h">
@@ -183,6 +189,21 @@
     <ClInclude Include="PhysicsManager.h">
       <Filter>Helper Files\Singletons</Filter>
     </ClInclude>
+    <ClInclude Include="SdlSoundSystem.h">
+      <Filter>Helper Files\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>Helper Files\Sounds\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggingSoundSystem.h">
+      <Filter>Helper Files\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="NullSoundSystem.h">
+      <Filter>Helper Files\Sounds</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>Helper Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Font.cpp">
@@ -301,6 +322,15 @@
     </ClCompile>
     <ClCompile Include="PhysicsManager.cpp">
       <Filter>Helper Files\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="SdlSoundSystem.cpp">
+      <Filter>Helper Files\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="LoggingSoundSystem.cpp">
+      <Filter>Helper Files\Sounds</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
+      <Filter>Helper Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
