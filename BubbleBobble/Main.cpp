@@ -29,7 +29,6 @@
 #include "GridComponent.h"
 #include "BoxCollision.h"
 #include "RigidBody.h"
-#include <SDL_mixer.h>
 #include "ServiceLocator.h"
 #include "LoggingSoundSystem.h"
 #include "SdlSoundSystem.h"

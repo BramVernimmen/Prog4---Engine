@@ -21,8 +21,8 @@ namespace dae
 		void Load(const unsigned short id, const std::string& path) override;
 
 	private:
-		class SoundSystemImpl;
-		std::unique_ptr<SoundSystemImpl> m_pImpl;
+		class SdlSoundSystemImpl;
+		std::unique_ptr<SdlSoundSystemImpl> m_pImpl;
 	};
 
 }

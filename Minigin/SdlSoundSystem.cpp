@@ -14,7 +14,7 @@
 
 using namespace dae;
 
-class SdlSoundSystem::SoundSystemImpl
+class SdlSoundSystem::SdlSoundSystemImpl
 {
 	struct AudioEvent
 	{
@@ -28,18 +28,18 @@ class SdlSoundSystem::SoundSystemImpl
 	};
 
 public:
-	SoundSystemImpl()
+	SdlSoundSystemImpl()
 	{
 		if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096) == -1)
 		{
 			throw std::runtime_error(std::string("Failed to open audio: ") + Mix_GetError());
 		}
 
-		m_AudioHandlerThread = std::jthread(&SoundSystemImpl::HandleQueue, this);
+		m_AudioHandlerThread = std::jthread(&SdlSoundSystemImpl::HandleQueue, this);
 		m_StopToken = m_AudioHandlerThread.get_stop_token();
 	}
 
-	~SoundSystemImpl()
+	~SdlSoundSystemImpl()
 	{
 		m_AudioHandlerThread.request_stop();
 		m_ConditionVariable.notify_all();
@@ -57,7 +57,10 @@ public:
 
 	void Play(const unsigned short id) 
 	{
-		m_EventQueue.push(AudioEvent{ std::make_unique<AudioPlay>(), id });
+		{
+			std::lock_guard lock(m_Mutex);
+			m_EventQueue.push(AudioEvent{ std::make_unique<AudioPlay>(), id });
+		}
 		m_ConditionVariable.notify_one();
 	}
 
@@ -74,7 +77,10 @@ public:
 
 	void Load(const unsigned short id, const std::string& path)
 	{
-		m_EventQueue.push(AudioEvent{ std::make_unique<AudioLoad>(), LoadStruct{id, path} });
+		{
+			std::lock_guard lock(m_Mutex);
+			m_EventQueue.push(AudioEvent{ std::make_unique<AudioLoad>(), LoadStruct{id, path} });
+		}
 		m_ConditionVariable.notify_one();
 	}
 
@@ -149,7 +155,7 @@ private:
 
 
 dae::SdlSoundSystem::SdlSoundSystem()
-	: m_pImpl{std::make_unique<SoundSystemImpl>()}
+	: m_pImpl{std::make_unique<SdlSoundSystemImpl>()}
 {
 }
 
