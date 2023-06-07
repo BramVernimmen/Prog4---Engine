@@ -32,6 +32,7 @@ namespace dae
 		void SetParent(GameObject* newParent, bool keepWorldPosition = false);
 		std::vector<GameObject*> GetChildren() const { return m_ReturnChildren; }
 		GameObject* GetParent() const { return m_pParent; }
+		GameObject* GetRootObject();
 
 	protected:
 		void AddChild(std::unique_ptr<GameObject> newChild);

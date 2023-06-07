@@ -87,6 +87,20 @@ void dae::GameObject::SetParent(GameObject* newParent, bool keepWorldPosition)
 
 }
 
+dae::GameObject* dae::GameObject::GetRootObject()
+{
+	GameObject* currRoot{ this };
+	GameObject* parent{ GetParent() };
+	while (parent != nullptr)
+	{
+		currRoot = parent;
+		parent = parent->GetParent();
+	}
+
+	return currRoot;
+
+}
+
 
 
 void dae::GameObject::AddChild(std::unique_ptr<GameObject> newChild)

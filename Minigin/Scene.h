@@ -6,7 +6,7 @@ namespace dae
 {
 	class Scene final
 	{
-		friend Scene& SceneManager::CreateScene(const std::string& name);
+		friend std::shared_ptr<Scene> SceneManager::CreateScene(const std::string& name);
 	public:
 
 		void Update();

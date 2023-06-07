@@ -16,7 +16,7 @@ void dae::RenderComponent::Render() const
 		if (currElement.first == nullptr)
 			continue;
 		const auto& currPosition{ currElement.second->GetWorldPosition()};
-		renderer.RenderTexture(*currElement.first, currPosition.x, currPosition.y);
+		renderer.RenderTexture(*currElement.first, currPosition.x, currPosition.y, m_FlipTextures);
 	}
 
 	if (!renderer.DrawDebug())

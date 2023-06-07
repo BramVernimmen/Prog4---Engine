@@ -6,6 +6,11 @@
 #include "GameTime.h"
 #include "ServiceLocator.h"
 #include "SoundSystem.h"
+#include "BoxCollision.h"
+#include "RenderComponent.h"
+#include "SceneManager.h"
+#include "Scene.h"
+
 
 dae::MoveCommand::MoveCommand(GameObject* pGameObject, float speed, float jumpStrength, unsigned short jumpSoundID, const std::string& jumpSoundPath)
 	: m_pGameObject{pGameObject}
@@ -16,27 +21,26 @@ dae::MoveCommand::MoveCommand(GameObject* pGameObject, float speed, float jumpSt
 	// cache the transform from the gameobject
 	//m_pTransform = m_pGameObject->GetComponent<TransformComponent>();
 	m_pRigidBody = m_pGameObject->GetComponent<RigidBody>();
+	m_pBoxCollision = m_pGameObject->GetComponent<BoxCollision>();
+	m_pRenderComponent = m_pGameObject->GetComponent<RenderComponent>();
 	dae::ServiceLocator::GetSoundSystem().Load(m_JumpSoundID, jumpSoundPath);
 }
 
 void dae::MoveCommand::Execute()
 {
-	// ----------- USING TRANSLATION ---------
-	// get the direction linked to this command
-
-	/*
-	auto axisValue = m_InputValue;
+	GameObject* pSceneRoot{ SceneManager::GetInstance().GetActiveScene()->GetRoot() };
+	if (m_pGameObject->GetRootObject() != pSceneRoot)
+		return;
 
 
-	axisValue *= m_MovementSpeed * dae::GameTime::GetInstance().GetDeltaTime();
-	const auto& localPos{ m_pTransform->GetLocalPosition() };
-	// move the local pos
-	m_pTransform->SetLocalPosition(axisValue.x + localPos.x, localPos.y - axisValue.y );
-	*/
-
-	// ---------------------------------------
-
-	// ----------- USING RIGIDBODY ---------
+	if (m_pRigidBody->GetVelocity().y > 0.0f)
+	{
+		m_pBoxCollision->AddIgnoreLayer(0b10);
+	}
+	else
+	{
+		m_pBoxCollision->RemoveIgnoreLayer(0b10);
+	}
 
 	if (m_pRigidBody->IsGrounded() == false)
 		return;
@@ -47,11 +51,18 @@ void dae::MoveCommand::Execute()
 	else
 		dae::ServiceLocator::GetSoundSystem().Play(m_JumpSoundID);
 
-	//const float dt = dae::GameTime::GetInstance().GetDeltaTime();
 
 	axisValue.x *= m_MovementSpeed;
 	axisValue.y *= m_JumpStrength;
 	
+	if (axisValue.x > 0)
+	{
+		m_pRenderComponent->SetFlipTexutures(false);
+	} 
+	else if (axisValue.x < 0)
+	{
+		m_pRenderComponent->SetFlipTexutures(true);
+	}
 
 	const auto& currVelocity = m_pRigidBody->GetVelocity();
 	m_pRigidBody->SetVelocity({ axisValue.x, currVelocity.y + axisValue.y });

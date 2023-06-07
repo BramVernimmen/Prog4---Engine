@@ -18,8 +18,8 @@ namespace dae
 		void Render();
 		void Destroy();
 
-		void RenderTexture(const Texture2D& texture, float x, float y) const;
-		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height) const;
+		void RenderTexture(const Texture2D& texture, float x, float y, bool flip = false) const;
+		void RenderTexture(const Texture2D& texture, float x, float y, float width, float height, bool flip = false) const;
 
 		SDL_Renderer* GetSDLRenderer() const;
 

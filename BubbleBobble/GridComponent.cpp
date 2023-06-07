@@ -47,7 +47,10 @@ void dae::GridComponent::Resize(int newWidth, int newHeight)
 	const auto& worldPos = m_pTransform->GetWorldPosition();
 	glm::vec2 pos{ worldPos.x, worldPos.y };
 
-	std::string test = "XXXXXXXXXXXXXXX--XXXXXXXXXXXXXXXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXXXX---XXXXXXXXXXXXXXXXXX---XXXXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXXXX---XXXXXXXXXXXXXXXXXX---XXXXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXXXX---XXXXXXXXXXXXXXXXXX---XXXXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+	constexpr uint32_t boxLayer{ 0b1 }; boxLayer;
+	constexpr uint32_t platformLayer{ 0b10 }; platformLayer;
+
+	std::string test = "XXXXXXXXXXXXXXX--XXXXXXXXXXXXXXXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX||---||||||||||||||||||---||XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX||---||||||||||||||||||---||XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX||---||||||||||||||||||---||XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 
 
 	for (int i = 0; i < m_Width; ++i) // for each width
@@ -57,6 +60,17 @@ void dae::GridComponent::Resize(int newWidth, int newHeight)
 			int currentIndex{ i + (j * m_Width) };
 			if (test[currentIndex] == '-')
 				continue;
+
+
+			uint32_t currentLayer{0b0};
+			if (test[currentIndex] == 'X')
+			{ 
+				currentLayer = boxLayer;
+			}
+			else if (test[currentIndex] == '|')
+			{
+				currentLayer = platformLayer;
+			}
 
 			glm::vec2 currentPos{};
 			currentPos.x = (i * static_cast<float>(m_PixelSize));
@@ -72,6 +86,7 @@ void dae::GridComponent::Resize(int newWidth, int newHeight)
 			auto collision = tile->AddComponent<dae::BoxCollision>();
 			collision->SetSize(m_PixelSize, m_PixelSize);
 			collision->SetStatic();
+			collision->SetCurrentLayer(currentLayer);
 			renderComp->AddToDebug(collision);
 			
 			

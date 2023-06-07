@@ -30,6 +30,8 @@ namespace dae
 		void AddToDebug(UpdateComponent* pComponentToAdd);
 		void RemoveFromDebug(UpdateComponent* pComponentToAdd);
 
+		void SetFlipTexutures(bool newFlip) { m_FlipTextures = newFlip; }
+
 	protected:
 
 	private:
@@ -37,6 +39,8 @@ namespace dae
 		std::unordered_multimap<Texture2D*, TransformComponent*> m_TexturesToRenderMap{};
 		std::vector<UpdateComponent*> m_DisplayGuiComponents{};
 		std::vector<UpdateComponent*> m_DebugComponents{};
+
+		bool m_FlipTextures{ false };
 	};
 }
 

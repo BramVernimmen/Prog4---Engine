@@ -28,15 +28,14 @@ std::vector<SDL_Rect> dae::CollisionManager::GetColliding(dae::BoxCollision* col
 	std::vector<SDL_Rect> hitRects{};
 
 	const SDL_Rect& boxToCheck = collisionToCheck->GetRect();
+	const uint32_t ignoreLayers = collisionToCheck->GetIgnoreLayers();
 	for (const auto& box : m_pBoxCollisions)
 	{
 		if (box == collisionToCheck)
 			continue;
 
-		if (IsOverlapping(boxToCheck, box->GetRect()))
+		if ((ignoreLayers & box->GetLayer()) == 0 && IsOverlapping(boxToCheck, box->GetRect()))
 		{
-			//hitRect = box->GetRect();
-			//std::cout << "HIT\n";
 			hitRects.emplace_back(box->GetRect());
 		}
 	}

@@ -56,6 +56,12 @@
     <ClCompile Include="GridComponent.cpp">
       <Filter>Components\UitilityComponents</Filter>
     </ClCompile>
+    <ClCompile Include="SkipLevelCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="GoBackLevelCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugHealthComponent.h">
@@ -84,6 +90,12 @@
     </ClInclude>
     <ClInclude Include="GridComponent.h">
       <Filter>Components\UitilityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="SkipLevelCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="GoBackLevelCommand.h">
+      <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
