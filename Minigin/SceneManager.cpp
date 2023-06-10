@@ -17,6 +17,11 @@ void dae::SceneManager::DisplayGui()
 	m_pActiveScene->DisplayGui();
 }
 
+void dae::SceneManager::CheckForRemoval()
+{
+	m_pActiveScene->CheckForRemoval();
+}
+
 void dae::SceneManager::PreviousScene()
 {
 	unsigned int numScenes{ static_cast<unsigned int>(m_scenes.size()) };

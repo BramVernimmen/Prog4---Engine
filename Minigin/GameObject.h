@@ -36,12 +36,16 @@ namespace dae
 		GameObject* GetParent() const { return m_pParent; }
 		GameObject* GetRootObject();
 
+		void MarkForDelete() { m_MarkedForDelete = true; }
+		bool IsMarkedForDelete() { return m_MarkedForDelete; }
+
 	protected:
 		void AddChild(std::unique_ptr<GameObject> newChild);
 		std::unique_ptr<GameObject> RemoveChild(GameObject* childToRemove);
 		bool CheckIfChild(GameObject* parentToCheck);
 
 	private:
+		bool m_MarkedForDelete{false};
 		std::vector<std::unique_ptr<BaseComponent>> m_Components{};
 		std::unique_ptr<BaseComponent> m_RenderComponent{};
 

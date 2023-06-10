@@ -114,8 +114,11 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		doContinue = input.ProcessInput();
 		sceneManager.Update();
 
+		sceneManager.CheckForRemoval(); // this will remove any gameobjects marked for delete
+
 		physics.Update();
 		collisions.Update();
+
 		renderer.Render();
 
 		// sleeping to get desired fps

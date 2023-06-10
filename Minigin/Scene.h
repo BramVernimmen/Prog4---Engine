@@ -13,6 +13,7 @@ namespace dae
 		void Update();
 		void Render() const;
 		void DisplayGui();
+		void CheckForRemoval();
 
 		GameObject* GetRoot() { return m_pRoot.get(); }
 
@@ -26,9 +27,9 @@ namespace dae
 
 	private: 
 		explicit Scene(const std::string& name);
+		void RemoveMarkedObjects(GameObject* parent);
 
 		std::string m_name;
-		//std::vector < std::unique_ptr<GameObject>> m_objects{};
 		std::unique_ptr<GameObject> m_pRoot;
 
 		static unsigned int m_idCounter; 
