@@ -8,4 +8,5 @@ namespace dae
 	class GainedScore final : public Event {};
 	class AudioLoad final : public Event {};
 	class AudioPlay final : public Event {};
+	class SceneLoaded final : public Event {};
 }

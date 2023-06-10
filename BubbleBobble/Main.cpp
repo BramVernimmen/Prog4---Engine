@@ -35,6 +35,7 @@
 #include "SkipLevelCommand.h"
 #include "GoBackLevelCommand.h"
 #include "LevelLoaderComponent.h"
+#include "PlayerManager.h"
 
 void load()
 {
@@ -81,6 +82,15 @@ void load()
 	levelLoaderComp->SetGridSize(32, 25);
 	levelLoaderComp->CreateLevels();
 
+
+	dae::PlayerManager* playerManager{&dae::PlayerManager::GetInstance()};
+	// add playerManager as Observer to every scene
+	for (const auto& currScene : dae::SceneManager::GetInstance().GetScenes())
+	{
+		currScene->AddObserver(playerManager);
+	}
+
+
 	// fps
 	auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 	dae::GameObject* fps = new dae::GameObject();
@@ -116,7 +126,7 @@ void load()
 	bubby->AddComponent<dae::RigidBody>();
 
 
-
+	playerManager->SetPlayer(bubby);
 
 	// P1 health debug
 	dae::GameObject* debugHealthP1 = new dae::GameObject();

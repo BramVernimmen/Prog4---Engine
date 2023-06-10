@@ -4,6 +4,7 @@
 #include "Utils_SDL.h"
 #include "TextureComponent.h"
 #include "BoxCollision.h"
+#include "PlayerSpawnComponent.h"
 
 dae::GridComponent::GridComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
@@ -65,6 +66,18 @@ void dae::GridComponent::CreateTiles()
 				continue;
 
 
+			glm::vec2 currentPos{};
+			currentPos.x = (i * static_cast<float>(m_PixelSize));
+			currentPos.y = (j * static_cast<float>(m_PixelSize));
+
+			if (m_TileLayout[currentIndex] == 'P')
+			{
+				auto spawn{ parent->AddComponent<PlayerSpawnComponent>() };
+				spawn->SetSpawnPosition(pos.x + currentPos.x,pos.y + currentPos.y);
+				continue;
+			}
+
+
 			uint32_t currentLayer{ 0b0 };
 			if (m_TileLayout[currentIndex] == 'X')
 			{
@@ -75,9 +88,6 @@ void dae::GridComponent::CreateTiles()
 				currentLayer = platformLayer;
 			}
 
-			glm::vec2 currentPos{};
-			currentPos.x = (i * static_cast<float>(m_PixelSize));
-			currentPos.y = (j * static_cast<float>(m_PixelSize));
 
 			dae::GameObject* tile = new dae::GameObject();
 			tile->SetParent(parent);

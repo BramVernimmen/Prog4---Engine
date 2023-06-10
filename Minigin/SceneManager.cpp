@@ -4,28 +4,16 @@
 
 void dae::SceneManager::Update()
 {
-	//for(auto& scene : m_scenes)
-	//{
-	//	scene->Update();
-	//}
 	m_pActiveScene->Update();
 }
 
 void dae::SceneManager::Render() const
 {
-	//for (const auto& scene : m_scenes)
-	//{
-	//	scene->Render();
-	//}
 	m_pActiveScene->Render();
 }
 
 void dae::SceneManager::DisplayGui()
 {
-	//for (const auto& scene : m_scenes)
-	//{
-	//	scene->DisplayGui();
-	//}
 	m_pActiveScene->DisplayGui();
 }
 
@@ -45,7 +33,7 @@ void dae::SceneManager::PreviousScene()
 
 			--i; // decrement to get the correct one
 
-			m_pActiveScene = m_scenes[i].get();
+			KnownSetActiveScene(m_scenes[i].get());
 			break;
 		}
 	}
@@ -60,7 +48,7 @@ void dae::SceneManager::NextScene()
 		{
 			// if we have found the current active scene, we need to find the next one
 			const unsigned int nextScene = ++i % m_scenes.size(); // increment index first, modulo size of scenes makes sure we loop back to 0
-			m_pActiveScene = m_scenes[nextScene].get();
+			KnownSetActiveScene(m_scenes[nextScene].get());
 			break;
 		}
 	}
@@ -73,7 +61,7 @@ void dae::SceneManager::SetActiveScene(Scene* newActiveScene)
 	{
 		if ((*it).get() == newActiveScene)
 		{
-			m_pActiveScene = newActiveScene;
+			KnownSetActiveScene(newActiveScene);
 			return;
 		}
 	}
@@ -115,6 +103,14 @@ void dae::SceneManager::AddScene(std::shared_ptr<Scene> sceneToAdd)
 	m_scenes.push_back(sceneToAdd);
 }
 
+void dae::SceneManager::KnownSetActiveScene(Scene* newActiveScene)
+{
+	// this function will straight up set the active scene, without any checks
+	// because this is powerful and can easily break stuff, it is private
+	m_pActiveScene = newActiveScene;
+	m_pActiveScene->IsSetAsActive();
+}
+
 std::shared_ptr<dae::Scene> dae::SceneManager::CreateScene(const std::string& name)
 {
 	const auto& scene = std::shared_ptr<Scene>(new Scene(name));
@@ -122,7 +118,7 @@ std::shared_ptr<dae::Scene> dae::SceneManager::CreateScene(const std::string& na
 
 	if (m_pActiveScene == nullptr)
 	{
-		m_pActiveScene = scene.get();
+		KnownSetActiveScene(scene.get());
 	}
 
 	return scene;

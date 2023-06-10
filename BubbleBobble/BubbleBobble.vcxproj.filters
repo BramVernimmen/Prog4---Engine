@@ -24,6 +24,9 @@
     <Filter Include="Components\PlayerBasedComponents\Debug">
       <UniqueIdentifier>{daa1d349-b4ae-4d5d-9504-fb6205205713}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helper Files">
+      <UniqueIdentifier>{50c55bc9-7b60-43e0-9898-c09eba9d4b4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -65,6 +68,12 @@
     <ClCompile Include="LevelLoaderComponent.cpp">
       <Filter>Components\UitilityComponents</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>Helper Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSpawnComponent.cpp">
+      <Filter>Components\UitilityComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugHealthComponent.h">
@@ -101,6 +110,12 @@
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="LevelLoaderComponent.h">
+      <Filter>Components\UitilityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>Helper Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSpawnComponent.h">
       <Filter>Components\UitilityComponents</Filter>
     </ClInclude>
   </ItemGroup>

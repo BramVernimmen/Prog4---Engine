@@ -27,6 +27,8 @@ namespace dae
 
 		template <typename T> T* AddComponent();
 		template <typename T> T* GetComponent() const;
+		template <typename T> std::vector<T*> GetComponents() const;
+		template <typename T> std::vector<T*> GetComponentsInChildren() const;
 		template <typename T> void RemoveComponent();
 
 		void SetParent(GameObject* newParent, bool keepWorldPosition = false);
@@ -63,9 +65,11 @@ namespace dae
 			return dynamic_cast<T*>(m_RenderComponent.get());
 		}
 
+
+		/// check not used anymore-> we want to have duplicate components on our objects
 		// first check if a component already exists
-		if (T * checkComp{ GetComponent<T>() }) 
-			return checkComp;
+		//if (T * checkComp{ GetComponent<T>() }) 
+		//	return checkComp;
 
 
 		// if we get here, the component doesn't exist yet, create it
@@ -87,6 +91,36 @@ namespace dae
 				return castedComp;
 		}
 		return nullptr; // nothing found
+	}
+
+	template<typename T>
+	inline std::vector<T*> GameObject::GetComponents() const
+	{
+		std::vector<T*> componentsToReturn{};
+
+		for (const auto& currComponent : m_Components)
+		{
+			T* castedComp = dynamic_cast<T*>(currComponent.get());
+			if (castedComp)
+				componentsToReturn.emplace_back(castedComp);
+		}
+
+		return componentsToReturn;
+	}
+
+	template<typename T>
+	inline std::vector<T*> GameObject::GetComponentsInChildren() const
+	{
+		std::vector<T*> componentsToReturn{};
+		for (const auto& currChild : m_Children)
+		{
+			std::vector<T*> components{ currChild->GetComponents<T>() };
+			componentsToReturn.insert(componentsToReturn.end(), components.begin(), components.end());
+			std::vector<T*> childComponents{ currChild->GetComponentsInChildren<T>() };
+			componentsToReturn.insert(componentsToReturn.end(), childComponents.begin(), childComponents.end());
+			
+		}
+		return componentsToReturn;
 	}
 
 	template<typename T>

@@ -25,7 +25,11 @@ namespace dae
 		void RemoveScene(std::shared_ptr<Scene> sceneToRemove);
 		void AddScene(std::shared_ptr<Scene> sceneToAdd);
 
+		std::vector<std::shared_ptr<Scene>>& GetScenes() { return m_scenes; }
+
 	private:
+		void KnownSetActiveScene(Scene* newActiveScene);
+
 		friend class Singleton<SceneManager>;
 		SceneManager() = default;
 		std::vector<std::shared_ptr<Scene>> m_scenes;
