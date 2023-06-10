@@ -49,7 +49,7 @@ void load()
 
 	dae::ServiceLocator::SetSoundSystem(new dae::SdlSoundSystem());
 	//dae::ServiceLocator::SetSoundSystem(new dae::LoggingSoundSystem(new dae::SdlSoundSystem));
-	auto& ss = dae::ServiceLocator::GetSoundSystem();
+	//auto& ss = dae::ServiceLocator::GetSoundSystem();
 
 	//ss.Load(0, "Sounds/Pickup.wav");
 	//ss.Play(0);
@@ -114,9 +114,6 @@ void load()
 	renderComp->AddToDebug(collision);
 
 	bubby->AddComponent<dae::RigidBody>();
-	//auto rigid = bubby->AddComponent<dae::RigidBody>();
-	//renderComp->AddToDisplayGui(rigid);
-
 
 
 
