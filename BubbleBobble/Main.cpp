@@ -60,10 +60,14 @@ void load()
 	levelLoader->SetParent(pRootDemo);
 	auto levelLoaderComp = levelLoader->AddComponent<dae::LevelLoaderComponent>();
 	levelLoaderComp->AddLevelFile("Levels/001.txt");
+	levelLoaderComp->AddLevelFile("Levels/002.txt");
+	levelLoaderComp->AddLevelFile("Levels/003.txt");
+	levelLoaderComp->AddLevelFile("Levels/004.txt");
+	levelLoaderComp->AddLevelFile("Levels/005.txt");
 	levelLoaderComp->SetTileTextureLocation("Tiles/");
 	levelLoaderComp->SetTileTextureExtension("_Tile.png");
-	levelLoaderComp->SetGridOffset(50, 70);
-	levelLoaderComp->SetGridSize(32, 25);
+	levelLoaderComp->SetGridOffset(50, 60);
+	levelLoaderComp->SetGridSize(32, 26);
 	levelLoaderComp->CreateLevels();
 
 

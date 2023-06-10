@@ -1,6 +1,6 @@
 grid info
 32 width
-25 high
+26 high
 
 
 X = tile
@@ -11,6 +11,7 @@ E = enemy spawn
 
 Base setup for every level
 
+XXXXXXXXXXXXXXX--XXXXXXXXXXXXXXX
 XX----------------------------XX
 XX----------------------------XX
 XX----------------------------XX
@@ -33,6 +34,6 @@ XX----------------------------XX
 XX----------------------------XX
 XX----------------------------XX
 XX----------------------------XX
+XX-P------------------------P-XX
 XX----------------------------XX
-XX----------------------------XX
-XX----------------------------XX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
