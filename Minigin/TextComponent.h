@@ -26,7 +26,6 @@ namespace dae
 
 		void SetFont(std::shared_ptr<Font>& newFont);
 		void SetText(const std::string& newText);
-		//void SetPosition(float x, float y);
 		void SetColor(const SDL_Color& newColor);
 
 		void AddToRenderer(RenderComponent* pRenderer);
@@ -37,7 +36,7 @@ namespace dae
 		std::shared_ptr<Texture2D> m_pTexture{};
 
 		bool m_NeedsUpdate{true};
-		std::string m_Text{};
+		std::string m_Text{" "};
 		std::shared_ptr<Font> m_Font;
 		SDL_Color m_Color{ 255,255,255 };
 	};

@@ -12,7 +12,6 @@ dae::TextComponent::TextComponent(GameObject* pOwner)
 	:UpdateComponent(pOwner)
 {
 	m_TransformComponent = GetOwner()->GetComponent<TransformComponent>();
-	m_Text = " ";
 }
 
 void dae::TextComponent::Update()

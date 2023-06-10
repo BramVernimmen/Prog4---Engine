@@ -19,8 +19,8 @@
 #include "TransformComponent.h"
 #include "InputManager.h"
 #include "MoveCommand.h"
-#include "HealthComponent.h"
-#include "DebugHealthComponent.h"
+//#include "HealthComponent.h"
+//#include "DebugHealthComponent.h"
 #include "DamageCommand.h"
 #include "ScoreComponent.h"
 #include "DebugScoreComponent.h"
@@ -62,7 +62,7 @@ void load()
 	levelLoaderComp->AddLevelFile("Levels/001.txt");
 	levelLoaderComp->SetTileTextureLocation("Tiles/");
 	levelLoaderComp->SetTileTextureExtension("_Tile.png");
-	levelLoaderComp->SetGridOffset(50, 50);
+	levelLoaderComp->SetGridOffset(50, 70);
 	levelLoaderComp->SetGridSize(32, 25);
 	levelLoaderComp->CreateLevels();
 
@@ -95,17 +95,25 @@ void load()
 	dae::PlayerInfo player1Info{};
 	player1Info.m_TexturePath = "Bubby.png";
 	player1Info.m_UseController = true;
+	player1Info.m_DisplayTopLeftX = 150.0f;
+	player1Info.m_FontColorR = 135;
+	player1Info.m_FontColorG = 249;
+	player1Info.m_FontColorB = 81;
 
 	dae::PlayerInfo player2Info{};
 	player2Info.m_TexturePath = "Bobby.png";
 	player2Info.m_UseController = true;
 	player2Info.m_KeyBoardInputs = { SDLK_LEFT, SDLK_RIGHT, SDLK_UP, SDLK_RIGHT }; // player 2 will use arrow keys
+	player2Info.m_DisplayTopLeftX = 600.0f;
+	player2Info.m_FontColorR = 73;
+	player2Info.m_FontColorG = 169;
+	player2Info.m_FontColorB = 250;
 
 	playerManager->AddPlayerInfo(player1Info);
 	playerManager->AddPlayerInfo(player2Info);
 
-	dae::SceneManager::GetInstance().PreviousScene();
-	playerManager->SetPlayerCount(0);
+	//dae::SceneManager::GetInstance().PreviousScene();
+	//playerManager->SetPlayerCount(0);
 
 	// bubby - has lives + score (P1)
 	//dae::GameObject* bubby = new dae::GameObject();

@@ -1,15 +1,14 @@
 #include "DamageCommand.h"
 #include "GameObject.h"
-#include "HealthComponent.h"
+#include "LivesComponent.h"
 
-dae::DamageCommand::DamageCommand(GameObject* pGameObject, int damage)
+dae::DamageCommand::DamageCommand(GameObject* pGameObject)
 	: m_pGameObject{pGameObject}
-	, m_Damage{damage}
 {
-	m_pHealth = pGameObject->GetComponent<HealthComponent>();
+	m_pLives = pGameObject->GetComponent<LivesComponent>();
 }
 
 void dae::DamageCommand::Execute()
 {
-	m_pHealth->DoDamage(m_Damage);
+	m_pLives->RemoveLife();
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "UpdateComponent.h"
 #include "Observer.h"
-#include "EngineEvents.h"
+#include "GameEvents.h"
 
 namespace dae
 {

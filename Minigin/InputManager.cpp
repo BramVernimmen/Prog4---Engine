@@ -164,6 +164,18 @@ void dae::InputManager::BindCommand(const std::vector<unsigned int>& buttons, In
 	m_Commands.emplace(info, std::move(pCommand));
 }
 
+void dae::InputManager::RemoveCommand(Command* commandToRemove)
+{
+	for (auto it{ m_Commands.begin() }; it != m_Commands.end(); ++it)
+	{
+		if ((*it).second.get() == commandToRemove)
+		{
+			m_Commands.erase(it);
+			return;
+		}
+	}
+}
+
 
 
 bool dae::InputManager::ReadSDL_Events()

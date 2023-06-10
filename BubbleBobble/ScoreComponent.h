@@ -2,7 +2,7 @@
 #include "UpdateComponent.h"
 #include "Subject.h"
 #include "Observer.h"
-#include "EngineEvents.h"
+#include "GameEvents.h"
 
 namespace dae
 {

@@ -43,7 +43,7 @@ namespace dae
 		bool ProcessInput();
 
 		void BindCommand(const std::vector<unsigned int>& buttons, InputType inputType, std::unique_ptr<Command> pCommand, int id = -1); // default to keyboard
-
+		void RemoveCommand(Command* commandToRemove);
 		
 
 	private:

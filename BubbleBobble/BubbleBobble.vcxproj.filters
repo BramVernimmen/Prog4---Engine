@@ -27,18 +27,21 @@
     <Filter Include="Helper Files">
       <UniqueIdentifier>{50c55bc9-7b60-43e0-9898-c09eba9d4b4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{0e34436c-ae46-452f-a80c-47f9aadfad2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
-    <ClCompile Include="DebugHealthComponent.cpp">
+    <ClCompile Include="DebugLivesComponent.cpp">
       <Filter>Components\PlayerBasedComponents\Debug</Filter>
     </ClCompile>
     <ClCompile Include="DebugScoreComponent.cpp">
       <Filter>Components\PlayerBasedComponents\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="HealthComponent.cpp">
+    <ClCompile Include="LivesComponent.cpp">
       <Filter>Components\PlayerBasedComponents</Filter>
     </ClCompile>
     <ClCompile Include="DamageCommand.cpp">
@@ -76,7 +79,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DebugHealthComponent.h">
+    <ClInclude Include="DebugLivesComponent.h">
       <Filter>Components\PlayerBasedComponents\Debug</Filter>
     </ClInclude>
     <ClInclude Include="DebugScoreComponent.h">
@@ -85,7 +88,7 @@
     <ClInclude Include="ScoreComponent.h">
       <Filter>Components\PlayerBasedComponents</Filter>
     </ClInclude>
-    <ClInclude Include="HealthComponent.h">
+    <ClInclude Include="LivesComponent.h">
       <Filter>Components\PlayerBasedComponents</Filter>
     </ClInclude>
     <ClInclude Include="GiveScoreCommand.h">
@@ -117,6 +120,9 @@
     </ClInclude>
     <ClInclude Include="PlayerSpawnComponent.h">
       <Filter>Components\UitilityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEvents.h">
+      <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,6 +8,13 @@
 #include "TextureComponent.h"
 #include "BoxCollision.h"
 #include "MoveCommand.h"
+#include "LivesComponent.h"
+#include "ScoreComponent.h"
+#include "DebugLivesComponent.h"
+#include "DebugScoreComponent.h"
+#include "ResourceManager.h"
+#include "TextComponent.h"
+
 
 void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 {
@@ -29,6 +36,25 @@ void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 					currPlayer->SetParent(sceneRoot); // still move the object to scene root, this scene will handle its destruction
 				}
 				m_pPlayers.clear();
+
+				// also remove all player commands
+				for (auto& currPlayerCommands : m_pPlayerCommands)
+				{
+					for (Command* currCommand : currPlayerCommands)
+					{
+						InputManager::GetInstance().RemoveCommand(currCommand);
+					}
+				}
+				m_pPlayerCommands.clear();
+
+				for (auto& currPlayerDebugs : m_pPlayerDebugs)
+				{
+					for (GameObject* currDebug : currPlayerDebugs)
+					{
+						currDebug->MarkForDelete();
+					}
+				}
+				m_pPlayerDebugs.clear();
 
 				return;
 			}
@@ -56,6 +82,14 @@ void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 				++index;
 			}
 
+			for (auto& currPlayerDebugs : m_pPlayerDebugs)
+			{
+				for (GameObject* currDebug : currPlayerDebugs)
+				{
+					currDebug->SetParent(sceneRoot);
+				}
+			}
+
 		}
 	}
 }
@@ -66,6 +100,8 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 		return;
 
 	int controllerUsers{ 0 };
+	std::vector<Command*> playerCommands{};
+
 	for (unsigned int i = 0; i < m_PlayerCount; i++)
 	{
 		const PlayerInfo& currPlayerInfo{ m_PlayerInfo[i] };
@@ -81,6 +117,9 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 		collisionComp->SetSize(currPlayerInfo.m_CollisionSizeX, currPlayerInfo.m_CollisionSizeY);
 		renderComp->AddToDebug(collisionComp);
 		player->AddComponent<RigidBody>();
+		auto livesComp = player->AddComponent<LivesComponent>();
+		auto scoreComp = player->AddComponent<ScoreComponent>();
+
 
 		// cache the player here
 		m_pPlayers.emplace_back(player);
@@ -94,6 +133,9 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 				currPlayerInfo.m_BaseJumpStrength, 
 				currPlayerInfo.m_JumpSoundId, 
 				currPlayerInfo.m_JumpSoundPath) };
+
+			playerCommands.emplace_back(keyboardMoveCommand.get());
+
 			InputManager::GetInstance().BindCommand(
 				currPlayerInfo.m_KeyBoardInputs,
 				currPlayerInfo.m_KeyboardInputType, 
@@ -103,16 +145,19 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 
 		if (currPlayerInfo.m_UseController)
 		{
-			auto keyboardMoveCommand{ std::make_unique<MoveCommand>(
+			auto controllerMoveCommand{ std::make_unique<MoveCommand>(
 				player,
 				currPlayerInfo.m_BaseSpeed,
 				currPlayerInfo.m_BaseJumpStrength,
 				currPlayerInfo.m_JumpSoundId,
 				currPlayerInfo.m_JumpSoundPath) };
+
+			playerCommands.emplace_back(controllerMoveCommand.get());
+
 			InputManager::GetInstance().BindCommand(
 				currPlayerInfo.m_ControllerInputs,
 				currPlayerInfo.m_ControllerInputType,
-				std::move(keyboardMoveCommand), controllerUsers);
+				std::move(controllerMoveCommand), controllerUsers);
 
 			++controllerUsers; 
 			// keep track of the controller users
@@ -120,5 +165,43 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 			// using the i will skip controller id 1 and 2, so if only 2 controllers are connected controller with id 3 will never be found
 		}
 
+
+
+		// create the lives and score display of the players
+		std::vector<GameObject*> playerDebugs{};
+		// starting with the lives display
+		GameObject* debugLivesObj = new GameObject();
+		debugLivesObj->SetParent(pRoot);
+		auto transComp = debugLivesObj->GetComponent<TransformComponent>();
+		transComp->SetLocalPosition(currPlayerInfo.m_DisplayTopLeftX, currPlayerInfo.m_DisplayTopLeftY);
+		renderComp = debugLivesObj->AddComponent<RenderComponent>();
+		auto textComp = debugLivesObj->AddComponent<TextComponent>();
+		auto font = ResourceManager::GetInstance().LoadFont(currPlayerInfo.m_FontPath, currPlayerInfo.m_FontSize);
+		textComp->SetFont(font);
+		textComp->SetColor({currPlayerInfo.m_FontColorR, currPlayerInfo.m_FontColorG, currPlayerInfo.m_FontColorB });
+		textComp->AddToRenderer(renderComp);
+		auto debugLivesComp = debugLivesObj->AddComponent<DebugLivesComponent>();
+		debugLivesComp->SetLastLives(livesComp->GetCurrentLives());
+		// add as observer
+		livesComp->AddObserver(debugLivesComp);
+		playerDebugs.emplace_back(debugLivesObj);
+
+		// next the display for the score
+		GameObject* debugScoreObj = new GameObject();
+		debugLivesObj->SetParent(pRoot);
+		transComp = debugScoreObj->GetComponent<TransformComponent>();
+		transComp->SetLocalPosition(currPlayerInfo.m_DisplayTopLeftX, currPlayerInfo.m_DisplayTopLeftY + currPlayerInfo.m_FontSize);
+		renderComp = debugScoreObj->AddComponent<RenderComponent>();
+		textComp = debugScoreObj->AddComponent<TextComponent>();
+		font = ResourceManager::GetInstance().LoadFont(currPlayerInfo.m_FontPath, currPlayerInfo.m_FontSize);
+		textComp->SetFont(font);
+		textComp->SetColor({ currPlayerInfo.m_FontColorR, currPlayerInfo.m_FontColorG, currPlayerInfo.m_FontColorB });
+		textComp->AddToRenderer(renderComp);
+		auto debugScoreComp = debugScoreObj->AddComponent<DebugScoreComponent>();
+		// add as observer
+		scoreComp->AddObserver(debugScoreComp);
+		playerDebugs.emplace_back(debugScoreObj);
+
+		m_pPlayerDebugs.emplace_back(playerDebugs);
 	}
 }

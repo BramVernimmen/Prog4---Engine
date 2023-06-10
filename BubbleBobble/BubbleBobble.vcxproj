@@ -184,12 +184,12 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DamageCommand.cpp" />
-    <ClCompile Include="DebugHealthComponent.cpp" />
+    <ClCompile Include="DebugLivesComponent.cpp" />
     <ClCompile Include="DebugScoreComponent.cpp" />
     <ClCompile Include="GiveScoreCommand.cpp" />
     <ClCompile Include="GoBackLevelCommand.cpp" />
     <ClCompile Include="GridComponent.cpp" />
-    <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="LivesComponent.cpp" />
     <ClCompile Include="HowToPlayComponent.cpp" />
     <ClCompile Include="LevelLoaderComponent.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -201,12 +201,13 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DamageCommand.h" />
-    <ClInclude Include="DebugHealthComponent.h" />
+    <ClInclude Include="DebugLivesComponent.h" />
     <ClInclude Include="DebugScoreComponent.h" />
+    <ClInclude Include="GameEvents.h" />
     <ClInclude Include="GiveScoreCommand.h" />
     <ClInclude Include="GoBackLevelCommand.h" />
     <ClInclude Include="GridComponent.h" />
-    <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="HowToPlayComponent.h" />
     <ClInclude Include="LevelLoaderComponent.h" />
     <ClInclude Include="MoveCommand.h" />

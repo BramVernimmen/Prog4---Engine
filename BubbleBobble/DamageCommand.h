@@ -3,11 +3,11 @@
 namespace dae
 {
 	class GameObject;
-	class HealthComponent;
+	class LivesComponent;
 	class DamageCommand : public Command
 	{
 	public:
-		DamageCommand(GameObject* pGameObject, int damage);
+		DamageCommand(GameObject* pGameObject);
 		~DamageCommand() = default;
 	
 		DamageCommand(const DamageCommand& other) = delete;
@@ -19,8 +19,7 @@ namespace dae
 		virtual void Execute() override;
 	private:
 		GameObject* m_pGameObject{};
-		HealthComponent* m_pHealth{};
-		int m_Damage{1};
+		LivesComponent* m_pLives{};
 	};
 }
 
