@@ -34,47 +34,59 @@
 #include "SdlSoundSystem.h"
 #include "SkipLevelCommand.h"
 #include "GoBackLevelCommand.h"
+#include "LevelLoaderComponent.h"
 
 void load()
 {
 
 	auto scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 	auto testScene = dae::SceneManager::GetInstance().CreateScene("TEST");
-	//auto someTest = std::shared_ptr<dae::Scene>(&testScene);
 	dae::GameObject* pRootDemo = scene->GetRoot();
 
 	dae::SceneManager::GetInstance().RemoveScene(testScene);
 	dae::SceneManager::GetInstance().AddScene(testScene);
 
 
-	dae::ServiceLocator::SetSoundSystem(nullptr);
 	dae::ServiceLocator::SetSoundSystem(new dae::SdlSoundSystem());
-	dae::ServiceLocator::SetSoundSystem(new dae::LoggingSoundSystem(new dae::SdlSoundSystem));
+	//dae::ServiceLocator::SetSoundSystem(new dae::LoggingSoundSystem(new dae::SdlSoundSystem));
 	auto& ss = dae::ServiceLocator::GetSoundSystem();
 
-	ss.Load(0, "Sounds/Pickup.wav");
-	ss.Play(0);
+	//ss.Load(0, "Sounds/Pickup.wav");
+	//ss.Play(0);
 
 
 
 	// grid 
-	dae::GameObject* grid = new dae::GameObject();
-	grid->SetParent(pRootDemo);
-	auto renderComp = grid->AddComponent<dae::RenderComponent>();
-	auto gridComp = grid->AddComponent<dae::GridComponent>();
-	renderComp->AddToDebug(gridComp);
-	auto transComp = grid->GetComponent<dae::TransformComponent>();
-	auto textureComp = grid->AddComponent<dae::TextureComponent>();
-	textureComp->SetTexture("001_Tile.png");
-	transComp->SetLocalPosition(50, 50);
-	gridComp->Resize(32, 25);
+	//dae::GameObject* grid = new dae::GameObject();
+	//grid->SetParent(pRootDemo);
+	//auto renderGridComp = grid->AddComponent<dae::RenderComponent>();
+	//auto gridComp = grid->AddComponent<dae::GridComponent>();
+	//renderGridComp->AddToDebug(gridComp);
+	//auto transGridComp = grid->GetComponent<dae::TransformComponent>();
+	//auto textureGridComp = grid->AddComponent<dae::TextureComponent>();
+	//textureGridComp->SetTexture("Tiles/001_Tile.png");
+	//gridComp->SetTileLayout("XXXXXXXXXXXXXXX--XXXXXXXXXXXXXXXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX||---||||||||||||||||||---||XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX||---||||||||||||||||||---||XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX||---||||||||||||||||||---||XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+	//transGridComp->SetLocalPosition(50, 50);
+	//gridComp->Resize(32, 25);
+
+
+	// level loader
+	dae::GameObject* levelLoader = new dae::GameObject();
+	levelLoader->SetParent(pRootDemo);
+	auto levelLoaderComp = levelLoader->AddComponent<dae::LevelLoaderComponent>();
+	levelLoaderComp->AddLevelFile("Levels/001.txt");
+	levelLoaderComp->SetTileTextureLocation("Tiles/");
+	levelLoaderComp->SetTileTextureExtension("_Tile.png");
+	levelLoaderComp->SetGridOffset(50, 50);
+	levelLoaderComp->SetGridSize(32, 25);
+	levelLoaderComp->CreateLevels();
 
 	// fps
 	auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
 	dae::GameObject* fps = new dae::GameObject();
 	fps->SetParent(pRootDemo);
-	renderComp = fps->AddComponent<dae::RenderComponent>();
-	transComp = fps->GetComponent<dae::TransformComponent>();
+	auto renderComp = fps->AddComponent<dae::RenderComponent>();
+	auto transComp = fps->GetComponent<dae::TransformComponent>();
 	transComp->SetLocalPosition(0, 0);
 	auto textComponent = fps->AddComponent<dae::TextComponent>();
 	textComponent->SetFont(font);
@@ -91,7 +103,7 @@ void load()
 	renderComp = bubby->AddComponent<dae::RenderComponent>();
 	transComp = bubby->GetComponent<dae::TransformComponent>();
 	transComp->SetLocalPosition(220.0f, 210.0f);
-	textureComp = bubby->AddComponent<dae::TextureComponent>();
+	auto textureComp = bubby->AddComponent<dae::TextureComponent>();
 	textureComp->SetTexture("Bubby.png");
 	textureComp->AddToRenderer(renderComp);
 	auto healthComp = bubby->AddComponent<dae::HealthComponent>();

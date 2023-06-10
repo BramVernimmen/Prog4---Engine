@@ -39,6 +39,12 @@ void dae::GridComponent::Resize(int newWidth, int newHeight)
 	m_Width = newWidth;
 	m_Height = newHeight;
 
+	CreateTiles();
+}
+
+void dae::GridComponent::CreateTiles()
+{
+
 	dae::GameObject* parent = GetOwner();
 	dae::TextureComponent* textureComp = parent->GetComponent<dae::TextureComponent>();
 	const auto& pTileTexture = textureComp->GetTexture();
@@ -50,24 +56,21 @@ void dae::GridComponent::Resize(int newWidth, int newHeight)
 	constexpr uint32_t boxLayer{ 0b1 }; boxLayer;
 	constexpr uint32_t platformLayer{ 0b10 }; platformLayer;
 
-	std::string test = "XXXXXXXXXXXXXXX--XXXXXXXXXXXXXXXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX||---||||||||||||||||||---||XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX||---||||||||||||||||||---||XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX||---||||||||||||||||||---||XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXX----------------------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-
-
 	for (int i = 0; i < m_Width; ++i) // for each width
 	{
 		for (int j = 0; j < m_Height; ++j)
 		{
 			int currentIndex{ i + (j * m_Width) };
-			if (test[currentIndex] == '-')
+			if (m_TileLayout[currentIndex] == '-')
 				continue;
 
 
-			uint32_t currentLayer{0b0};
-			if (test[currentIndex] == 'X')
-			{ 
+			uint32_t currentLayer{ 0b0 };
+			if (m_TileLayout[currentIndex] == 'X')
+			{
 				currentLayer = boxLayer;
 			}
-			else if (test[currentIndex] == '|')
+			else if (m_TileLayout[currentIndex] == '|')
 			{
 				currentLayer = platformLayer;
 			}
@@ -88,10 +91,7 @@ void dae::GridComponent::Resize(int newWidth, int newHeight)
 			collision->SetStatic();
 			collision->SetCurrentLayer(currentLayer);
 			renderComp->AddToDebug(collision);
-			
-			
 
 		}
 	}
-
 }

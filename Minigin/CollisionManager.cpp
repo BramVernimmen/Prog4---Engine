@@ -29,9 +29,14 @@ std::vector<SDL_Rect> dae::CollisionManager::GetColliding(dae::BoxCollision* col
 
 	const SDL_Rect& boxToCheck = collisionToCheck->GetRect();
 	const uint32_t ignoreLayers = collisionToCheck->GetIgnoreLayers();
+
+	const GameObject* rootOfCheck{ collisionToCheck->GetOwner()->GetRootObject() };
 	for (const auto& box : m_pBoxCollisions)
 	{
 		if (box == collisionToCheck)
+			continue;
+
+		if (rootOfCheck != box->GetOwner()->GetRootObject())
 			continue;
 
 		if ((ignoreLayers & box->GetLayer()) == 0 && IsOverlapping(boxToCheck, box->GetRect()))

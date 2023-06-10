@@ -62,6 +62,9 @@
     <ClCompile Include="GoBackLevelCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="LevelLoaderComponent.cpp">
+      <Filter>Components\UitilityComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugHealthComponent.h">
@@ -96,6 +99,9 @@
     </ClInclude>
     <ClInclude Include="GoBackLevelCommand.h">
       <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelLoaderComponent.h">
+      <Filter>Components\UitilityComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
