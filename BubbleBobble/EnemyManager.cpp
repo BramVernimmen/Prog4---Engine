@@ -7,6 +7,7 @@
 #include "TextureComponent.h"
 #include "BoxCollision.h"
 #include "EnemyComponent.h"
+#include "ResourceManager.h"
 
 void dae::EnemyManager::Notify(const Event& currEvent, std::any payload)
 {
@@ -45,7 +46,6 @@ void dae::EnemyManager::Notify(const Event& currEvent, std::any payload)
 					glm::vec2 spawnPos{spawns[index]->GetSpawnPosition()};
 					currEnemy->GetComponent<TransformComponent>()->SetLocalPosition(spawnPos.x, spawnPos.y);
 				}
-				currEnemy->GetComponent<RigidBody>()->SetVelocity({ 0.0f, 0.0f });
 				++index;
 			}
 
@@ -62,14 +62,21 @@ void dae::EnemyManager::CreateEnemies(GameObject* pRoot)
 		enemy->SetParent(pRoot);
 		auto renderComp = enemy->AddComponent<RenderComponent>();
 		auto textureComp = enemy->AddComponent<dae::TextureComponent>();
-		textureComp->SetTexture("ZenChan/Run.png");
 		textureComp->AddToRenderer(renderComp);
 		enemy->AddComponent<RigidBody>();
 		auto collisionComp = enemy->AddComponent<BoxCollision>();
 		collisionComp->SetCurrentLayer(0b100);
 		collisionComp->SetSize(35, 48);
 		renderComp->AddToDebug(collisionComp);
-		enemy->AddComponent<EnemyComponent>();
+		auto enemyComp = enemy->AddComponent<EnemyComponent>();
+		enemyComp->SetIdleTexture(ResourceManager::GetInstance().LoadTexture("ZenChan/Run.png"));
+		enemyComp->SetMovementSpeed(100.0f);
+		enemyComp->SetJumpingStrength(250.0f);
+		enemyComp->SetDeathTexture(ResourceManager::GetInstance().LoadTexture("ZenChan/Death.png"));
+		enemyComp->SetBubbleTexture(ResourceManager::GetInstance().LoadTexture("ZenChan/InBubble.png"));
+
+		enemyComp->SetEnemyBubble();
+
 
 		m_pEnemies.emplace_back(enemy);
 

@@ -45,6 +45,12 @@
     <Filter Include="Components\EnemyBasedComponents">
       <UniqueIdentifier>{2e4ec046-1d86-4992-95b3-2300607bd89a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States\Enemy">
+      <UniqueIdentifier>{0509ed33-df15-4f7c-b7a7-9b592b3577b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Enemy\Base">
+      <UniqueIdentifier>{b0f3d747-f267-49ce-8dcf-51de2ea11574}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -124,6 +130,21 @@
     </ClCompile>
     <ClCompile Include="EnemyComponent.cpp">
       <Filter>Components\EnemyBasedComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyRunningState.cpp">
+      <Filter>States\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyJumpingState.cpp">
+      <Filter>States\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFallingState.cpp">
+      <Filter>States\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBubbleState.cpp">
+      <Filter>States\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyDeathState.cpp">
+      <Filter>States\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -207,6 +228,24 @@
     </ClInclude>
     <ClInclude Include="EnemyComponent.h">
       <Filter>Components\EnemyBasedComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyState.h">
+      <Filter>States\Enemy\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyRunningState.h">
+      <Filter>States\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyJumpingState.h">
+      <Filter>States\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFallingState.h">
+      <Filter>States\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBubbleState.h">
+      <Filter>States\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDeathState.h">
+      <Filter>States\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,6 +5,7 @@
 #include "BoxCollision.h"
 #include "Texture2D.h"
 #include "EnemyComponent.h"
+#include "EnemyBubbleState.h"
 
 dae::PlayerComponent::PlayerComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
@@ -31,42 +32,55 @@ void dae::PlayerComponent::Notify(const Event& currEvent, std::any payload)
 	{
 		if (payload.type() == typeid(GameObject*))
 		{
-			if (std::any_cast<GameObject*>(payload)->GetComponent<EnemyComponent>())
+			EnemyComponent* pEnemyComp{ std::any_cast<GameObject*>(payload)->GetComponent<EnemyComponent>() };
+			if (pEnemyComp)
 			{
-				NotifyObservers(PlayerHit());
-				//NotifyObservers(ItemPickedUp(), 200);
-				m_Respawn = true;
+				if (dynamic_cast<EnemyBubbleState*>(pEnemyComp->GetCurrentState()))
+				{
+					pEnemyComp->SetEnemyDeath();
+					NotifyObservers(EnemyKilled(), pEnemyComp->GetValue());
+				}
+				else
+				{
+					NotifyObservers(PlayerHit());
+					m_Respawn = true;
+				}
+				
 			}
 		}
 	}
 	if (typeid(currEvent) == typeid(PlayerDied))
 	{
 		// set to dead state
-		m_pCurrentState = m_pPlayerDeathState.get();
-		m_pCurrentState->OnEnter();
+		NotifyObservers(PlayerDied());
+		SetPlayerDeath();
 	}
 }
 
 void dae::PlayerComponent::SetPlayerFalling()
 {
+	m_pCurrentState->OnExit();
 	m_pCurrentState = m_pPlayerFallingState.get();
 	m_pCurrentState->OnEnter();
 }
 
 void dae::PlayerComponent::SetPlayerRunning()
 {
+	m_pCurrentState->OnExit();
 	m_pCurrentState = m_pPlayerRunningState.get();
 	m_pCurrentState->OnEnter();
 }
 
 void dae::PlayerComponent::SetPlayerJumping()
 {
+	m_pCurrentState->OnExit();
 	m_pCurrentState = m_pPlayerJumpingState.get();
 	m_pCurrentState->OnEnter();
 }
 
 void dae::PlayerComponent::SetPlayerDeath()
 {
+	m_pCurrentState->OnExit();
 	m_pCurrentState = m_pPlayerDeathState.get();
 	m_pCurrentState->OnEnter();
 }

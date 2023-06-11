@@ -48,7 +48,6 @@ void dae::PlayerJumpingState::Update()
 
 	if (m_pRigidBody->GetVelocity().y <= 0.0f)
 	{
-		OnExit();
 		// switch state to falling
 		m_pPlayer->GetComponent<PlayerComponent>()->SetPlayerFalling();
 	}

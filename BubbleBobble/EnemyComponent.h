@@ -3,11 +3,12 @@
 #include "Observer.h"
 #include "Subject.h"
 #include "GameEvents.h"
-//#include "PlayerFallingState.h"
-//#include "PlayerJumpingState.h"
-//#include "PlayerRunningState.h"
-//#include "PlayerDeathState.h"
-//#include "PlayerState.h"
+#include "EnemyFallingState.h"
+#include "EnemyJumpingState.h"
+#include "EnemyRunningState.h"
+#include "EnemyDeathState.h"
+#include "EnemyBubbleState.h"
+#include "EnemyState.h"
 
 
 namespace dae
@@ -26,26 +27,32 @@ namespace dae
 
 		virtual void Update() override;
 
-		//void SetPlayerFalling();
-		//void SetPlayerRunning();
-		//void SetPlayerJumping();
-		//void SetPlayerDeath();
-		//
-		//void SetJumpingSoundId(unsigned short id);
-		//void SetMovementSpeed(float newSpeed);
-		//void SetJumpingStrength(float newJump);
-		//void SetIdleTexture(std::shared_ptr<Texture2D> newTexture);
-		//void SetDeathTexture(std::shared_ptr<Texture2D> newTexture);
+		void SetEnemyFalling();
+		void SetEnemyRunning();
+		void SetEnemyJumping();
+		void SetEnemyBubble();
+		void SetEnemyDeath();
+		
 
-		//PlayerState* GetCurrentState() { return m_pCurrentState; }
+		void SetMovementSpeed(float newSpeed);
+		void SetJumpingStrength(float newJump);
+		void SetIdleTexture(std::shared_ptr<Texture2D> newTexture);
+		void SetBubbleTexture(std::shared_ptr<Texture2D> newTexture);
+		void SetDeathTexture(std::shared_ptr<Texture2D> newTexture);
 
+		EnemyState* GetCurrentState() { return m_pCurrentState; }
+
+		int GetValue() { return m_Value; }
 	private:
-		//std::unique_ptr<PlayerFallingState> m_pPlayerFallingState{std::make_unique<PlayerFallingState>(GetOwner())};
-		//std::unique_ptr<PlayerJumpingState> m_pPlayerJumpingState{std::make_unique<PlayerJumpingState>(GetOwner())};
-		//std::unique_ptr<PlayerRunningState> m_pPlayerRunningState{std::make_unique<PlayerRunningState>(GetOwner())};
-		//std::unique_ptr<PlayerDeathState> m_pPlayerDeathState{std::make_unique<PlayerDeathState>(GetOwner())};
+		std::unique_ptr<EnemyFallingState> m_pEnemyFallingState{std::make_unique<EnemyFallingState>(GetOwner())};
+		std::unique_ptr<EnemyJumpingState> m_pEnemyJumpingState{std::make_unique<EnemyJumpingState>(GetOwner())};
+		std::unique_ptr<EnemyRunningState> m_pEnemyRunningState{std::make_unique<EnemyRunningState>(GetOwner())};
+		std::unique_ptr<EnemyBubbleState> m_pEnemyBubbleState{std::make_unique<EnemyBubbleState>(GetOwner())};
+		std::unique_ptr<EnemyDeathState> m_pEnemyDeathState{std::make_unique<EnemyDeathState>(GetOwner())};
 
-		//PlayerState* m_pCurrentState{};
+		EnemyState* m_pCurrentState{};
+
+		int m_Value{1000};
 	};
 
 }

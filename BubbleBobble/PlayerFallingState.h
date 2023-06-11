@@ -5,7 +5,6 @@ namespace dae
 {
 	class GameObject;
 	class RigidBody;
-	class BoxCollision;
 	class RenderComponent;
 	class TransformComponent;
 	class PlayerFallingState final : public PlayerState
