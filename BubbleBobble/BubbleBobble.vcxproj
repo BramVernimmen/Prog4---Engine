@@ -187,6 +187,9 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClCompile Include="DebugLivesComponent.cpp" />
     <ClCompile Include="DebugScoreComponent.cpp" />
     <ClCompile Include="EndMenuComponent.cpp" />
+    <ClCompile Include="EnemyComponent.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="EnemySpawnComponent.cpp" />
     <ClCompile Include="GiveScoreCommand.cpp" />
     <ClCompile Include="GoBackLevelCommand.cpp" />
     <ClCompile Include="GridComponent.cpp" />
@@ -212,6 +215,9 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClInclude Include="DebugLivesComponent.h" />
     <ClInclude Include="DebugScoreComponent.h" />
     <ClInclude Include="EndMenuComponent.h" />
+    <ClInclude Include="EnemyComponent.h" />
+    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="EnemySpawnComponent.h" />
     <ClInclude Include="GameEvents.h" />
     <ClInclude Include="GiveScoreCommand.h" />
     <ClInclude Include="GoBackLevelCommand.h" />

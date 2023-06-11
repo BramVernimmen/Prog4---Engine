@@ -22,10 +22,12 @@ namespace dae
 		void SetKinematic(bool newState) { m_IsKinematic = newState; }
 		void SetVelocity(glm::vec2 newVelocity) { m_Velocity = newVelocity; }
 		void SetGrounded(bool isGrounded = true) { m_IsGrounded = isGrounded; }
+		void SetIgnoreGravity(bool ignore = true) { m_IgnoresGravity = ignore; }
 
 		glm::vec2 GetVelocity() { return m_Velocity; }
 		bool IsKinematic() { return m_IsKinematic; }
 		bool IsGrounded() { return m_IsGrounded; }
+		bool IgnoresGravity() { return m_IgnoresGravity; }
 
 	private:
 		TransformComponent* m_pTransform{};
@@ -34,6 +36,7 @@ namespace dae
 		glm::vec2 m_DisplayVelocity{};
 		bool m_IsKinematic{ false };
 		bool m_IsGrounded{ false };
+		bool m_IgnoresGravity{ false };
 	};
 
 }

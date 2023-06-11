@@ -26,7 +26,7 @@ void dae::PhysicsManager::Update()
 
 	for (const auto& currRigidBody : m_pRigidBodies)
 	{
-		if (currRigidBody->IsKinematic() || currRigidBody->IsGrounded())
+		if (currRigidBody->IsKinematic() || currRigidBody->IsGrounded() || currRigidBody->IgnoresGravity())
 			continue;
 
 		auto currVelocity = currRigidBody->GetVelocity();

@@ -42,6 +42,9 @@
     <Filter Include="States\Player\Base">
       <UniqueIdentifier>{953d79bd-5daa-4e0f-af5d-55d1dd72ec19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\EnemyBasedComponents">
+      <UniqueIdentifier>{2e4ec046-1d86-4992-95b3-2300607bd89a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -112,6 +115,15 @@
     </ClCompile>
     <ClCompile Include="PlayerDeathState.cpp">
       <Filter>States\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawnComponent.cpp">
+      <Filter>Components\UitilityComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Helper Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyComponent.cpp">
+      <Filter>Components\EnemyBasedComponents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +198,15 @@
     </ClInclude>
     <ClInclude Include="PlayerDeathState.h">
       <Filter>States\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawnComponent.h">
+      <Filter>Components\UitilityComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Helper Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyComponent.h">
+      <Filter>Components\EnemyBasedComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

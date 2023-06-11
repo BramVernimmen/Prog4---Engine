@@ -5,6 +5,7 @@
 #include "TextureComponent.h"
 #include "BoxCollision.h"
 #include "PlayerSpawnComponent.h"
+#include "EnemySpawnComponent.h"
 
 dae::GridComponent::GridComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
@@ -74,6 +75,12 @@ void dae::GridComponent::CreateTiles()
 			{
 				auto spawn{ parent->AddComponent<PlayerSpawnComponent>() };
 				spawn->SetSpawnPosition(pos.x + currentPos.x,pos.y + currentPos.y);
+				continue;
+			}
+			else if (m_TileLayout[currentIndex] == 'E')
+			{
+				auto spawn{ parent->AddComponent<EnemySpawnComponent>() };
+				spawn->SetSpawnPosition(pos.x + currentPos.x, pos.y + currentPos.y);
 				continue;
 			}
 

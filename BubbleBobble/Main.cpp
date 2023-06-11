@@ -22,6 +22,7 @@
 #include "GoBackLevelCommand.h"
 #include "LevelLoaderComponent.h"
 #include "PlayerManager.h"
+#include "EnemyManager.h"
 #include "MainMenuComponent.h"
 #include "EndMenuComponent.h"
 #include "MuteCommand.h"
@@ -60,10 +61,12 @@ void load()
 
 
 	dae::PlayerManager* playerManager{&dae::PlayerManager::GetInstance()};
+	dae::EnemyManager* enemyManager{&dae::EnemyManager::GetInstance()};
 	// add playerManager as Observer to every scene
 	for (const auto& currScene : dae::SceneManager::GetInstance().GetScenes())
 	{
 		currScene->AddObserver(playerManager);
+		currScene->AddObserver(enemyManager);
 	}
 
 

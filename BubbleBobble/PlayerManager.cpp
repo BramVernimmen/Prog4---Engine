@@ -137,7 +137,6 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 		auto scoreComp = player->AddComponent<ScoreComponent>();
 		// player comp uses lives and score, make sure it's created after those
 		auto collisionComp = player->AddComponent<BoxCollision>();
-		collisionComp->SetCurrentLayer(0b1100);
 		collisionComp->AddLayerForOverlapEvent(0b1100);
 		collisionComp->SetSize(currPlayerInfo.m_CollisionSizeX, currPlayerInfo.m_CollisionSizeY);
 		renderComp->AddToDebug(collisionComp);

@@ -4,7 +4,7 @@
 #include "PlayerManager.h"
 #include "BoxCollision.h"
 #include "Texture2D.h"
-
+#include "EnemyComponent.h"
 
 dae::PlayerComponent::PlayerComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
@@ -31,10 +31,10 @@ void dae::PlayerComponent::Notify(const Event& currEvent, std::any payload)
 	{
 		if (payload.type() == typeid(GameObject*))
 		{
-			if (std::any_cast<GameObject*>(payload)->GetComponent<PlayerComponent>())
+			if (std::any_cast<GameObject*>(payload)->GetComponent<EnemyComponent>())
 			{
 				NotifyObservers(PlayerHit());
-				NotifyObservers(ItemPickedUp(), 200);
+				//NotifyObservers(ItemPickedUp(), 200);
 				m_Respawn = true;
 			}
 		}
