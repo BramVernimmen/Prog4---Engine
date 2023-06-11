@@ -18,6 +18,8 @@ namespace dae
 
 		void Play(const unsigned short id) override;
 		void Load(const unsigned short id, const std::string& path) override;
+		void PlayTrack(const unsigned short id) override;
+		void LoadTrack(const unsigned short id, const std::string& path) override;
 		void MuteOrUnMute() override;
 
 	private:

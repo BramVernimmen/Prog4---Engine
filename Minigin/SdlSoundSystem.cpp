@@ -58,6 +58,14 @@ public:
 				Mix_FreeChunk(currChunk.second);
 			}
 		}
+		
+		for (const auto& currTrack : m_LoadedTracks)
+		{
+			if (currTrack.second != nullptr)
+			{
+				Mix_FreeMusic(currTrack.second);
+			}
+		}
 
 		Mix_CloseAudio();
 		Mix_Quit();
@@ -86,6 +94,31 @@ public:
 			Mix_PlayChannel(-1, currSound, 0);
 		}
 	}
+
+	void PlayTrack(const unsigned short id) 
+	{
+		{
+			std::unique_lock<std::mutex> lock(m_Mutex);
+			m_EventQueue.push(AudioEvent{ std::make_unique<AudioPlayTrack>(), id });
+		}
+		m_ConditionVariable.notify_one();
+	}
+
+	void HandlePlayTrack(const unsigned short id)
+	{
+		// play sound
+		std::unique_lock<std::mutex> lock(m_Mutex);
+		Mix_Music* currTrack = m_LoadedTracks[id];
+
+		lock.unlock();
+
+		if (currTrack != nullptr)
+		{
+			// play the sound
+			Mix_PlayMusic(currTrack, -1);
+		}
+	}
+	
 
 	void Load(const unsigned short id, const std::string& path)
 	{
@@ -122,6 +155,43 @@ public:
 			Mix_FreeChunk(soundToFree);
 	}
 
+
+	void LoadTrack(const unsigned short id, const std::string& path)
+	{
+		{
+			std::unique_lock<std::mutex> lock(m_Mutex);
+			m_EventQueue.push(AudioEvent{ std::make_unique<AudioLoadTrack>(), LoadStruct{id, path} });
+		}
+		m_ConditionVariable.notify_one();
+	}
+
+	void HandleLoadTrack(const unsigned short id, const std::string& path)
+	{
+		// load the sound before the lock -> loading the sound takes most of the time
+		const auto fullPath = dae::ResourceManager::GetInstance().GetDataPath() + path;
+		Mix_Music* newTrack = Mix_LoadMUS(fullPath.c_str());
+
+		Mix_Music* trackToFree{ nullptr };
+		std::unique_lock<std::mutex> lock(m_Mutex);
+
+		if (m_LoadedTracks[id] != nullptr)
+		{
+			// release the old sound and replace with new
+			trackToFree = m_LoadedTracks[id];
+		}
+
+		m_LoadedTracks[id] = newTrack;
+
+		if (m_LoadedTracks[id] == nullptr)
+			throw std::runtime_error(std::string("Failed to load sound: ") + SDL_GetError());
+
+		lock.unlock();
+
+		if (trackToFree)
+			Mix_FreeMusic(trackToFree);
+	}
+
+
 	void HandleQueue()
 	{
 
@@ -129,7 +199,9 @@ public:
 		while (!m_StopToken.stop_requested()) 
 		{
 			std::unique_lock<std::mutex> lock(m_Mutex);
-			m_ConditionVariable.wait(lock);
+
+			if (m_EventQueue.empty())
+				m_ConditionVariable.wait(lock);
 
 
 			// just for testing right now
@@ -154,6 +226,15 @@ public:
 				{
 					HandlePlay(std::any_cast<unsigned short>(currEvent.payload));
 				}
+				else if (typeid(*currEvent.eventType) == typeid(AudioPlayTrack)) // play track
+				{
+					HandlePlayTrack(std::any_cast<unsigned short>(currEvent.payload));
+				}
+				else if (typeid(*currEvent.eventType) == typeid(AudioLoadTrack)) // load track
+				{
+					LoadStruct loadInfo{ std::any_cast<LoadStruct>(currEvent.payload) }; // payload should always be correct
+					HandleLoadTrack(loadInfo.id, loadInfo.path);
+				}
 
 				lock.lock();
 			}
@@ -166,10 +247,12 @@ public:
 		if (m_IsMuted)
 		{
 			Mix_Volume(-1, 0);
+			Mix_VolumeMusic(0);
 		}
 		else
 		{
 			Mix_Volume(-1, m_CurrentVolume);
+			Mix_VolumeMusic(m_CurrentVolume);
 		}
 	}
 
@@ -179,6 +262,7 @@ private:
 	// this way we can use sound ID to play a sound
 	// but before we can play a sound, we have to load them.
 	std::unordered_map<unsigned short, Mix_Chunk*> m_LoadedSounds{};
+	std::unordered_map<unsigned short, Mix_Music*> m_LoadedTracks{};
 
 	std::queue<AudioEvent> m_EventQueue{};
 	std::jthread m_AudioHandlerThread{};
@@ -208,6 +292,16 @@ void dae::SdlSoundSystem::Play(const unsigned short id)
 void dae::SdlSoundSystem::Load(const unsigned short id, const std::string& path)
 {
 	m_pImpl->Load(id, path);
+}
+
+void dae::SdlSoundSystem::PlayTrack(const unsigned short id)
+{
+	m_pImpl->PlayTrack(id);
+}
+
+void dae::SdlSoundSystem::LoadTrack(const unsigned short id, const std::string& path)
+{
+	m_pImpl->LoadTrack(id, path);
 }
 
 void dae::SdlSoundSystem::MuteOrUnMute()

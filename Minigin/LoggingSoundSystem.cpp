@@ -19,6 +19,18 @@ void dae::LoggingSoundSystem::Load(const unsigned short id, const std::string& p
 
 }
 
+void dae::LoggingSoundSystem::PlayTrack(const unsigned short id)
+{
+	m_pSS->PlayTrack(id);
+	std::cout << "track playing with id: " << id << "\n";
+}
+
+void dae::LoggingSoundSystem::LoadTrack(const unsigned short id, const std::string& path)
+{
+	m_pSS->LoadTrack(id, path);
+	std::cout << "track with path: " << path << " will be loaded on id: " << id << "\n";
+}
+
 void dae::LoggingSoundSystem::MuteOrUnMute()
 {
 	m_pSS->MuteOrUnMute();

@@ -48,6 +48,10 @@ void load()
 	dae::ServiceLocator::SetSoundSystem(new dae::SdlSoundSystem());
 	//dae::ServiceLocator::SetSoundSystem(new dae::LoggingSoundSystem(new dae::SdlSoundSystem));
 	
+	auto& ss{ dae::ServiceLocator::GetSoundSystem() };
+	ss.LoadTrack(0, "Music/MainTheme.mp3");
+	ss.LoadTrack(1, "Music/shoulder.mp3");
+	ss.PlayTrack(0);
 
 	// level loader
 	dae::GameObject* levelLoader = new dae::GameObject();
@@ -97,8 +101,6 @@ void load()
 	playerManager->AddPlayerInfo(player1Info);
 	playerManager->AddPlayerInfo(player2Info);
 
-	//dae::SceneManager::GetInstance().PreviousScene();
-	//playerManager->SetPlayerCount(0);
 
 
 
