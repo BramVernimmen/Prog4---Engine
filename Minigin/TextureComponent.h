@@ -21,12 +21,13 @@ namespace dae
 		virtual void Update() override;
 
 		void SetTexture(const std::string& filename);
+		void SetTexture(std::shared_ptr<Texture2D> newTexture);
 		std::shared_ptr<Texture2D> GetTexture() { return m_pTexture; }
 
 		void AddToRenderer(RenderComponent* pRenderer);
 
     private:
-		std::shared_ptr<Texture2D> m_pTexture{};
+		std::shared_ptr<Texture2D> m_pTexture{nullptr};
 		TransformComponent* m_TransformComponent{};
     };
 

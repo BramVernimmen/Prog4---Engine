@@ -198,7 +198,10 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="MuteCommand.cpp" />
     <ClCompile Include="PlayerComponent.cpp" />
+    <ClCompile Include="PlayerFallingState.cpp" />
+    <ClCompile Include="PlayerJumpingState.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
+    <ClCompile Include="PlayerRunningState.cpp" />
     <ClCompile Include="PlayerSpawnComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="SkipLevelCommand.cpp" />
@@ -219,8 +222,12 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="MuteCommand.h" />
     <ClInclude Include="PlayerComponent.h" />
+    <ClInclude Include="PlayerFallingState.h" />
+    <ClInclude Include="PlayerJumpingState.h" />
     <ClInclude Include="PlayerManager.h" />
+    <ClInclude Include="PlayerRunningState.h" />
     <ClInclude Include="PlayerSpawnComponent.h" />
+    <ClInclude Include="PlayerState.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="SkipLevelCommand.h" />
   </ItemGroup>

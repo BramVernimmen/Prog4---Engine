@@ -33,6 +33,15 @@
     <Filter Include="Components\Menu%27s">
       <UniqueIdentifier>{8c1aa4a2-e485-472e-ac03-6035ff982517}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{6880fe8c-fb5d-4a00-8d73-bc4902e072d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Player">
+      <UniqueIdentifier>{d30d6216-6310-40b8-9c56-036223f5d8ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Player\Base">
+      <UniqueIdentifier>{953d79bd-5daa-4e0f-af5d-55d1dd72ec19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -92,6 +101,15 @@
     <ClCompile Include="PlayerComponent.cpp">
       <Filter>Components\PlayerBasedComponents</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerRunningState.cpp">
+      <Filter>States\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerJumpingState.cpp">
+      <Filter>States\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerFallingState.cpp">
+      <Filter>States\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugLivesComponent.h">
@@ -150,6 +168,18 @@
     </ClInclude>
     <ClInclude Include="PlayerComponent.h">
       <Filter>Components\PlayerBasedComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>States\Player\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRunningState.h">
+      <Filter>States\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerJumpingState.h">
+      <Filter>States\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerFallingState.h">
+      <Filter>States\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

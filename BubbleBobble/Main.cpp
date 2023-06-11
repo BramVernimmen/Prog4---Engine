@@ -1,5 +1,3 @@
-//#include <SDL.h>
-
 #if _DEBUG
 // ReSharper disable once CppUnusedIncludeDirective
 #if __has_include(<vld.h>)
@@ -13,20 +11,10 @@
 #include "GameObject.h"
 #include "Scene.h"
 #include "RenderComponent.h"
-#include "TextureComponent.h"
 #include "TextComponent.h"
 #include "FPSComponent.h"
 #include "TransformComponent.h"
-#include "InputManager.h"
-#include "MoveCommand.h"
-#include "DamageCommand.h"
-#include "ScoreComponent.h"
-#include "DebugScoreComponent.h"
-#include "GiveScoreCommand.h"
 #include "HowToPlayComponent.h"
-#include "GridComponent.h"
-#include "BoxCollision.h"
-#include "RigidBody.h"
 #include "ServiceLocator.h"
 #include "LoggingSoundSystem.h"
 #include "SdlSoundSystem.h"
@@ -92,7 +80,7 @@ void load()
 	dae::PlayerInfo player2Info{};
 	player2Info.m_TexturePath = "Bobby.png";
 	player2Info.m_UseController = true;
-	player2Info.m_KeyBoardInputs = { SDLK_LEFT, SDLK_RIGHT, SDLK_UP, SDLK_RIGHT }; // player 2 will use arrow keys
+	player2Info.m_KeyBoardInputs = { SDLK_LEFT, SDLK_RIGHT, SDLK_UP, SDLK_DOWN }; // player 2 will use arrow keys
 	player2Info.m_DisplayTopLeftX = 600.0f;
 	player2Info.m_FontColorR = 73;
 	player2Info.m_FontColorG = 169;

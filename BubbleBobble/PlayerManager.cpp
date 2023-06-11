@@ -17,6 +17,8 @@
 #include "TextComponent.h"
 #include "PlayerComponent.h"
 #include <iostream>
+#include "ServiceLocator.h"
+#include "SoundSystem.h"
 
 void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 {
@@ -104,10 +106,11 @@ void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 
 void dae::PlayerManager::RespawnPlayer(GameObject* pOwner, size_t playerId)
 {
-
+	// issue with respawning
 	auto spawns{ SceneManager::GetInstance().GetActiveScene()->GetRoot()->GetComponentsInChildren<PlayerSpawnComponent>()};
 	glm::vec2 spawnPos{spawns[playerId]->GetSpawnPosition()};
-	pOwner->GetComponent<TransformComponent>()->SetLocalPosition(spawnPos.x, spawnPos.y);
+	TransformComponent* pTransform{ pOwner->GetComponent<TransformComponent>() };
+	pTransform->SetLocalPosition(spawnPos.x, spawnPos.y);
 	pOwner->GetComponent<RigidBody>()->SetVelocity({ 0.0f, 0.0f });
 }
 
@@ -128,23 +131,34 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 		player->SetParent(pRoot);
 		auto renderComp = player->AddComponent<RenderComponent>();
 		auto textureComp = player->AddComponent<dae::TextureComponent>();
-		textureComp->SetTexture(currPlayerInfo.m_TexturePath);
+		//textureComp->SetTexture(currPlayerInfo.m_TexturePath);
 		textureComp->AddToRenderer(renderComp);
+		player->AddComponent<RigidBody>();
 		auto livesComp = player->AddComponent<LivesComponent>();
 		auto scoreComp = player->AddComponent<ScoreComponent>();
 		// player comp uses lives and score, make sure it's created after those
+		auto collisionComp = player->AddComponent<BoxCollision>();
+		collisionComp->SetCurrentLayer(0b1100);
+		collisionComp->AddLayerForOverlapEvent(0b1100);
+		collisionComp->SetSize(currPlayerInfo.m_CollisionSizeX, currPlayerInfo.m_CollisionSizeY);
+		renderComp->AddToDebug(collisionComp);
 		auto playerComp = player->AddComponent<PlayerComponent>();
 		playerComp->SetPlayerId(static_cast<size_t>(i));
 		playerComp->AddObserver(livesComp);
 		livesComp->AddObserver(playerComp);
 		playerComp->AddObserver(scoreComp);
-		auto collisionComp = player->AddComponent<BoxCollision>();
 		collisionComp->AddObserver(playerComp);
-		collisionComp->SetCurrentLayer(0b1100);
-		collisionComp->AddLayerForOverlapEvent(0b1100);
-		collisionComp->SetSize(currPlayerInfo.m_CollisionSizeX, currPlayerInfo.m_CollisionSizeY);
-		renderComp->AddToDebug(collisionComp);
-		player->AddComponent<RigidBody>();
+		
+
+		auto& ss{ ServiceLocator::GetSoundSystem() }; 
+		ss.Load(currPlayerInfo.m_JumpSoundId, currPlayerInfo.m_JumpSoundPath);
+
+		playerComp->SetJumpingSoundId(currPlayerInfo.m_JumpSoundId);
+		playerComp->SetMovementSpeed(currPlayerInfo.m_BaseSpeed);
+		playerComp->SetJumpingStrength(currPlayerInfo.m_BaseJumpStrength);
+		playerComp->SetIdleTexture(ResourceManager::GetInstance().LoadTexture(currPlayerInfo.m_TexturePath));
+
+
 
 
 		// cache the player here
@@ -153,12 +167,7 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 		// do movement of player
 		if (currPlayerInfo.m_UseKeyboard)
 		{
-			auto keyboardMoveCommand{ std::make_unique<MoveCommand>(
-				player, 
-				currPlayerInfo.m_BaseSpeed, 
-				currPlayerInfo.m_BaseJumpStrength, 
-				currPlayerInfo.m_JumpSoundId, 
-				currPlayerInfo.m_JumpSoundPath) };
+			auto keyboardMoveCommand{ std::make_unique<MoveCommand>(player) };
 
 			playerCommands.emplace_back(keyboardMoveCommand.get());
 
@@ -171,12 +180,7 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 
 		if (currPlayerInfo.m_UseController)
 		{
-			auto controllerMoveCommand{ std::make_unique<MoveCommand>(
-				player,
-				currPlayerInfo.m_BaseSpeed,
-				currPlayerInfo.m_BaseJumpStrength,
-				currPlayerInfo.m_JumpSoundId,
-				currPlayerInfo.m_JumpSoundPath) };
+			auto controllerMoveCommand{ std::make_unique<MoveCommand>(player) };
 
 			playerCommands.emplace_back(controllerMoveCommand.get());
 
