@@ -19,8 +19,6 @@
 #include "TransformComponent.h"
 #include "InputManager.h"
 #include "MoveCommand.h"
-//#include "HealthComponent.h"
-//#include "DebugHealthComponent.h"
 #include "DamageCommand.h"
 #include "ScoreComponent.h"
 #include "DebugScoreComponent.h"
@@ -36,28 +34,23 @@
 #include "GoBackLevelCommand.h"
 #include "LevelLoaderComponent.h"
 #include "PlayerManager.h"
+#include "MainMenuComponent.h"
+#include "EndMenuComponent.h"
 
 void load()
 {
 
-	auto scene = dae::SceneManager::GetInstance().CreateScene("MainMenu");
-	auto testScene = dae::SceneManager::GetInstance().CreateScene("TEST");
-	dae::GameObject* pRootDemo = scene->GetRoot();
-
-	dae::SceneManager::GetInstance().RemoveScene(testScene);
-	dae::SceneManager::GetInstance().AddScene(testScene);
+	auto mainMenuScene = dae::SceneManager::GetInstance().CreateScene("MainMenu");
+	dae::GameObject* pRootMainMenu = mainMenuScene->GetRoot();
 
 
 	dae::ServiceLocator::SetSoundSystem(new dae::SdlSoundSystem());
 	//dae::ServiceLocator::SetSoundSystem(new dae::LoggingSoundSystem(new dae::SdlSoundSystem));
-	//auto& ss = dae::ServiceLocator::GetSoundSystem();
-
-	//ss.Load(0, "Sounds/Pickup.wav");
-	//ss.Play(0);
+	
 
 	// level loader
 	dae::GameObject* levelLoader = new dae::GameObject();
-	levelLoader->SetParent(pRootDemo);
+	levelLoader->SetParent(pRootMainMenu);
 	auto levelLoaderComp = levelLoader->AddComponent<dae::LevelLoaderComponent>();
 	levelLoaderComp->AddLevelFile("Levels/001.txt");
 	levelLoaderComp->AddLevelFile("Levels/002.txt");
@@ -69,6 +62,8 @@ void load()
 	levelLoaderComp->SetGridOffset(50, 60);
 	levelLoaderComp->SetGridSize(32, 26);
 	levelLoaderComp->CreateLevels();
+	levelLoader->MarkForDelete(); // we don't need it after this, so we can already mark it
+
 
 
 	dae::PlayerManager* playerManager{&dae::PlayerManager::GetInstance()};
@@ -77,21 +72,6 @@ void load()
 	{
 		currScene->AddObserver(playerManager);
 	}
-
-
-	// fps - will be shown in the main menu
-	auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
-	dae::GameObject* fps = new dae::GameObject();
-	fps->SetParent(pRootDemo);
-	auto renderComp = fps->AddComponent<dae::RenderComponent>();
-	auto transComp = fps->GetComponent<dae::TransformComponent>();
-	transComp->SetLocalPosition(0, 0);
-	auto textComponent = fps->AddComponent<dae::TextComponent>();
-	textComponent->SetFont(font);
-	textComponent->SetText("FPS");
-	textComponent->SetColor({ 150, 150, 0 });
-	textComponent->AddToRenderer(renderComp);
-	fps->AddComponent<dae::FPSComponent>();
 
 
 
@@ -119,76 +99,69 @@ void load()
 	//dae::SceneManager::GetInstance().PreviousScene();
 	//playerManager->SetPlayerCount(0);
 
-	// bubby - has lives + score (P1)
-	//dae::GameObject* bubby = new dae::GameObject();
-	//bubby->SetParent(pRootDemo);
-	//renderComp = bubby->AddComponent<dae::RenderComponent>();
-	//transComp = bubby->GetComponent<dae::TransformComponent>();
-	//transComp->SetLocalPosition(220.0f, 210.0f);
-	//auto textureComp = bubby->AddComponent<dae::TextureComponent>();
-	//textureComp->SetTexture("Bubby.png");
-	//textureComp->AddToRenderer(renderComp);
-	////auto healthComp = bubby->AddComponent<dae::HealthComponent>();
-	////auto scoreComp = bubby->AddComponent<dae::ScoreComponent>();
-	////healthComp->AddObserver(scoreComp); // our score needs to listen to our own health (for this test)
-	//auto collision = bubby->AddComponent<dae::BoxCollision>();
-	//collision->SetSize(48, 48);
-	//renderComp->AddToDebug(collision);
-
-	//bubby->AddComponent<dae::RigidBody>();
 
 
-	//// P1 health debug
-	//dae::GameObject* debugHealthP1 = new dae::GameObject();
-	//debugHealthP1->SetParent(pRootDemo);
-	//renderComp = debugHealthP1->AddComponent<dae::RenderComponent>();
-	//transComp = debugHealthP1->GetComponent<dae::TransformComponent>();
-	//transComp->SetLocalPosition(0.0f, 150.0f);
-	//textComponent = debugHealthP1->AddComponent<dae::TextComponent>();
-	//font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
-	//textComponent->SetFont(font);
-	//textComponent->SetColor({ 0, 255, 0 });
-	//textComponent->AddToRenderer(renderComp);
-	//auto debugHealthComp = debugHealthP1->AddComponent<dae::DebugHealthComponent>();
-	//debugHealthComp->SetLastHealth(healthComp->GetCurrentHealth());
+	// ==== Main Menu Stuff ========
 
-	//// P1 score debug
-	//dae::GameObject* debugScoreP1 = new dae::GameObject();
-	//debugScoreP1->SetParent(pRootDemo);
-	//renderComp = debugScoreP1->AddComponent<dae::RenderComponent>();
-	//transComp = debugScoreP1->GetComponent<dae::TransformComponent>();
-	//transComp->SetLocalPosition(0.0f, 170.f);
-	//textComponent = debugScoreP1->AddComponent<dae::TextComponent>();
-	//font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
-	//textComponent->SetFont(font);
-	//textComponent->SetColor({ 0, 255, 0 });
-	//textComponent->AddToRenderer(renderComp);
-	//auto debugScoreComp = debugScoreP1->AddComponent<dae::DebugScoreComponent>();
-
-	//// add	debug observer to bubby
-	//healthComp->AddObserver(debugHealthComp);
-	//scoreComp->AddObserver(debugScoreComp);
-
-
-
+	// fps - will be shown in the main menu
+	auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 24);
+	dae::GameObject* fps = new dae::GameObject();
+	fps->SetParent(pRootMainMenu);
+	auto renderComp = fps->AddComponent<dae::RenderComponent>();
+	auto transComp = fps->GetComponent<dae::TransformComponent>();
+	transComp->SetLocalPosition(0, 0);
+	auto textComponent = fps->AddComponent<dae::TextComponent>();
+	textComponent->SetFont(font);
+	textComponent->SetText("FPS");
+	textComponent->SetColor({ 150, 150, 0 });
+	textComponent->AddToRenderer(renderComp);
+	fps->AddComponent<dae::FPSComponent>();
 
 
 	// =========== How To Play? ========
 	dae::GameObject* howToPlay = new dae::GameObject();
-	howToPlay->SetParent(pRootDemo);
+	howToPlay->SetParent(pRootMainMenu);
 	renderComp = howToPlay->AddComponent<dae::RenderComponent>();
 	auto tutorialComp = howToPlay->AddComponent<dae::HowToPlayComponent>();
 	renderComp->AddToDisplayGui(tutorialComp);
 
+	dae::GameObject* mainMenuObj = new dae::GameObject();
+	mainMenuObj->SetParent(pRootMainMenu);
+	renderComp = mainMenuObj->AddComponent<dae::RenderComponent>();
+	auto mainMenuComp = mainMenuObj->AddComponent<dae::MainMenuComponent>();
+	renderComp->AddToDisplayGui(mainMenuComp);
+
+
+
+
+	// =======================================================
+
+
+	// ==== End Menu Stuff ========
+
+	// after all levels have been created; create end menu
+	auto endMenuScene = dae::SceneManager::GetInstance().CreateScene("EndMenu");
+	dae::GameObject* pRootEndMenu = endMenuScene->GetRoot();
+
+
+	dae::GameObject* endMenuObj = new dae::GameObject();
+	endMenuObj->SetParent(pRootEndMenu);
+	renderComp = endMenuObj->AddComponent<dae::RenderComponent>();
+	auto endMenuComp = endMenuObj->AddComponent<dae::EndMenuComponent>();
+	renderComp->AddToDisplayGui(endMenuComp);
+	endMenuComp->SetHighScoreFilePath("Highscore.txt");
+
+	// =======================================================
+
+
+
 
 	// =========== Skip/GoBack Level Buttons ========
 	auto skipLevelCommand{ std::make_unique<dae::SkipLevelCommand>() };
-	dae::InputManager::GetInstance().BindCommand({SDLK_F4}, dae::InputManager::InputType::OnButtonDown, std::move(skipLevelCommand));
+	dae::InputManager::GetInstance().BindCommand({ SDLK_F4 }, dae::InputManager::InputType::OnButtonDown, std::move(skipLevelCommand));
 
 	auto prevLevelCommand{ std::make_unique<dae::GoBackLevelCommand>() };
-	dae::InputManager::GetInstance().BindCommand({SDLK_F3}, dae::InputManager::InputType::OnButtonDown, std::move(prevLevelCommand));
-
-
+	dae::InputManager::GetInstance().BindCommand({ SDLK_F3 }, dae::InputManager::InputType::OnButtonDown, std::move(prevLevelCommand));
 }
 
 int main(int, char* []) {

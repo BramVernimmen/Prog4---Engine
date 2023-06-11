@@ -13,7 +13,7 @@ namespace dae
 	{
 		// base player info
 		std::string m_TexturePath{"Bibby.png" };
-		int m_CollisionSizeX{48};
+		int m_CollisionSizeX{35};
 		int m_CollisionSizeY{48};
 
 		// movement info
@@ -59,6 +59,6 @@ namespace dae
 		std::vector<std::vector<GameObject*>> m_pPlayerDebugs{}; // each player has multiple debug components, cache them here
 		std::vector<std::vector<Command*>> m_pPlayerCommands{}; // this way each player has their own vector of commands
 
-		unsigned int m_PlayerCount{ 2 };
+		unsigned int m_PlayerCount{ 0 };
 	};
 }

@@ -186,6 +186,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClCompile Include="DamageCommand.cpp" />
     <ClCompile Include="DebugLivesComponent.cpp" />
     <ClCompile Include="DebugScoreComponent.cpp" />
+    <ClCompile Include="EndMenuComponent.cpp" />
     <ClCompile Include="GiveScoreCommand.cpp" />
     <ClCompile Include="GoBackLevelCommand.cpp" />
     <ClCompile Include="GridComponent.cpp" />
@@ -193,6 +194,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClCompile Include="HowToPlayComponent.cpp" />
     <ClCompile Include="LevelLoaderComponent.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainMenuComponent.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="PlayerSpawnComponent.cpp" />
@@ -203,6 +205,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClInclude Include="DamageCommand.h" />
     <ClInclude Include="DebugLivesComponent.h" />
     <ClInclude Include="DebugScoreComponent.h" />
+    <ClInclude Include="EndMenuComponent.h" />
     <ClInclude Include="GameEvents.h" />
     <ClInclude Include="GiveScoreCommand.h" />
     <ClInclude Include="GoBackLevelCommand.h" />
@@ -210,6 +213,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClInclude Include="LivesComponent.h" />
     <ClInclude Include="HowToPlayComponent.h" />
     <ClInclude Include="LevelLoaderComponent.h" />
+    <ClInclude Include="MainMenuComponent.h" />
     <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="PlayerSpawnComponent.h" />

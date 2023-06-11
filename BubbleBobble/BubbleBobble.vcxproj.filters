@@ -30,6 +30,9 @@
     <Filter Include="Events">
       <UniqueIdentifier>{0e34436c-ae46-452f-a80c-47f9aadfad2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\Menu%27s">
+      <UniqueIdentifier>{8c1aa4a2-e485-472e-ac03-6035ff982517}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -77,6 +80,12 @@
     <ClCompile Include="PlayerSpawnComponent.cpp">
       <Filter>Components\UitilityComponents</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuComponent.cpp">
+      <Filter>Components\Menu%27s</Filter>
+    </ClCompile>
+    <ClCompile Include="EndMenuComponent.cpp">
+      <Filter>Components\Menu%27s</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugLivesComponent.h">
@@ -123,6 +132,12 @@
     </ClInclude>
     <ClInclude Include="GameEvents.h">
       <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuComponent.h">
+      <Filter>Components\Menu%27s</Filter>
+    </ClInclude>
+    <ClInclude Include="EndMenuComponent.h">
+      <Filter>Components\Menu%27s</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

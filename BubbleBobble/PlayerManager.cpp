@@ -14,7 +14,7 @@
 #include "DebugScoreComponent.h"
 #include "ResourceManager.h"
 #include "TextComponent.h"
-
+#include <iostream>
 
 void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 {
@@ -24,6 +24,12 @@ void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 		{
 			// handle payload
 			Scene* newlyLoadedScene{ std::any_cast<Scene*>(payload) };
+			if (newlyLoadedScene->GetName().find("Level_") == std::string::npos)
+			{
+				// if we get here, a scene was loaded that wasn't a level
+				// for now just destroy the players if this happens
+				SetPlayerCount(0);
+			}
 			GameObject* sceneRoot{ newlyLoadedScene->GetRoot() };
 			
 
@@ -164,7 +170,7 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 			// probably won't need it, but if we have e.g. 4 players and the first and last player use controller
 			// using the i will skip controller id 1 and 2, so if only 2 controllers are connected controller with id 3 will never be found
 		}
-
+		m_pPlayerCommands.emplace_back(playerCommands);
 
 
 		// create the lives and score display of the players

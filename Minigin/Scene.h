@@ -24,6 +24,7 @@ namespace dae
 		Scene& operator=(Scene&& other) = delete;
 
 		void IsSetAsActive();
+		const std::string& GetName() { return m_name; }
 
 	private: 
 		explicit Scene(const std::string& name);
