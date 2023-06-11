@@ -25,7 +25,7 @@ namespace dae
 
 	private:
 		int m_CurrentLives{};
-		int m_MaxLives{5};
+		int m_MaxLives{4};
 
 
 	};

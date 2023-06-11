@@ -34,6 +34,7 @@ void dae::HowToPlayComponent::DisplayGui()
 		ImGui::Dummy(ImVec2(0.0f, 25.0f));
 		ImGui::Text("Go to previous scene using F3");
 		ImGui::Text("Go to next scene using F4");
+		ImGui::Text("Mute/Unmute sounds using F5");
 
 
 		ImGui::End();

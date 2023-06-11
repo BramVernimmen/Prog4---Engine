@@ -18,3 +18,9 @@ void dae::LoggingSoundSystem::Load(const unsigned short id, const std::string& p
 	std::cout << "sound with path: " << path << " will be loaded on id: " << id << "\n";
 
 }
+
+void dae::LoggingSoundSystem::MuteOrUnMute()
+{
+	m_pSS->MuteOrUnMute();
+	std::cout << "All Sounds are now Muted/UnMuted" << "\n";
+}

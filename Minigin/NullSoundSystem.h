@@ -16,7 +16,8 @@ namespace dae
 		NullSoundSystem& operator=(NullSoundSystem&& other) = delete;
 
 		void Play(const unsigned short ) override { /*do nothing*/ }
-		void Load(const unsigned short , const std::string& ) override {/*do nothing*/ };
+		void Load(const unsigned short , const std::string& ) override {/*do nothing*/ }
+		void MuteOrUnMute() override {/*do nothing*/ }
 	};
 
 }

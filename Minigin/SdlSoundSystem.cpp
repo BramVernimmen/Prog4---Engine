@@ -160,6 +160,18 @@ public:
 		}
 	}
 
+	void MuteOrUnMute()
+	{
+		m_IsMuted = !m_IsMuted;
+		if (m_IsMuted)
+		{
+			Mix_Volume(-1, 0);
+		}
+		else
+		{
+			Mix_Volume(-1, m_CurrentVolume);
+		}
+	}
 
 private:
 
@@ -173,6 +185,10 @@ private:
 	std::mutex m_Mutex{};
 	std::stop_token m_StopToken{}; // we use this to cache the stop_token from our thread -> no need to constantly ask the thread for it
 	std::condition_variable m_ConditionVariable{};
+
+	bool m_IsMuted{ false };
+
+	int m_CurrentVolume{ SDL_MIX_MAXVOLUME };
 };
 
 
@@ -192,4 +208,9 @@ void dae::SdlSoundSystem::Play(const unsigned short id)
 void dae::SdlSoundSystem::Load(const unsigned short id, const std::string& path)
 {
 	m_pImpl->Load(id, path);
+}
+
+void dae::SdlSoundSystem::MuteOrUnMute()
+{
+	m_pImpl->MuteOrUnMute();
 }

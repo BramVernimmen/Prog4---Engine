@@ -36,6 +36,7 @@
 #include "PlayerManager.h"
 #include "MainMenuComponent.h"
 #include "EndMenuComponent.h"
+#include "MuteCommand.h"
 
 void load()
 {
@@ -162,6 +163,10 @@ void load()
 
 	auto prevLevelCommand{ std::make_unique<dae::GoBackLevelCommand>() };
 	dae::InputManager::GetInstance().BindCommand({ SDLK_F3 }, dae::InputManager::InputType::OnButtonDown, std::move(prevLevelCommand));
+
+	auto muteCommand{ std::make_unique<dae::MuteCommand>() };
+	dae::InputManager::GetInstance().BindCommand({SDLK_F5}, dae::InputManager::InputType::OnButtonDown, std::move(muteCommand));
+
 }
 
 int main(int, char* []) {

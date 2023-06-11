@@ -18,6 +18,7 @@ namespace dae
 
 		void Play(const unsigned short id) override;
 		void Load(const unsigned short id, const std::string& path) override;
+		void MuteOrUnMute() override;
 
 	private:
 		std::unique_ptr<SoundSystem> m_pSS;
