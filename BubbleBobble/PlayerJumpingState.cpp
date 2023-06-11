@@ -7,7 +7,10 @@
 #include "BoxCollision.h"
 #include <glm/glm.hpp>
 #include "RenderComponent.h"
-
+#include "SceneManager.h"
+#include "Scene.h"
+#include "GridComponent.h"
+#include "TransformComponent.h"
 
 dae::PlayerJumpingState::PlayerJumpingState(GameObject* pPlayer)
 {
@@ -15,6 +18,17 @@ dae::PlayerJumpingState::PlayerJumpingState(GameObject* pPlayer)
 	m_pRigidBody = pPlayer->GetComponent<RigidBody>();
 	m_pBoxCollision = pPlayer->GetComponent<BoxCollision>();
 	m_pRenderComp = pPlayer->GetComponent<RenderComponent>();
+
+	auto pGrids{ SceneManager::GetInstance().GetActiveScene()->GetRoot()->GetComponentsInChildren<GridComponent>() };
+	auto firstGrid{ pGrids.front() };
+	m_TopPosY = firstGrid->GetOwner()->GetComponent<TransformComponent>()->GetLocalPosition().y;
+	m_GridPixelSize = firstGrid->GetPixelSize();
+	m_BottomPosY = static_cast<float>(firstGrid->GetHeight() * m_GridPixelSize);
+
+	m_MaxBottomPosY = m_BottomPosY + m_GridPixelSize;
+	m_MaxTopPosY = m_TopPosY - m_GridPixelSize;
+
+	m_pTransformComp = pPlayer->GetComponent<TransformComponent>();
 
 }
 
@@ -26,6 +40,12 @@ void dae::PlayerJumpingState::OnEnter()
 
 void dae::PlayerJumpingState::Update()
 {
+	auto& localPos{ m_pTransformComp->GetLocalPosition() };
+	if (localPos.y < m_MaxTopPosY)
+	{
+		m_pTransformComp->SetLocalPosition(localPos.x, m_MaxBottomPosY);
+	}
+
 	if (m_pRigidBody->GetVelocity().y <= 0.0f)
 	{
 		OnExit();

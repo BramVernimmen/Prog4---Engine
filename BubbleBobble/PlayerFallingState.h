@@ -7,6 +7,7 @@ namespace dae
 	class RigidBody;
 	class BoxCollision;
 	class RenderComponent;
+	class TransformComponent;
 	class PlayerFallingState final : public PlayerState
 	{
 	public:
@@ -26,7 +27,13 @@ namespace dae
 	private:
 		RigidBody* m_pRigidBody{};
 		RenderComponent* m_pRenderComp{};
+		TransformComponent* m_pTransformComp{};
+		float m_TopPosY{};
+		float m_BottomPosY{};
+		int m_GridPixelSize{};
 
+		float m_MaxTopPosY{};
+		float m_MaxBottomPosY{};
 	};
 
 }

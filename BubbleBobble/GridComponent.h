@@ -21,6 +21,9 @@ namespace dae
 
 		void SetTileLayout(const std::string& newTileLayout) { m_TileLayout = newTileLayout; }
 		void Resize(int newWidth, int newHeight);
+		int GetWidth() { return m_Width; }
+		int GetHeight() { return m_Height; }
+		int GetPixelSize() {return m_PixelSize;}
 
 	private:
 		void CreateTiles();
