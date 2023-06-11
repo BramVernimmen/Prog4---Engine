@@ -15,6 +15,12 @@ dae::PlayerComponent::PlayerComponent(GameObject* pOwner)
 
 void dae::PlayerComponent::Update()
 {
+	if (m_Respawn)
+	{
+		PlayerManager::GetInstance().RespawnPlayer(GetOwner(), m_PlayerId);
+		m_Respawn = false;
+	}
+
 	// handle states here
 	m_pCurrentState->Update();
 }
@@ -28,8 +34,8 @@ void dae::PlayerComponent::Notify(const Event& currEvent, std::any payload)
 			if (std::any_cast<GameObject*>(payload)->GetComponent<PlayerComponent>())
 			{
 				NotifyObservers(PlayerHit());
-				PlayerManager::GetInstance().RespawnPlayer(GetOwner(), m_PlayerId);
 				NotifyObservers(ItemPickedUp(), 200);
+				m_Respawn = true;
 			}
 		}
 	}

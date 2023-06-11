@@ -109,8 +109,7 @@ void dae::PlayerManager::RespawnPlayer(GameObject* pOwner, size_t playerId)
 	// issue with respawning
 	auto spawns{ SceneManager::GetInstance().GetActiveScene()->GetRoot()->GetComponentsInChildren<PlayerSpawnComponent>()};
 	glm::vec2 spawnPos{spawns[playerId]->GetSpawnPosition()};
-	TransformComponent* pTransform{ pOwner->GetComponent<TransformComponent>() };
-	pTransform->SetLocalPosition(spawnPos.x, spawnPos.y);
+	pOwner->GetComponent<TransformComponent>()->SetLocalPosition(spawnPos.x, spawnPos.y);
 	pOwner->GetComponent<RigidBody>()->SetVelocity({ 0.0f, 0.0f });
 }
 

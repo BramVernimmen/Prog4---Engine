@@ -45,6 +45,7 @@ namespace dae
 		PlayerState* GetCurrentState() { return m_pCurrentState; }
 
 	private:
+		bool m_Respawn{false};
 		size_t m_PlayerId{};
 		std::unique_ptr<PlayerFallingState> m_pPlayerFallingState{std::make_unique<PlayerFallingState>(GetOwner())};
 		std::unique_ptr<PlayerJumpingState> m_pPlayerJumpingState{std::make_unique<PlayerJumpingState>(GetOwner())};
