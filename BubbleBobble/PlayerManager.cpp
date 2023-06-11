@@ -156,7 +156,9 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 		playerComp->SetJumpingSoundId(currPlayerInfo.m_JumpSoundId);
 		playerComp->SetMovementSpeed(currPlayerInfo.m_BaseSpeed);
 		playerComp->SetJumpingStrength(currPlayerInfo.m_BaseJumpStrength);
-		playerComp->SetIdleTexture(ResourceManager::GetInstance().LoadTexture(currPlayerInfo.m_TexturePath));
+		std::string texturePath{currPlayerInfo.m_TexturePath};
+		playerComp->SetIdleTexture(ResourceManager::GetInstance().LoadTexture(texturePath + "/Idle.png"));
+		playerComp->SetDeathTexture(ResourceManager::GetInstance().LoadTexture(texturePath + "/Death.png"));
 
 
 

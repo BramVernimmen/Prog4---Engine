@@ -35,9 +35,9 @@ void dae::PlayerComponent::Notify(const Event& currEvent, std::any payload)
 	}
 	if (typeid(currEvent) == typeid(PlayerDied))
 	{
-		// set to dead state, this is just a temp test
-		GetOwner()->GetComponent<RigidBody>()->SetKinematic(true);
-		GetOwner()->GetComponent<BoxCollision>()->SetInactive();
+		// set to dead state
+		m_pCurrentState = m_pPlayerDeathState.get();
+		m_pCurrentState->OnEnter();
 	}
 }
 
@@ -59,6 +59,12 @@ void dae::PlayerComponent::SetPlayerJumping()
 	m_pCurrentState->OnEnter();
 }
 
+void dae::PlayerComponent::SetPlayerDeath()
+{
+	m_pCurrentState = m_pPlayerDeathState.get();
+	m_pCurrentState->OnEnter();
+}
+
 void dae::PlayerComponent::SetJumpingSoundId(unsigned short id)
 {
 	m_pPlayerJumpingState->SetJumpSoundId(id);
@@ -77,5 +83,10 @@ void dae::PlayerComponent::SetJumpingStrength(float newJump)
 void dae::PlayerComponent::SetIdleTexture(std::shared_ptr<Texture2D> newTexture)
 {
 	m_pPlayerRunningState->SetTexture(newTexture);
+}
+
+void dae::PlayerComponent::SetDeathTexture(std::shared_ptr<Texture2D> newTexture)
+{
+	m_pPlayerDeathState->SetTexture(newTexture);
 }
 

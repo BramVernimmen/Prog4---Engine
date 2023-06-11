@@ -70,7 +70,7 @@ void load()
 
 
 	dae::PlayerInfo player1Info{};
-	player1Info.m_TexturePath = "Bubby.png";
+	player1Info.m_TexturePath = "Bubby";
 	player1Info.m_UseController = true;
 	player1Info.m_DisplayTopLeftX = 150.0f;
 	player1Info.m_FontColorR = 135;
@@ -78,7 +78,7 @@ void load()
 	player1Info.m_FontColorB = 81;
 
 	dae::PlayerInfo player2Info{};
-	player2Info.m_TexturePath = "Bobby.png";
+	player2Info.m_TexturePath = "Bobby";
 	player2Info.m_UseController = true;
 	player2Info.m_KeyBoardInputs = { SDLK_LEFT, SDLK_RIGHT, SDLK_UP, SDLK_DOWN }; // player 2 will use arrow keys
 	player2Info.m_DisplayTopLeftX = 600.0f;
