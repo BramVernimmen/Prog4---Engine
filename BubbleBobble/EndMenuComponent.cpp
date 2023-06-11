@@ -16,13 +16,18 @@ void dae::EndMenuComponent::DisplayGui()
 {
     ImGui::Begin("End Menu");
 
-    ImGui::Text("Current Highscore: %i by: %s", m_Highscore, m_HighscoreInitials.c_str());
+    ImGui::Text("Current Highscores:");
+    for (size_t i = 0; i < m_HighscoreInitials.size(); i++)
+    {
+        ImGui::Text("%i by: %s", m_Highscores[i], m_HighscoreInitials[i].c_str());
+    }
+
     ImGui::Dummy(ImVec2(0.0f, 12.0f));
     // only show this when current score is higher then highscore
     ImGui::Text("Your Score: %i", m_CurrentScore);
     ImGui::Dummy(ImVec2(0.0f, 12.0f));
 
-    if (m_CurrentScore >= m_Highscore)
+    if (m_Highscores.size() < m_MaxAmountOfScoresSaved || m_CurrentScore >= m_Highscores.back())
     {
         ImGui::PushItemWidth(30.0f);
         ImGui::InputText("Input Initials Here", &m_CurrentInitialsString[0], 4);
@@ -38,7 +43,7 @@ void dae::EndMenuComponent::DisplayGui()
     }
     else
     {
-        ImGui::Text("Too bad, you didn't beat the highscore!");
+        ImGui::Text("Too bad, you didn't beat a highscore!");
     }
     
     ImGui::Dummy(ImVec2(0.0f, 25.0f));
@@ -69,13 +74,19 @@ void dae::EndMenuComponent::ReadHighscoreFile()
     {
         std::string currLine{};
         
-        // first line should be the score
-        std::getline(input, currLine);
-        m_Highscore = std::stoi(currLine);
+        m_Highscores.clear();
+        m_HighscoreInitials.clear();
 
-        // second line should be the initials
-        std::getline(input, currLine);
-        m_HighscoreInitials = currLine;
+        while (!input.eof())
+        {
+            // first line should be the score
+            std::getline(input, currLine);
+            m_Highscores.emplace_back(std::stoi(currLine));
+
+            // second line should be the initials
+            std::getline(input, currLine);
+            m_HighscoreInitials.emplace_back(currLine);
+        }
     }
     else
     {
@@ -95,10 +106,32 @@ void dae::EndMenuComponent::WriteHighscoreToFile(int score, const std::string& i
     // this will always overwrite the file with the new values
     if (std::ofstream output{filePath})
     {
-        output << score;
-        output << "\n";
-        output << initials.c_str();
-        output << "\n";
+        if (m_Highscores.size() >= m_MaxAmountOfScoresSaved)
+        {
+            // this means we need to remove the lowest score
+            m_Highscores.pop_back();
+            m_HighscoreInitials.pop_back();
+        }
+
+        // go through all scores and check once the passed score is higher
+        size_t i{ 0 };
+        for (; i < m_Highscores.size(); ++i)
+        {
+            if (m_Highscores[i] <= score)
+                break;
+        }
+
+        m_Highscores.insert(m_Highscores.begin() + i, score);
+        m_HighscoreInitials.insert(m_HighscoreInitials.begin() + i, initials);
+
+        for (size_t index = 0; index < m_Highscores.size(); ++index)
+        {
+            if (index > 0)
+                output << "\n";
+            output << m_Highscores[index];
+            output << "\n";
+            output << m_HighscoreInitials[index].c_str();
+        }
     }
     
 

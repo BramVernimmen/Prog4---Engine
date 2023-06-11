@@ -1,6 +1,7 @@
 #pragma once
 #include "UpdateComponent.h"
 #include <string>
+#include <vector>
 
 namespace dae
 {
@@ -21,16 +22,16 @@ namespace dae
 		void SetHighScoreFilePath(const std::string& filePath); 
 	private:
 		void ReadHighscoreFile();
-		std::string m_HighscoreInitials{};
-		int m_Highscore{};
+		std::vector<std::string> m_HighscoreInitials{};
+		std::vector<int> m_Highscores{};
 
 		void WriteHighscoreToFile(int score = 192, const std::string& initials = "PRO");
 
 		std::string m_HighScoreFilePath{};
 		std::string m_CurrentInitialsString{};
-		int m_CurrentScore{ 1000 };
+		int m_CurrentScore{ 0 };
 
-
+		size_t m_MaxAmountOfScoresSaved{ 10 };
 	};
 
 }
