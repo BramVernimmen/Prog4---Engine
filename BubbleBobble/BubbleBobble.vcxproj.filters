@@ -89,6 +89,9 @@
     <ClCompile Include="MuteCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerComponent.cpp">
+      <Filter>Components\PlayerBasedComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugLivesComponent.h">
@@ -144,6 +147,9 @@
     </ClInclude>
     <ClInclude Include="MuteCommand.h">
       <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerComponent.h">
+      <Filter>Components\PlayerBasedComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

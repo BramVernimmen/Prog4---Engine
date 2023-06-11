@@ -9,6 +9,14 @@ dae::LivesComponent::LivesComponent(GameObject* pOwner)
 
 
 
+void dae::LivesComponent::Notify(const Event& currEvent, std::any payload)
+{
+	if (typeid(currEvent) == typeid(PlayerHit)) // handle things here
+	{
+		RemoveLife();
+	}
+}
+
 void dae::LivesComponent::ResetLives()
 {
 	m_CurrentLives = m_MaxLives;

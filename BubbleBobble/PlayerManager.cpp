@@ -1,4 +1,5 @@
 #include "PlayerManager.h"
+#include "SceneManager.h"
 #include "Scene.h"
 #include "EngineEvents.h"
 #include "GameObject.h"
@@ -14,6 +15,7 @@
 #include "DebugScoreComponent.h"
 #include "ResourceManager.h"
 #include "TextComponent.h"
+#include "PlayerComponent.h"
 #include <iostream>
 
 void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
@@ -100,6 +102,15 @@ void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 	}
 }
 
+void dae::PlayerManager::RespawnPlayer(GameObject* pOwner, size_t playerId)
+{
+
+	auto spawns{ SceneManager::GetInstance().GetActiveScene()->GetRoot()->GetComponentsInChildren<PlayerSpawnComponent>()};
+	glm::vec2 spawnPos{spawns[playerId]->GetSpawnPosition()};
+	pOwner->GetComponent<TransformComponent>()->SetLocalPosition(spawnPos.x, spawnPos.y);
+	pOwner->GetComponent<RigidBody>()->SetVelocity({ 0.0f, 0.0f });
+}
+
 void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 {
 	if (m_PlayerCount > m_PlayerInfo.size())
@@ -119,12 +130,21 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 		auto textureComp = player->AddComponent<dae::TextureComponent>();
 		textureComp->SetTexture(currPlayerInfo.m_TexturePath);
 		textureComp->AddToRenderer(renderComp);
+		auto livesComp = player->AddComponent<LivesComponent>();
+		auto scoreComp = player->AddComponent<ScoreComponent>();
+		// player comp uses lives and score, make sure it's created after those
+		auto playerComp = player->AddComponent<PlayerComponent>();
+		playerComp->SetPlayerId(static_cast<size_t>(i));
+		playerComp->AddObserver(livesComp);
+		livesComp->AddObserver(playerComp);
+		playerComp->AddObserver(scoreComp);
 		auto collisionComp = player->AddComponent<BoxCollision>();
+		collisionComp->AddObserver(playerComp);
+		collisionComp->SetCurrentLayer(0b1100);
+		collisionComp->AddLayerForOverlapEvent(0b1100);
 		collisionComp->SetSize(currPlayerInfo.m_CollisionSizeX, currPlayerInfo.m_CollisionSizeY);
 		renderComp->AddToDebug(collisionComp);
 		player->AddComponent<RigidBody>();
-		auto livesComp = player->AddComponent<LivesComponent>();
-		auto scoreComp = player->AddComponent<ScoreComponent>();
 
 
 		// cache the player here

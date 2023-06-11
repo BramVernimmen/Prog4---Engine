@@ -16,13 +16,12 @@ void dae::ScoreComponent::AddScore(int scoreToAdd)
 
 void dae::ScoreComponent::Notify(const Event& currEvent, std::any payload)
 {
-	if (typeid(currEvent) == typeid(PlayerHit))
+	if (typeid(currEvent) == typeid(ItemPickedUp))
 	{
-		AddScore(250);
-	}
-	else if (typeid(currEvent) == typeid(PlayerDied))
-	{
-		AddScore(2000);
+		if (payload.type() == typeid(int))
+		{
+			AddScore(std::any_cast<int>(payload));
+		}
 	}
 }
 

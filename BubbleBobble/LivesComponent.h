@@ -1,11 +1,12 @@
 #pragma once
 #include "UpdateComponent.h"
 #include "Subject.h"
+#include "Observer.h"
 
 namespace dae
 {
 
-	class LivesComponent final : public UpdateComponent, public Subject
+	class LivesComponent final : public UpdateComponent, public Subject, public Observer
 	{
 	public:
 		LivesComponent(GameObject* pOwner);
@@ -17,6 +18,9 @@ namespace dae
 
 
 		virtual void Update() override {};
+
+		virtual void Notify(const Event& currEvent, std::any payload = nullptr) override;
+
 
 		void SetMaxLives(int newMax) { m_MaxLives = newMax; }
 		void ResetLives();

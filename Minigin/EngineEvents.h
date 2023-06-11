@@ -6,4 +6,5 @@ namespace dae
 	class AudioLoad final : public Event {};
 	class AudioPlay final : public Event {};
 	class SceneLoaded final : public Event {};
+	class ObjectOverlapping final : public Event {};
 }

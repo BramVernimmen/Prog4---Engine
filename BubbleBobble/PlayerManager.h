@@ -52,6 +52,8 @@ namespace dae
 
 		void Notify(const Event& currEvent, std::any payload = nullptr) override;
 
+		void RespawnPlayer(GameObject* pOwner, size_t playerId);
+
 	private:
 		void CreatePlayers(GameObject* pRoot);
 		std::vector<GameObject*> m_pPlayers{};

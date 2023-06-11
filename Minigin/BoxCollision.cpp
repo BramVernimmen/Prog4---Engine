@@ -3,6 +3,7 @@
 #include "TransformComponent.h"
 #include "Utils_SDL.h"
 #include "CollisionManager.h"
+#include "EngineEvents.h"
 
 dae::BoxCollision::BoxCollision(GameObject* pOwner)
 	: UpdateComponent(pOwner)
@@ -45,4 +46,9 @@ SDL_Rect dae::BoxCollision::GetRect()
 	rect.h = m_Height;
 
 	return rect;
+}
+
+void dae::BoxCollision::IsOverlappingWith(GameObject* overlappingGameObject)
+{
+	NotifyObservers(ObjectOverlapping(), overlappingGameObject);
 }

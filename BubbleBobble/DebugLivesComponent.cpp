@@ -13,7 +13,8 @@ void dae::DebugLivesComponent::Update()
 {
 	if (m_ShouldUpdateText)
 	{
-		m_pPersonalTextComponent->SetText("Lives: " + std::to_string(m_LastLives - 1) );
+		
+		m_pPersonalTextComponent->SetText("Lives: " + std::to_string((m_LastLives > 0) ? m_LastLives - 1 : m_LastLives));
 		m_ShouldUpdateText = false;
 	}
 }
