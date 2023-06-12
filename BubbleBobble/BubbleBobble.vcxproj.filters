@@ -149,6 +149,9 @@
     <ClCompile Include="ShootBubbleCommand.cpp">
       <Filter>Commands\PlayerCommands</Filter>
     </ClCompile>
+    <ClCompile Include="BubbleComponent.cpp">
+      <Filter>Components\PlayerBasedComponents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugLivesComponent.h">
@@ -246,6 +249,9 @@
     </ClInclude>
     <ClInclude Include="ShootBubbleCommand.h">
       <Filter>Commands\PlayerCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="BubbleComponent.h">
+      <Filter>Components\PlayerBasedComponents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

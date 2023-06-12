@@ -31,6 +31,7 @@ namespace dae
 		void RemoveFromDebug(UpdateComponent* pComponentToAdd);
 
 		void SetFlipTexutures(bool newFlip) { m_FlipTextures = newFlip; }
+		bool IsTextureFlipped() { return m_FlipTextures; }
 
 	protected:
 

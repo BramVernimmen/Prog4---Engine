@@ -183,6 +183,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BubbleComponent.cpp" />
     <ClCompile Include="DebugLivesComponent.cpp" />
     <ClCompile Include="DebugScoreComponent.cpp" />
     <ClCompile Include="EndMenuComponent.cpp" />
@@ -215,6 +216,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClCompile Include="SkipLevelCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BubbleComponent.h" />
     <ClInclude Include="DebugLivesComponent.h" />
     <ClInclude Include="DebugScoreComponent.h" />
     <ClInclude Include="EndMenuComponent.h" />

@@ -138,7 +138,9 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 		auto scoreComp = player->AddComponent<ScoreComponent>();
 		// player comp uses lives and score, make sure it's created after those
 		auto collisionComp = player->AddComponent<BoxCollision>();
+		collisionComp->SetCurrentLayer(0b100'000);
 		collisionComp->AddLayerForOverlapEvent(0b1100);
+		collisionComp->AddIgnoreLayer(0b10000);
 		collisionComp->SetSize(currPlayerInfo.m_CollisionSizeX, currPlayerInfo.m_CollisionSizeY);
 		renderComp->AddToDebug(collisionComp);
 		auto playerComp = player->AddComponent<PlayerComponent>();
@@ -162,7 +164,7 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 		playerComp->SetDeathTexture(ResourceManager::GetInstance().LoadTexture(texturePath + "/Death.png"));
 
 
-
+		auto pBubbleTexture{ ResourceManager::GetInstance().LoadTexture("Bubble.png") };
 
 		// cache the player here
 		m_pPlayers.emplace_back(player);
@@ -181,6 +183,7 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 
 			auto keyboardShootCommand{ std::make_unique<ShootBubbleCommand>(player, currPlayerInfo.m_ShootSoundId) };
 			playerCommands.emplace_back(keyboardShootCommand.get());
+			keyboardShootCommand->SetTexture(pBubbleTexture);
 
 			InputManager::GetInstance().BindCommand(
 				currPlayerInfo.m_KeyBoardShootInput, 
@@ -203,6 +206,7 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 
 			auto controllerShootCommand{ std::make_unique<ShootBubbleCommand>(player, currPlayerInfo.m_ShootSoundId) };
 			playerCommands.emplace_back(controllerShootCommand.get());
+			controllerShootCommand->SetTexture(pBubbleTexture);
 
 			InputManager::GetInstance().BindCommand(
 				currPlayerInfo.m_ControllerShootInput,

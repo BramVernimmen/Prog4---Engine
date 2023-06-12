@@ -31,7 +31,7 @@ void dae::EnemyBubbleState::OnEnter()
 {
 	m_pEnemy->GetComponent<TextureComponent>()->SetTexture(m_pBubbleTexture);
 	
-	m_pBoxCollision->AddIgnoreLayer(0b11);
+	m_pBoxCollision->AddIgnoreLayer(0b111);
 
 
 	RigidBody* pRigidBody{ m_pEnemy->GetComponent<RigidBody>() };
@@ -50,7 +50,7 @@ void dae::EnemyBubbleState::Update()
 	auto& localPos{ m_pTransformComp->GetLocalPosition() };
 	if (localPos.y <= m_MaxTopPosY || m_CurrentDuration >= m_MaxDuration)
 	{
-		m_pBoxCollision->RemoveIgnoreLayer(0b11);
+		m_pBoxCollision->RemoveIgnoreLayer(0b111);
 		m_pEnemy->GetComponent<RigidBody>()->SetIgnoreGravity(false);
 		m_pEnemy->GetComponent<EnemyComponent>()->SetEnemyRunning();
 	}
