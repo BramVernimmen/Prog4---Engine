@@ -5,6 +5,8 @@
 #include "EnemyComponent.h"
 #include "RigidBody.h"
 #include "BoxCollision.h"
+#include "ServiceLocator.h"
+#include "SoundSystem.h"
 
 dae::EnemyDeathState::EnemyDeathState(GameObject* pEnemy)
 {
@@ -19,6 +21,8 @@ void dae::EnemyDeathState::OnEnter()
 	m_pEnemy->GetComponent<RigidBody>()->SetIgnoreGravity(false);
 	m_pEnemy->GetComponent<BoxCollision>()->SetInactive();
 	m_pEnemy->GetComponent<BoxCollision>()->SetCurrentLayer(0b0);
+
+	ServiceLocator::GetSoundSystem().Play(m_DeathSoundId);
 
 	// spawn item
 }

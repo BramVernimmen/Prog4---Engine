@@ -17,12 +17,12 @@ namespace dae
 		EnemyFallingState& operator=(const EnemyFallingState& other) = delete;
 		EnemyFallingState& operator=(EnemyFallingState&& other) = delete;
 
-		virtual void OnEnter() override {}
+		virtual void OnEnter() override;
 		virtual void Update() override;
 		virtual void OnExit() override {}
 
 	private:
-		RigidBody* m_pRigidBody{};
+		RigidBody* m_pRigidBody{nullptr};
 		TransformComponent* m_pTransformComp{};
 		float m_TopPosY{};
 		float m_BottomPosY{};

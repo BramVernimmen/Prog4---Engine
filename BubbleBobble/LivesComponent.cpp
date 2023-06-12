@@ -1,5 +1,6 @@
 #include "LivesComponent.h"
 #include "GameEvents.h"
+#include "GameTime.h"
 
 dae::LivesComponent::LivesComponent(GameObject* pOwner)
 	: UpdateComponent(pOwner)
@@ -9,9 +10,23 @@ dae::LivesComponent::LivesComponent(GameObject* pOwner)
 
 
 
+void dae::LivesComponent::Update()
+{
+	if (m_IsInvincible)
+	{
+		m_CurrentInvincibility += GameTime::GetInstance().GetDeltaTime();
+
+		if (m_CurrentInvincibility >= m_MaxInvincibility)
+		{
+			m_IsInvincible = false;
+			m_CurrentInvincibility = 0.0f;
+		}
+	}
+}
+
 void dae::LivesComponent::Notify(const Event& currEvent, std::any payload)
 {
-	if (typeid(currEvent) == typeid(PlayerHit)) // handle things here
+	if (typeid(currEvent) == typeid(PlayerHit) && !m_IsInvincible) // handle things here
 	{
 		RemoveLife();
 	}
@@ -39,5 +54,5 @@ void dae::LivesComponent::RemoveLife()
 
 	// we lost a live, send event
 	NotifyObservers(PlayerHit(), this);
-	
+	m_IsInvincible = true;
 }

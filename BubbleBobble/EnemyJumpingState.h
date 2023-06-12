@@ -23,7 +23,7 @@ namespace dae
 		virtual void OnExit() override;
 
 	private:
-		RigidBody* m_pRigidBody{};
+		RigidBody* m_pRigidBody{nullptr};
 		TransformComponent* m_pTransformComp{};
 		BoxCollision* m_pBoxCollision{};
 

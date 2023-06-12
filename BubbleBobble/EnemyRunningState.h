@@ -30,9 +30,13 @@ namespace dae
 	private:
 		std::shared_ptr<Texture2D> m_pRunningTexture{};
 		RenderComponent* m_pRenderComp{};
-		RigidBody* m_pRigidBody{};
+		RigidBody* m_pRigidBody{nullptr};
 		float m_MovementSpeed{};
 		float m_JumpStrength{};
+
+		float m_MaxWalkDuration{2.0f};
+		float m_WalkDuration{0.0f};
+		float m_CachedXVelocity{ 0.0f };
 	};
 
 }

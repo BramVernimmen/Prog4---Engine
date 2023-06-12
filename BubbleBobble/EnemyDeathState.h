@@ -23,10 +23,11 @@ namespace dae
 		virtual void OnExit() override {}
 
 		void SetTexture(std::shared_ptr<Texture2D> newTexture);
-
+		void SetDeathSoundId(unsigned short id) { m_DeathSoundId = id; }
 	private:
 		std::shared_ptr<Texture2D> m_pDeathTexture{};
 		RenderComponent* m_pRenderComp{};
+		unsigned short m_DeathSoundId{};
 	};
 
 }

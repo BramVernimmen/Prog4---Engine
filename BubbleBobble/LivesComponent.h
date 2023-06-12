@@ -17,7 +17,7 @@ namespace dae
 		LivesComponent& operator=(LivesComponent&& other) = delete;
 
 
-		virtual void Update() override {};
+		virtual void Update() override;
 
 		virtual void Notify(const Event& currEvent, std::any payload = nullptr) override;
 
@@ -31,7 +31,9 @@ namespace dae
 		int m_CurrentLives{};
 		int m_MaxLives{4};
 
-
+		float m_MaxInvincibility{ 2.0f };
+		float m_CurrentInvincibility{ 0.0f };
+		bool m_IsInvincible{ false };
 	};
 
 }

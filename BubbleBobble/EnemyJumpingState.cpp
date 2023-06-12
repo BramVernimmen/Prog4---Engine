@@ -12,7 +12,6 @@
 dae::EnemyJumpingState::EnemyJumpingState(GameObject* pEnemy)
 {
 	m_pEnemy = pEnemy;
-	m_pRigidBody = pEnemy->GetComponent<RigidBody>();
 	m_pBoxCollision = pEnemy->GetComponent<BoxCollision>();
 
 	auto pGrids{ SceneManager::GetInstance().GetActiveScene()->GetRoot()->GetComponentsInChildren<GridComponent>() };
@@ -30,6 +29,8 @@ dae::EnemyJumpingState::EnemyJumpingState(GameObject* pEnemy)
 void dae::EnemyJumpingState::OnEnter()
 {
 	m_pBoxCollision->AddIgnoreLayer(0b10);
+	if (!m_pRigidBody)
+		m_pRigidBody = m_pEnemy->GetComponent<RigidBody>();
 }
 
 void dae::EnemyJumpingState::Update()

@@ -72,3 +72,8 @@ void dae::EnemyComponent::SetDeathTexture(std::shared_ptr<Texture2D> newTexture)
 {
 	m_pEnemyDeathState->SetTexture(newTexture);
 }
+
+void dae::EnemyComponent::SetDeathSoundId(unsigned short id)
+{
+	m_pEnemyDeathState->SetDeathSoundId(id);
+}

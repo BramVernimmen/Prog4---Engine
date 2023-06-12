@@ -39,6 +39,7 @@ namespace dae
 		void SetIdleTexture(std::shared_ptr<Texture2D> newTexture);
 		void SetBubbleTexture(std::shared_ptr<Texture2D> newTexture);
 		void SetDeathTexture(std::shared_ptr<Texture2D> newTexture);
+		void SetDeathSoundId(unsigned short id);
 
 		EnemyState* GetCurrentState() { return m_pCurrentState; }
 

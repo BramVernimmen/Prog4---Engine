@@ -11,7 +11,6 @@
 dae::EnemyFallingState::EnemyFallingState(GameObject* pEnemy)
 {
 	m_pEnemy = pEnemy;
-	m_pRigidBody = pEnemy->GetComponent<RigidBody>();
 
 	auto pGrids{ SceneManager::GetInstance().GetActiveScene()->GetRoot()->GetComponentsInChildren<GridComponent>() };
 	auto firstGrid{ pGrids.front() };
@@ -23,6 +22,12 @@ dae::EnemyFallingState::EnemyFallingState(GameObject* pEnemy)
 	m_MaxTopPosY = m_TopPosY - m_GridPixelSize;
 
 	m_pTransformComp = pEnemy->GetComponent<TransformComponent>();
+}
+
+void dae::EnemyFallingState::OnEnter()
+{
+	if (!m_pRigidBody)
+		m_pRigidBody = m_pEnemy->GetComponent<RigidBody>();
 }
 
 void dae::EnemyFallingState::Update()

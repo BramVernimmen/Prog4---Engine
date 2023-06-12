@@ -8,6 +8,9 @@
 #include "BoxCollision.h"
 #include "EnemyComponent.h"
 #include "ResourceManager.h"
+#include "ServiceLocator.h"
+#include "SoundSystem.h"
+
 
 void dae::EnemyManager::Notify(const Event& currEvent, std::any payload)
 {
@@ -63,17 +66,21 @@ void dae::EnemyManager::CreateEnemies(GameObject* pRoot)
 		auto renderComp = enemy->AddComponent<RenderComponent>();
 		auto textureComp = enemy->AddComponent<dae::TextureComponent>();
 		textureComp->AddToRenderer(renderComp);
-		enemy->AddComponent<RigidBody>();
 		auto collisionComp = enemy->AddComponent<BoxCollision>();
 		collisionComp->SetCurrentLayer(0b100);
+		collisionComp->AddIgnoreLayer(0b100);
 		collisionComp->SetSize(35, 48);
 		renderComp->AddToDebug(collisionComp);
 		auto enemyComp = enemy->AddComponent<EnemyComponent>();
+		enemy->AddComponent<RigidBody>();
+		enemyComp->SetEnemyRunning();
 		enemyComp->SetIdleTexture(ResourceManager::GetInstance().LoadTexture("ZenChan/Run.png"));
 		enemyComp->SetMovementSpeed(100.0f);
 		enemyComp->SetJumpingStrength(250.0f);
 		enemyComp->SetDeathTexture(ResourceManager::GetInstance().LoadTexture("ZenChan/Death.png"));
 		enemyComp->SetBubbleTexture(ResourceManager::GetInstance().LoadTexture("ZenChan/InBubble.png"));
+		enemyComp->SetDeathSoundId(11);
+		ServiceLocator::GetSoundSystem().Load(11, "Sounds/Death.wav");
 
 		m_pEnemies.emplace_back(enemy);
 
