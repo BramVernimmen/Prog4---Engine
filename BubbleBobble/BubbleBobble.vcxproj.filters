@@ -152,6 +152,9 @@
     <ClCompile Include="BubbleComponent.cpp">
       <Filter>Components\PlayerBasedComponents</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Helper Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugLivesComponent.h">
@@ -252,6 +255,9 @@
     </ClInclude>
     <ClInclude Include="BubbleComponent.h">
       <Filter>Components\PlayerBasedComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Helper Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

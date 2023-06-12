@@ -59,6 +59,7 @@ namespace dae
 		void Notify(const Event& currEvent, std::any payload = nullptr) override;
 
 		void RespawnPlayer(GameObject* pOwner, size_t playerId);
+		int GetHighestScore();
 
 	private:
 		void CreatePlayers(GameObject* pRoot);
@@ -68,5 +69,7 @@ namespace dae
 		std::vector<std::vector<Command*>> m_pPlayerCommands{}; // this way each player has their own vector of commands
 
 		unsigned int m_PlayerCount{ 0 };
+		unsigned int m_AmountOfDeadPlayers{0};
+		unsigned int m_AmountOfDeadEnemies{0};
 	};
 }

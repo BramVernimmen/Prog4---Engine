@@ -26,6 +26,7 @@
 #include "MainMenuComponent.h"
 #include "EndMenuComponent.h"
 #include "MuteCommand.h"
+#include "GameManager.h"
 
 void load()
 {
@@ -62,11 +63,13 @@ void load()
 
 	dae::PlayerManager* playerManager{&dae::PlayerManager::GetInstance()};
 	dae::EnemyManager* enemyManager{&dae::EnemyManager::GetInstance()};
+	dae::GameManager* gameManager{&dae::GameManager::GetInstance()};
 	// add playerManager as Observer to every scene
 	for (const auto& currScene : dae::SceneManager::GetInstance().GetScenes())
 	{
 		currScene->AddObserver(playerManager);
 		currScene->AddObserver(enemyManager);
+		currScene->AddObserver(gameManager);
 	}
 
 
@@ -136,6 +139,11 @@ void load()
 
 	// after all levels have been created; create end menu
 	auto endMenuScene = dae::SceneManager::GetInstance().CreateScene("EndMenu");
+	endMenuScene->AddObserver(playerManager);
+	endMenuScene->AddObserver(enemyManager);
+	endMenuScene->AddObserver(gameManager);
+	gameManager->SetEndScene(endMenuScene.get());
+
 	dae::GameObject* pRootEndMenu = endMenuScene->GetRoot();
 
 

@@ -20,6 +20,7 @@ namespace dae
 		virtual void DisplayGui() override;
 
 		void SetHighScoreFilePath(const std::string& filePath); 
+		void SetCurrentScore(int newScore);
 	private:
 		void ReadHighscoreFile();
 		std::vector<std::string> m_HighscoreInitials{};
@@ -32,6 +33,8 @@ namespace dae
 		int m_CurrentScore{ 0 };
 
 		size_t m_MaxAmountOfScoresSaved{ 10 };
+
+		bool m_CanWrite{ true };
 	};
 
 }

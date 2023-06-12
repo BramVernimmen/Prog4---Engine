@@ -12,6 +12,7 @@ namespace dae
 	public:
 		void Notify(const Event& currEvent, std::any payload = nullptr) override;
 
+		size_t GetAmountOfEnemies() { return m_AmountOfEnemies; }
 	private:
 		void CreateEnemies(GameObject* pRoot);
 		std::vector<GameObject*> m_pEnemies{};

@@ -27,7 +27,7 @@ void dae::EndMenuComponent::DisplayGui()
     ImGui::Text("Your Score: %i", m_CurrentScore);
     ImGui::Dummy(ImVec2(0.0f, 12.0f));
 
-    if (m_Highscores.size() < m_MaxAmountOfScoresSaved || m_CurrentScore >= m_Highscores.back())
+    if ((m_Highscores.size() < m_MaxAmountOfScoresSaved || m_CurrentScore >= m_Highscores.back()) && m_CanWrite)
     {
         ImGui::PushItemWidth(30.0f);
         ImGui::InputText("Input Initials Here", &m_CurrentInitialsString[0], 4);
@@ -39,6 +39,7 @@ void dae::EndMenuComponent::DisplayGui()
             WriteHighscoreToFile(m_CurrentScore, m_CurrentInitialsString);
             m_CurrentInitialsString.clear();
             ReadHighscoreFile();
+            m_CanWrite = false;
         }
     }
     else
@@ -63,6 +64,12 @@ void dae::EndMenuComponent::SetHighScoreFilePath(const std::string& filePath)
     m_HighScoreFilePath = filePath; 
     
     ReadHighscoreFile();
+}
+
+void dae::EndMenuComponent::SetCurrentScore(int newScore)
+{
+    m_CurrentScore = newScore;
+    m_CanWrite = true;
 }
 
 void dae::EndMenuComponent::ReadHighscoreFile()

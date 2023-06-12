@@ -20,6 +20,9 @@
 #include "ServiceLocator.h"
 #include "SoundSystem.h"
 #include "ShootBubbleCommand.h"
+#include "EndMenuComponent.h"
+#include "GameManager.h"
+#include "EnemyManager.h"
 
 void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 {
@@ -29,6 +32,15 @@ void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 		{
 			// handle payload
 			Scene* newlyLoadedScene{ std::any_cast<Scene*>(payload) };
+			m_AmountOfDeadEnemies = 0;
+			auto endMenuComps{ newlyLoadedScene->GetRoot()->GetComponentsInChildren<EndMenuComponent>() };
+			if (!endMenuComps.empty())
+			{
+				// we are in the endscene, just say all players are dead to the gamemanager; this will get the current highscore
+				GameManager::GetInstance().SetHighscore(GetHighestScore());
+			}
+
+
 			if (newlyLoadedScene->GetName().find("Level_") == std::string::npos)
 			{
 				// if we get here, a scene was loaded that wasn't a level
@@ -40,6 +52,7 @@ void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 
 			if (m_PlayerCount == 0)
 			{
+				m_AmountOfDeadPlayers = 0;
 				// mark all players to be deleted
 				for (GameObject* currPlayer : m_pPlayers)
 				{
@@ -103,15 +116,56 @@ void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 
 		}
 	}
+	if (typeid(currEvent) == typeid(PlayerDied))
+	{
+		++m_AmountOfDeadPlayers;
+		if (m_AmountOfDeadPlayers >= static_cast<int>(m_pPlayers.size()))
+			GameManager::GetInstance().AllPlayersDead();
+	}
+	if (typeid(currEvent) == typeid(EnemyKilled))
+	{
+		++m_AmountOfDeadEnemies;
+		if (m_AmountOfDeadEnemies >= static_cast<int>(EnemyManager::GetInstance().GetAmountOfEnemies()))
+			GameManager::GetInstance().AllEnemiesDead();
+	}
+
 }
 
 void dae::PlayerManager::RespawnPlayer(GameObject* pOwner, size_t playerId)
 {
 	// issue with respawning
 	auto spawns{ SceneManager::GetInstance().GetActiveScene()->GetRoot()->GetComponentsInChildren<PlayerSpawnComponent>()};
+	if(spawns.empty())
+		return;
 	glm::vec2 spawnPos{spawns[playerId]->GetSpawnPosition()};
 	pOwner->GetComponent<TransformComponent>()->SetLocalPosition(spawnPos.x, spawnPos.y);
 	pOwner->GetComponent<RigidBody>()->SetVelocity({ 0.0f, 0.0f });
+}
+
+int dae::PlayerManager::GetHighestScore()
+{
+	int currentHighestScore{};
+	for (int index{0};GameObject* currPlayer : m_pPlayers)
+	{
+		ScoreComponent* scoreComp{ currPlayer->GetComponent<ScoreComponent>() };
+		if (scoreComp)
+		{
+			if (index == 0)
+			{
+				currentHighestScore = scoreComp->GetCurrentScore();
+			}
+			else
+			{
+				int currScore{ scoreComp->GetCurrentScore() };
+				if (currScore > currentHighestScore)
+					currentHighestScore = currScore;
+			}
+		}
+
+		++index;
+	}
+
+	return currentHighestScore;
 }
 
 void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
@@ -146,6 +200,7 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 		auto playerComp = player->AddComponent<PlayerComponent>();
 		playerComp->SetPlayerId(static_cast<size_t>(i));
 		playerComp->AddObserver(livesComp);
+		playerComp->AddObserver(this);
 		livesComp->AddObserver(playerComp);
 		playerComp->AddObserver(scoreComp);
 		collisionComp->AddObserver(playerComp);
