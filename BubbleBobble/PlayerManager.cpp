@@ -19,6 +19,7 @@
 #include <iostream>
 #include "ServiceLocator.h"
 #include "SoundSystem.h"
+#include "ShootBubbleCommand.h"
 
 void dae::PlayerManager::Notify(const Event& currEvent, std::any payload)
 {
@@ -150,6 +151,8 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 
 		auto& ss{ ServiceLocator::GetSoundSystem() }; 
 		ss.Load(currPlayerInfo.m_JumpSoundId, currPlayerInfo.m_JumpSoundPath);
+		ss.Load(currPlayerInfo.m_ShootSoundId, currPlayerInfo.m_ShootSoundPath);
+
 
 		playerComp->SetJumpingSoundId(currPlayerInfo.m_JumpSoundId);
 		playerComp->SetMovementSpeed(currPlayerInfo.m_BaseSpeed);
@@ -176,6 +179,14 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 				currPlayerInfo.m_KeyboardInputType, 
 				std::move(keyboardMoveCommand));
 
+			auto keyboardShootCommand{ std::make_unique<ShootBubbleCommand>(player, currPlayerInfo.m_ShootSoundId) };
+			playerCommands.emplace_back(keyboardShootCommand.get());
+
+			InputManager::GetInstance().BindCommand(
+				currPlayerInfo.m_KeyBoardShootInput, 
+				InputManager::InputType::OnButtonDown, 
+				std::move(keyboardShootCommand));
+
 		}
 
 		if (currPlayerInfo.m_UseController)
@@ -188,6 +199,15 @@ void dae::PlayerManager::CreatePlayers(GameObject* pRoot)
 				currPlayerInfo.m_ControllerInputs,
 				currPlayerInfo.m_ControllerInputType,
 				std::move(controllerMoveCommand), controllerUsers);
+
+
+			auto controllerShootCommand{ std::make_unique<ShootBubbleCommand>(player, currPlayerInfo.m_ShootSoundId) };
+			playerCommands.emplace_back(controllerShootCommand.get());
+
+			InputManager::GetInstance().BindCommand(
+				currPlayerInfo.m_ControllerShootInput,
+				InputManager::InputType::OnButtonDown,
+				std::move(controllerShootCommand), controllerUsers);
 
 			++controllerUsers; 
 			// keep track of the controller users

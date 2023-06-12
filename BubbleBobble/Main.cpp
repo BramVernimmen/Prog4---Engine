@@ -84,6 +84,7 @@ void load()
 	player2Info.m_TexturePath = "Bobby";
 	player2Info.m_UseController = true;
 	player2Info.m_KeyBoardInputs = { SDLK_LEFT, SDLK_RIGHT, SDLK_UP, SDLK_DOWN }; // player 2 will use arrow keys
+	player2Info.m_KeyBoardShootInput = { SDLK_KP_0 };
 	player2Info.m_DisplayTopLeftX = 600.0f;
 	player2Info.m_FontColorR = 73;
 	player2Info.m_FontColorG = 169;

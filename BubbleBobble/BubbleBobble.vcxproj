@@ -183,7 +183,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DamageCommand.cpp" />
     <ClCompile Include="DebugLivesComponent.cpp" />
     <ClCompile Include="DebugScoreComponent.cpp" />
     <ClCompile Include="EndMenuComponent.cpp" />
@@ -195,7 +194,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="EnemyRunningState.cpp" />
     <ClCompile Include="EnemySpawnComponent.cpp" />
-    <ClCompile Include="GiveScoreCommand.cpp" />
     <ClCompile Include="GoBackLevelCommand.cpp" />
     <ClCompile Include="GridComponent.cpp" />
     <ClCompile Include="LivesComponent.cpp" />
@@ -213,10 +211,10 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClCompile Include="PlayerRunningState.cpp" />
     <ClCompile Include="PlayerSpawnComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
+    <ClCompile Include="ShootBubbleCommand.cpp" />
     <ClCompile Include="SkipLevelCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DamageCommand.h" />
     <ClInclude Include="DebugLivesComponent.h" />
     <ClInclude Include="DebugScoreComponent.h" />
     <ClInclude Include="EndMenuComponent.h" />
@@ -230,7 +228,6 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClInclude Include="EnemySpawnComponent.h" />
     <ClInclude Include="EnemyState.h" />
     <ClInclude Include="GameEvents.h" />
-    <ClInclude Include="GiveScoreCommand.h" />
     <ClInclude Include="GoBackLevelCommand.h" />
     <ClInclude Include="GridComponent.h" />
     <ClInclude Include="LivesComponent.h" />
@@ -248,6 +245,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClInclude Include="PlayerSpawnComponent.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="ScoreComponent.h" />
+    <ClInclude Include="ShootBubbleCommand.h" />
     <ClInclude Include="SkipLevelCommand.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

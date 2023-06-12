@@ -51,6 +51,12 @@
     <Filter Include="States\Enemy\Base">
       <UniqueIdentifier>{b0f3d747-f267-49ce-8dcf-51de2ea11574}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Commands\PlayerCommands">
+      <UniqueIdentifier>{115c3526-3b08-45a9-bb7d-284bd45682db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands\UtilityCommands">
+      <UniqueIdentifier>{d3e651d1-f988-4f09-a5de-718235b36e98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -65,15 +71,6 @@
     <ClCompile Include="LivesComponent.cpp">
       <Filter>Components\PlayerBasedComponents</Filter>
     </ClCompile>
-    <ClCompile Include="DamageCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="GiveScoreCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
     <ClCompile Include="ScoreComponent.cpp">
       <Filter>Components\PlayerBasedComponents</Filter>
     </ClCompile>
@@ -82,12 +79,6 @@
     </ClCompile>
     <ClCompile Include="GridComponent.cpp">
       <Filter>Components\UitilityComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="SkipLevelCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="GoBackLevelCommand.cpp">
-      <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="LevelLoaderComponent.cpp">
       <Filter>Components\UitilityComponents</Filter>
@@ -103,9 +94,6 @@
     </ClCompile>
     <ClCompile Include="EndMenuComponent.cpp">
       <Filter>Components\Menu%27s</Filter>
-    </ClCompile>
-    <ClCompile Include="MuteCommand.cpp">
-      <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="PlayerComponent.cpp">
       <Filter>Components\PlayerBasedComponents</Filter>
@@ -146,6 +134,21 @@
     <ClCompile Include="EnemyDeathState.cpp">
       <Filter>States\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Commands\PlayerCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="GoBackLevelCommand.cpp">
+      <Filter>Commands\UtilityCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="MuteCommand.cpp">
+      <Filter>Commands\UtilityCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="SkipLevelCommand.cpp">
+      <Filter>Commands\UtilityCommands</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootBubbleCommand.cpp">
+      <Filter>Commands\PlayerCommands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DebugLivesComponent.h">
@@ -160,26 +163,11 @@
     <ClInclude Include="LivesComponent.h">
       <Filter>Components\PlayerBasedComponents</Filter>
     </ClInclude>
-    <ClInclude Include="GiveScoreCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
     <ClInclude Include="HowToPlayComponent.h">
       <Filter>Components\UitilityComponents</Filter>
     </ClInclude>
     <ClInclude Include="GridComponent.h">
       <Filter>Components\UitilityComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="SkipLevelCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="GoBackLevelCommand.h">
-      <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="LevelLoaderComponent.h">
       <Filter>Components\UitilityComponents</Filter>
@@ -198,9 +186,6 @@
     </ClInclude>
     <ClInclude Include="EndMenuComponent.h">
       <Filter>Components\Menu%27s</Filter>
-    </ClInclude>
-    <ClInclude Include="MuteCommand.h">
-      <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="PlayerComponent.h">
       <Filter>Components\PlayerBasedComponents</Filter>
@@ -246,6 +231,21 @@
     </ClInclude>
     <ClInclude Include="EnemyDeathState.h">
       <Filter>States\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Commands\PlayerCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="GoBackLevelCommand.h">
+      <Filter>Commands\UtilityCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="MuteCommand.h">
+      <Filter>Commands\UtilityCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="SkipLevelCommand.h">
+      <Filter>Commands\UtilityCommands</Filter>
+    </ClInclude>
+    <ClInclude Include="ShootBubbleCommand.h">
+      <Filter>Commands\PlayerCommands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

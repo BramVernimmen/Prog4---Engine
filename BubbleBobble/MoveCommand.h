@@ -1,7 +1,5 @@
 #pragma once
 #include "Axis2DCommand.h"
-#include <memory>
-#include <string>
 
 namespace dae
 {

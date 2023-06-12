@@ -21,12 +21,15 @@ namespace dae
 
 		virtual void OnEnter() override;
 		virtual void Update() override;
-		virtual void OnExit() override {}
+		virtual void OnExit() override;
 		virtual void HandleInput(std::any payload) override;
 
 		void SetTexture(std::shared_ptr<Texture2D> newTexture);
 		void SetMovementSpeed(float newSpeed) { m_MovementSpeed = newSpeed; }
 		void SetJumpStrength(float newJumpForce) { m_JumpStrength = newJumpForce; }
+
+		bool CanShoot() { return m_CanShoot; }
+		void Shoot() { m_CanShoot = false; }
 
 	private:
 		std::shared_ptr<Texture2D> m_pRunningTexture{};
@@ -34,6 +37,10 @@ namespace dae
 		RigidBody* m_pRigidBody{};
 		float m_MovementSpeed{};
 		float m_JumpStrength{};
+
+		bool m_CanShoot{ true };
+		float m_MaxShootTimer{ 0.5f };
+		float m_CurrentShootTimer{ 0.0f };
 	};
 
 }

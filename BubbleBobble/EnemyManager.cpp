@@ -75,9 +75,6 @@ void dae::EnemyManager::CreateEnemies(GameObject* pRoot)
 		enemyComp->SetDeathTexture(ResourceManager::GetInstance().LoadTexture("ZenChan/Death.png"));
 		enemyComp->SetBubbleTexture(ResourceManager::GetInstance().LoadTexture("ZenChan/InBubble.png"));
 
-		enemyComp->SetEnemyBubble();
-
-
 		m_pEnemies.emplace_back(enemy);
 
 	}

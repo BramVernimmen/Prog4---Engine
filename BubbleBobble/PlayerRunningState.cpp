@@ -5,6 +5,7 @@
 #include "RenderComponent.h"
 #include "RigidBody.h"
 #include "PlayerComponent.h"
+#include "GameTime.h"
 
 dae::PlayerRunningState::PlayerRunningState(GameObject* pPlayer)
 {
@@ -20,12 +21,27 @@ void dae::PlayerRunningState::OnEnter()
 
 void dae::PlayerRunningState::Update()
 {
+	if (!m_CanShoot)
+	{
+		m_CurrentShootTimer += GameTime::GetInstance().GetDeltaTime();
+		if (m_CurrentShootTimer >= m_MaxShootTimer)
+		{
+			m_CanShoot = true;
+			m_CurrentShootTimer = 0.0f;
+		}
+	}
 
 	if (!m_pRigidBody->IsGrounded() && m_pRigidBody->GetVelocity().y < 0.0f)
 	{
 		// change to falling
 		m_pPlayer->GetComponent<PlayerComponent>()->SetPlayerFalling();
 	}
+}
+
+void dae::PlayerRunningState::OnExit()
+{
+	m_CanShoot = true;
+	m_CurrentShootTimer = 0.0f;
 }
 
 void dae::PlayerRunningState::HandleInput(std::any payload)

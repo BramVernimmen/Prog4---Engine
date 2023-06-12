@@ -20,16 +20,22 @@ namespace dae
 		bool m_UseKeyboard{ true };
 		std::vector<unsigned int> m_KeyBoardInputs{SDLK_a, SDLK_d, SDLK_w, SDLK_s};
 		InputManager::InputType m_KeyboardInputType{InputManager::InputType::Digital2DAxis};
+
+		std::vector<unsigned int> m_KeyBoardShootInput{SDLK_e};
 		bool m_UseController{ false };
 		std::vector<unsigned int> m_ControllerInputs{Controller::ControllerButton::DPadLeft, 
 													Controller::ControllerButton::DPadRight, 
 													Controller::ControllerButton::DPadUp, 
 													Controller::ControllerButton::DPadDown };
 		InputManager::InputType m_ControllerInputType{InputManager::InputType::Digital2DAxis};
+
+		std::vector<unsigned int> m_ControllerShootInput{Controller::ControllerButton::ButtonB};
 		float m_BaseSpeed{ 100.0f };
 		float m_BaseJumpStrength{ 250.0f };
 		unsigned short m_JumpSoundId{ static_cast<unsigned short>(1) };
 		std::string m_JumpSoundPath{"Sounds/Jump.wav"};
+		unsigned short m_ShootSoundId{ static_cast<unsigned short>(2) };
+		std::string m_ShootSoundPath{"Sounds/Shoot.wav"};
 
 		// display info
 		float m_DisplayTopLeftX{0.0f};
